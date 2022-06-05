@@ -47,6 +47,8 @@ class AppModule(appModuleHandler.AppModule):
 				obj.name = _('Chats Archivados')
 			elif obj.UIAAutomationId == 'BackButton':
 				obj.name = _('Atrás')
+			elif obj.UIAAutomationId == 'PttDeleteButton':
+				obj.name = 'Cancelar mensaje'
 		except:
 			pass
 		try:
@@ -78,12 +80,10 @@ class AppModule(appModuleHandler.AppModule):
 		gesture='kb:control+r'
 	)
 	def script_voiceMessage(self, gesture):
-		focus = api.getFocusObject()
 		send = self.get('PttSendButton')
 		if send:
 			send.doAction()
 			playWaveFile(os.path.join(self.soundsPath, "send.wav"))
-			focus.setFocus()
 			self.clearGestureBindings()
 			self.bindGestures(self.__gestures)
 			return
@@ -91,16 +91,13 @@ class AppModule(appModuleHandler.AppModule):
 		if record:
 			record.doAction()
 			playWaveFile(os.path.join(self.soundsPath, "start.wav"))
-			focus.setFocus()
 			self.bindGestures({'kb:control+shift+r': 'cancelVoiceMessage', 'kb:control+t': 'timeAnnounce'})
 
 	def script_cancelVoiceMessage(self, gesture):
-		focus = api.getFocusObject()
 		cancel = self.get('PttDeleteButton')
 		if cancel:
 			cancel.doAction()
 			playWaveFile(os.path.join(self.soundsPath, "cancel.wav"))
-			focus.setFocus()
 			self.clearGestureBindings()
 			self.bindGestures(self.__gestures)
 

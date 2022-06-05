@@ -5,6 +5,7 @@ Autor: [Gerardo Kessler](http://gera.ar)
 Este complemento añade atajos de teclado a funciones importantes de la aplicación, así como el renombre de objetos sin etiqueta, a saber:
 
 * Botón mensaje de voz, mal etiquetado cuando el cuadro está vacío.
+* Cancelar mensaje, al grabar un mensaje de voz.
 * Botón atrás en la ventana de chats archivados.
 * Opción chats archivados.
 * Botón cancelar, en el cuadro de búsqueda de mensajes.
