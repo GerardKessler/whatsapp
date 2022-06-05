@@ -34,6 +34,11 @@ class AppModule(appModuleHandler.AppModule):
 			with open(f"{appArgs.configPath}\\whatsapp.ini", "w") as f:
 				f.write("desactivado")
 
+	def get(self, id):
+		for obj in api.getForegroundObject().children[1].children:
+			if obj.UIAAutomationId == id:
+				return obj
+
 	def event_NVDAObject_init(self, obj):
 		try:
 			if obj.UIAAutomationId == 'RightButton' and obj.previous.description == '':
@@ -66,34 +71,38 @@ class AppModule(appModuleHandler.AppModule):
 		except:
 			nextHandler()
 
-	@script(gesture="kb:control+r")
+	@script(
+	category= 'whatsapp',
+	# Translators: Descripción del elemento en el diálogo gestos de entrada
+	description= _('Iniciar o finalizar la grabación de un mensaje de voz'),
+		gesture='kb:control+r'
+	)
 	def script_voiceMessage(self, gesture):
 		focus = api.getFocusObject()
-		for obj in self.globalObject.children:
-			if obj.UIAAutomationId == 'PttSendButton':
-				obj.doAction()
-				playWaveFile(os.path.join(self.soundsPath, "send.wav"))
-				focus.setFocus()
-				self.clearGestureBindings()
-				self.bindGestures(self.__gestures)
-				return
-		for obj in self.globalObject.children:
-			if obj.UIAAutomationId == 'RightButton':
-				obj.doAction()
-				playWaveFile(os.path.join(self.soundsPath, "start.wav"))
-				focus.setFocus()
-				self.bindGestures({"kb:control+shift+r": "cancelVoiceMessage", "kb:control+t": "timeAnnounce"})
+		send = self.get('PttSendButton')
+		if send:
+			send.doAction()
+			playWaveFile(os.path.join(self.soundsPath, "send.wav"))
+			focus.setFocus()
+			self.clearGestureBindings()
+			self.bindGestures(self.__gestures)
+			return
+		record = self.get('RightButton')
+		if record:
+			record.doAction()
+			playWaveFile(os.path.join(self.soundsPath, "start.wav"))
+			focus.setFocus()
+			self.bindGestures({'kb:control+shift+r': 'cancelVoiceMessage', 'kb:control+t': 'timeAnnounce'})
 
 	def script_cancelVoiceMessage(self, gesture):
 		focus = api.getFocusObject()
-		for obj in self.globalObject.children:
-			if obj.UIAAutomationId == 'PttDeleteButton':
-				obj.doAction()
-				playWaveFile(os.path.join(self.soundsPath, "cancel.wav"))
-				focus.setFocus()
-				self.clearGestureBindings()
-				self.bindGestures(self.__gestures)
-				break
+		cancel = self.get('PttDeleteButton')
+		if cancel:
+			cancel.doAction()
+			playWaveFile(os.path.join(self.soundsPath, "cancel.wav"))
+			focus.setFocus()
+			self.clearGestureBindings()
+			self.bindGestures(self.__gestures)
 
 	def script_timeAnnounce(self, gesture):
 		for obj in self.globalObject.children:
@@ -101,7 +110,12 @@ class AppModule(appModuleHandler.AppModule):
 				message(obj.name)
 				break
 
-	@script(gesture="kb:control+shift+e")
+	@script(
+		category= 'whatsapp',
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Activa y desactiva la eliminación de los números de teléfono de los contactos no agendados en los mensajes'),
+		gesture='kb:control+shift+e'
+	)
 	def script_viewConfigToggle(self, gesture):
 		self.configFile()
 		with open(f"{appArgs.configPath}\\whatsapp.ini", "w") as f:
@@ -116,40 +130,125 @@ class AppModule(appModuleHandler.AppModule):
 				# Translators: Mensaje que anuncia la activación de los mensajes editados
 				message(_('Mensajes editados, activado'))
 
-	@script(gesture="kb:alt+rightArrow")
+	@script(
+	category= 'whatsapp',
+	# Translators: Descripción del elemento en el diálogo gestos de entrada
+	description= _('Enfoca la lista de chats'),
+		gesture='kb:alt+rightArrow'
+	)
 	def script_chatsList(self, gesture):
 		if self.lastChat:
 			self.lastChat.setFocus()
 
-	@script(gesture="kb:alt+leftArrow")
+	@script(
+		category= 'whatsapp',
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Conmuta entre la lista de mensajes y el cuadro de edición dentro de un chat'),
+		gesture='kb:alt+leftArrow'
+	)
 	def script_switch(self, gesture):
 		if self.switch == 'TextBox' or self.switch == None:
-			for obj in self.globalObject.children:
-				if obj.UIAAutomationId == 'ListView':
-					obj.lastChild.setFocus()
-					self.switch = 'ListView'
-					break
+			listView = self.get('ListView')
+			if listView:
+				listView.lastChild.setFocus()
+				self.switch = 'ListView'
 		else:
-			for obj in self.globalObject.children:
-				if obj.UIAAutomationId == 'TextBox':
-					obj.setFocus()
-					self.switch = 'TextBox'
-					break
+			textBox = self.get('TextBox')
+			if textBox:
+				textBox.setFocus()
+				self.switch = 'TextBox'
 
-	@script(gesture="kb:control+shift+t")
+	@script(
+		category= 'whatsapp',
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Verbaliza el nombre del contacto o grupo'),
+		gesture='kb:control+shift+t'
+	)
 	def script_chatName(self, gesture):
-		try:
-			for obj in self.globalObject.children:
-				if obj.UIAAutomationId == 'TitleButton':
-					message(obj.firstChild.name)
-					break
-		except:
-			pass
+		title = self.get('TitleButton')
+		if title:
+			message(title.firstChild.name)
 
-	@script(gesture="kb:alt+r")
+	@script(
+		category= 'whatsapp',
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Verbaliza la respuesta en el mensaje con el foco'),
+		gesture='kb:alt+r'
+	)
 	def script_responseText(self, gesture):
 		fc = api.getFocusObject()
 		if fc.UIAAutomationId == 'BubbleListItem':
 			text = "\n".join([item.name for item in fc.children if item.UIAAutomationId == 'TextBlock'])
 			message(text)
 
+	@script(
+		category= 'whatsapp',
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Pulsa el botón adjuntar'),
+		gesture='kb:control+shift+a'
+	)
+	def script_toAttach(self, gesture):
+		attach = self.get('AttachButton')
+		if attach:
+			message(attach.name)
+			attach.doAction()
+
+	@script(
+		category= 'whatsapp',
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Pulsa el botón info del chat'),
+		gesture='kb:control+shift+i'
+	)
+	def script_moreInfo(self, gesture):
+		info = self.get('TitleButton')
+		if info:
+			message(info.name)
+			info.doAction()
+
+	@script(
+		category= 'whatsapp',
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Pulsa el botón de configuración'),
+		gesture='kb:control+shift+o'
+	)
+	def script_settings(self, gesture):
+		settings = self.get('SettingsButton')
+		if settings:
+			message(settings.name)
+			settings.doAction()
+
+	@script(
+		category= 'whatsapp',
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Pulsa el botón de nuevo chat'),
+		gesture='kb:control+shift+n'
+	)
+	def script_newChat(self, gesture):
+		newChat = self.get('NewConvoButton')
+		if newChat:
+			message(newChat.name)
+			newChat.doAction()
+
+	@script(
+		category= 'whatsapp',
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Pulsa el botón llamada de video'),
+		gesture='kb:control+shift+v'
+	)
+	def script_videoCall(self, gesture):
+		videoCall = self.get('VideoCallButton')
+		if videoCall:
+			message(videoCall.name)
+			videoCall.doAction()
+
+	@script(
+		category= 'whatsapp',
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Pulsa el botón llamada de audio'),
+		gesture='kb:control+shift+l'
+	)
+	def script_audioCall(self, gesture):
+		audioCall = self.get('AudioCallButton')
+		if audioCall:
+			message(audioCall.name)
+			audioCall.doAction()
