@@ -58,12 +58,16 @@ class AppModule(appModuleHandler.AppModule):
 	def event_NVDAObject_init(self, obj):
 		try:
 			if obj.UIAAutomationId == 'RightButton' and obj.previous.description == '':
+				# Translators: Etiqueta del botón mensaje de voz
 				obj.name = _('Mensaje de voz')
 			elif obj.name == 'WhatsApp.ChatListArchiveButtonCellVm':
+				# Translators: Etiqueta del elementos mensajes archivados
 				obj.name = _('Chats Archivados')
 			elif obj.UIAAutomationId == 'BackButton':
+				# Translators: Etiqueta del botón atrás en los chatsArchivados
 				obj.name = _('Atrás')
 			elif obj.UIAAutomationId == 'PttDeleteButton':
+				# Translators: Etiqueta del botón cancelar mensaje de voz
 				obj.name = 'Cancelar mensaje'
 		except:
 			pass
