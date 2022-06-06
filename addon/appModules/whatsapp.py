@@ -39,7 +39,7 @@ class AppModule(appModuleHandler.AppModule):
 	def __init__(self, *args, **kwargs):
 		super(AppModule, self).__init__(*args, **kwargs)
 		self.lastChat = None
-		self.soundsPath = os.path.join(appArgs.configPath, "addons", "WhatsApp-desktop", "appModules", "sounds")
+		self.soundsPath = os.path.join(appArgs.configPath, "addons", "whatsapp", "appModules", "sounds")
 		self.configFile()
 
 	def configFile(self):

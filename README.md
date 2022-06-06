@@ -2,6 +2,9 @@
 
 Autor: [Gerardo Kessler](http://gera.ar)  
 
+Importante:  
+Este complemento solo es compatible con la versión UWP de WhatsApp, actualmente llamada WhatsApp Beta. Asimismo en el caso de tener otros complementos instalados que se activen con la aplicación, como Whatsapp-desktop, se deberán deshabilitar para evitar conflictos.
+
 Este complemento añade atajos de teclado a funciones importantes de la aplicación, así como el renombre de objetos sin etiqueta, a saber:
 
 * Botón mensaje de voz, mal etiquetado cuando el cuadro está vacío.
