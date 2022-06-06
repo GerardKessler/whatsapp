@@ -78,6 +78,14 @@ class AppModule(appModuleHandler.AppModule):
 
 	def event_gainFocus(self, obj, nextHandler):
 		try:
+			if obj.UIAAutomationId == 'BubbleListItem' and obj.children[1].UIAAutomationId == 'NameTextBlock':
+				obj.name = f'{obj.children[1].name} ({obj.children[2].name})'
+				nextHandler()
+			else:
+				nextHandler()
+		except:
+			nextHandler()
+		try:
 			if obj.UIAAutomationId == 'ChatsListItem':
 				self.lastChat = obj
 				nextHandler()
@@ -93,16 +101,15 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+r'
 	)
 	def script_voiceMessage(self, gesture):
-		textBox = self.get('TextBox')
-		button = self.get('RightButton') or self.get('PttSendButton')
-		if button and (textBox is None or textBox.childCount > 0):
-			button.doAction()
-			mute(1)
-			if button.UIAAutomationId == 'RightButton':
-				playWaveFile(os.path.join(self.soundsPath, "start.wav"))
-				return
-			else:
-				playWaveFile(os.path.join(self.soundsPath, "send.wav"))
+		send = self.get('PttSendButton')
+		if send:
+			send.doAction()
+			playWaveFile(os.path.join(self.soundsPath, "send.wav"))
+			return
+		record = self.get('RightButton')
+		if record:
+			record.doAction()
+			playWaveFile(os.path.join(self.soundsPath, "start.wav"))
 
 	@script(
 		category= category,
