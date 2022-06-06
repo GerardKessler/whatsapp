@@ -38,8 +38,6 @@ class AppModule(appModuleHandler.AppModule):
 
 	def __init__(self, *args, **kwargs):
 		super(AppModule, self).__init__(*args, **kwargs)
-		self.switch = None
-		self.globalObject = None
 		self.lastChat = None
 		self.soundsPath = os.path.join(appArgs.configPath, "addons", "WhatsApp-desktop", "appModules", "sounds")
 		self.configFile()
@@ -81,11 +79,6 @@ class AppModule(appModuleHandler.AppModule):
 			if obj.UIAAutomationId == 'ChatsListItem':
 				self.lastChat = obj
 				nextHandler()
-				if not self.globalObject:
-					self.globalObject = api.getForegroundObject().children[1]
-					nextHandler
-				else:
-					nextHandler()
 			else:
 				nextHandler()
 		except:
@@ -130,10 +123,9 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+t'
 	)
 	def script_timeAnnounce(self, gesture):
-		for obj in self.globalObject.children:
-			if obj.UIAAutomationId == 'PttTimer':
-				message(obj.name)
-				break
+		timer = self.get('PttTimer')
+		if timer:
+			message(timer.name)
 
 	@script(
 		category= category,
@@ -172,16 +164,14 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:alt+leftArrow'
 	)
 	def script_switch(self, gesture):
-		if self.switch == 'TextBox' or self.switch == None:
-			listView = self.get('ListView')
-			if listView:
-				listView.lastChild.setFocus()
-				self.switch = 'ListView'
-		else:
+		if api.getFocusObject().UIAAutomationId == 'BubbleListItem':
 			textBox = self.get('TextBox')
 			if textBox:
 				textBox.setFocus()
-				self.switch = 'TextBox'
+		else:
+			listView = self.get('ListView')
+			if listView:
+				listView.lastChild.setFocus()
 
 	@script(
 		category= category,
