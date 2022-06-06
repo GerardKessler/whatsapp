@@ -3,6 +3,9 @@
 # This file is covered by the GNU General Public License.
 # Canal de actualización y creación de ventanas por Héctor J. Benítez Corredera <xebolax@gmail.com>
 
+from threading import Thread
+from time import sleep
+import speech
 from globalVars import appArgs
 import appModuleHandler
 from scriptHandler import script
@@ -15,6 +18,18 @@ import addonHandler
 
 # Lína de traducción
 addonHandler.initTranslation()
+
+def mute(time, msg= False):
+	if msg:
+		message(msg)
+		sleep(0.1)
+	Thread(target=killSpeak, args=(time,), daemon= True).start()
+
+def killSpeak(time):
+	speech.setSpeechMode(speech.SpeechMode.off)
+	sleep(time)
+	speech.setSpeechMode(speech.SpeechMode.talk)
+
 
 class AppModule(appModuleHandler.AppModule):
 
@@ -84,6 +99,7 @@ class AppModule(appModuleHandler.AppModule):
 		button = self.get('RightButton') or self.get('PttSendButton')
 		if button and (textBox is None or textBox.childCount > 0):
 			button.doAction()
+			mute(1)
 			if button.UIAAutomationId == 'RightButton':
 				playWaveFile(os.path.join(self.soundsPath, "start.wav"))
 				self.bindGestures({'kb:control+shift+r': 'cancelVoiceMessage', 'kb:control+t': 'timeAnnounce'})
