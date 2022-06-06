@@ -80,18 +80,18 @@ class AppModule(appModuleHandler.AppModule):
 		gesture='kb:control+r'
 	)
 	def script_voiceMessage(self, gesture):
-		send = self.get('PttSendButton')
-		if send:
-			send.doAction()
-			playWaveFile(os.path.join(self.soundsPath, "send.wav"))
-			self.clearGestureBindings()
-			self.bindGestures(self.__gestures)
-			return
-		record = self.get('RightButton')
-		if record:
-			record.doAction()
-			playWaveFile(os.path.join(self.soundsPath, "start.wav"))
-			self.bindGestures({'kb:control+shift+r': 'cancelVoiceMessage', 'kb:control+t': 'timeAnnounce'})
+		textBox = self.get('TextBox')
+		button = self.get('RightButton') or self.get('PttSendButton')
+		if button and (textBox is None or textBox.childCount > 0):
+			button.doAction()
+			if button.UIAAutomationId == 'RightButton':
+				playWaveFile(os.path.join(self.soundsPath, "start.wav"))
+				self.bindGestures({'kb:control+shift+r': 'cancelVoiceMessage', 'kb:control+t': 'timeAnnounce'})
+				return
+			else:
+				playWaveFile(os.path.join(self.soundsPath, "send.wav"))
+				self.clearGestureBindings()
+				self.bindGestures(self.__gestures)
 
 	def script_cancelVoiceMessage(self, gesture):
 		cancel = self.get('PttDeleteButton')

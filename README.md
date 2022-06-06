@@ -12,6 +12,7 @@ Este complemento añade atajos de teclado a funciones importantes de la aplicaci
 
 ## Lista de comandos
 
+* Abrir la aplicación; sin asignar
 * Grabar y enviar mensajes de voz; control + r
 * Descartar el mensaje de voz en grabación; control + shift + r
 * Conocer el tiempo transcurrido en grabación; control ++ t
