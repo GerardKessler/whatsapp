@@ -87,20 +87,6 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		_MainWindows = HiloComplemento()
 		_MainWindows.start()
 
-	@script(
-		category="WhatsApp",
-		# Translators: Descripción del elemento en el diálogo gestos de entrada
-		description= _('Trae al frente la ventana de whatsapp desde cualquier ubicación')
-	)
-	def script_focusToWhatsappWindow(self, gesture):
-		if api.getForegroundObject().name == 'WhatsApp': return
-		WSHwnd = user32.FindWindowW('Chrome_WidgetWin_1', 'WhatsApp')
-		if not WSHwnd:
-			# Translators: Mensaje que anuncia que la ventana de WhatsApp no ha sido encontrada.
-			ui.message(_('No se encuentra la ventana de WhatsApp'))
-		else:
-			user32.SetForegroundWindow(WSHwnd)
-
 class ViewApps(wx.Dialog):
 	def __init__(self, parent, nombre, id, resultados):
 		# Translators: Título de la ventana
