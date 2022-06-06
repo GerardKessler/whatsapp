@@ -1,7 +1,6 @@
 ﻿# -*- coding: utf-8 -*-
 # Copyright (C) 2021 Gerardo Kessler <ReaperYOtrasYerbas@gmail.com>
 # This file is covered by the GNU General Public License.
-# Canal de actualización y creación de ventanas por Héctor J. Benítez Corredera <xebolax@gmail.com>
 
 from threading import Thread
 from time import sleep
@@ -29,7 +28,6 @@ def killSpeak(time):
 	speech.setSpeechMode(speech.SpeechMode.off)
 	sleep(time)
 	speech.setSpeechMode(speech.SpeechMode.talk)
-
 
 class AppModule(appModuleHandler.AppModule):
 
@@ -61,14 +59,14 @@ class AppModule(appModuleHandler.AppModule):
 				# Translators: Etiqueta del botón mensaje de voz
 				obj.name = _('Mensaje de voz')
 			elif obj.name == 'WhatsApp.ChatListArchiveButtonCellVm':
-				# Translators: Etiqueta del elementos mensajes archivados
+				# Translators: Etiqueta del elemento mensajes archivados
 				obj.name = _('Chats Archivados')
 			elif obj.UIAAutomationId == 'BackButton':
 				# Translators: Etiqueta del botón atrás en los chatsArchivados
 				obj.name = _('Atrás')
 			elif obj.UIAAutomationId == 'PttDeleteButton':
 				# Translators: Etiqueta del botón cancelar mensaje de voz
-				obj.name = 'Cancelar mensaje'
+				obj.name = _('Cancelar mensaje')
 		except:
 			pass
 		try:
