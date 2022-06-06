@@ -81,7 +81,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	@script(
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Abre WhatsApp, o la enfoca si ya se encuentra abierta'),
-		category="WhatsApp")
+		category= _('whatsapp')
 	def script_open(self, gesture):
 		_MainWindows = HiloComplemento()
 		_MainWindows.start()

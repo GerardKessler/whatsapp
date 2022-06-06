@@ -33,6 +33,9 @@ def killSpeak(time):
 
 class AppModule(appModuleHandler.AppModule):
 
+	# Translators: Nombre de categoría en el diálogo gestos de entrada
+	category = _('whatsapp')
+
 	def __init__(self, *args, **kwargs):
 		super(AppModule, self).__init__(*args, **kwargs)
 		self.switch = None
@@ -89,10 +92,10 @@ class AppModule(appModuleHandler.AppModule):
 			nextHandler()
 
 	@script(
-	category= 'whatsapp',
+	category= category,
 	# Translators: Descripción del elemento en el diálogo gestos de entrada
 	description= _('Iniciar o finalizar la grabación de un mensaje de voz'),
-		gesture='kb:control+r'
+		gesture= 'kb:control+r'
 	)
 	def script_voiceMessage(self, gesture):
 		textBox = self.get('TextBox')
@@ -102,21 +105,30 @@ class AppModule(appModuleHandler.AppModule):
 			mute(1)
 			if button.UIAAutomationId == 'RightButton':
 				playWaveFile(os.path.join(self.soundsPath, "start.wav"))
-				self.bindGestures({'kb:control+shift+r': 'cancelVoiceMessage', 'kb:control+t': 'timeAnnounce'})
 				return
 			else:
 				playWaveFile(os.path.join(self.soundsPath, "send.wav"))
-				self.clearGestureBindings()
-				self.bindGestures(self.__gestures)
 
+	@script(
+		category= category,
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Cancela la grabación de los mensajes de voz'),
+		gesture= 'kb:control+shift+r'
+	)
 	def script_cancelVoiceMessage(self, gesture):
 		cancel = self.get('PttDeleteButton')
 		if cancel:
 			cancel.doAction()
 			playWaveFile(os.path.join(self.soundsPath, "cancel.wav"))
-			self.clearGestureBindings()
-			self.bindGestures(self.__gestures)
+		else:
+			gesture.send()
 
+	@script(
+		category= category,
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Verbaliza el tiempo de grabación de un mensaje'),
+		gesture= 'kb:control+t'
+	)
 	def script_timeAnnounce(self, gesture):
 		for obj in self.globalObject.children:
 			if obj.UIAAutomationId == 'PttTimer':
@@ -124,10 +136,10 @@ class AppModule(appModuleHandler.AppModule):
 				break
 
 	@script(
-		category= 'whatsapp',
+		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Activa y desactiva la eliminación de los números de teléfono de los contactos no agendados en los mensajes'),
-		gesture='kb:control+shift+e'
+		gesture= 'kb:control+shift+e'
 	)
 	def script_viewConfigToggle(self, gesture):
 		self.configFile()
@@ -144,20 +156,20 @@ class AppModule(appModuleHandler.AppModule):
 				message(_('Mensajes editados, activado'))
 
 	@script(
-	category= 'whatsapp',
+	category= category,
 	# Translators: Descripción del elemento en el diálogo gestos de entrada
 	description= _('Enfoca la lista de chats'),
-		gesture='kb:alt+rightArrow'
+		gesture= 'kb:alt+rightArrow'
 	)
 	def script_chatsList(self, gesture):
 		if self.lastChat:
 			self.lastChat.setFocus()
 
 	@script(
-		category= 'whatsapp',
+		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Conmuta entre la lista de mensajes y el cuadro de edición dentro de un chat'),
-		gesture='kb:alt+leftArrow'
+		gesture= 'kb:alt+leftArrow'
 	)
 	def script_switch(self, gesture):
 		if self.switch == 'TextBox' or self.switch == None:
@@ -172,10 +184,10 @@ class AppModule(appModuleHandler.AppModule):
 				self.switch = 'TextBox'
 
 	@script(
-		category= 'whatsapp',
+		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Verbaliza el nombre del contacto o grupo'),
-		gesture='kb:control+shift+t'
+		gesture= 'kb:control+shift+t'
 	)
 	def script_chatName(self, gesture):
 		title = self.get('TitleButton')
@@ -183,10 +195,10 @@ class AppModule(appModuleHandler.AppModule):
 			message(title.firstChild.name)
 
 	@script(
-		category= 'whatsapp',
+		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Verbaliza la respuesta en el mensaje con el foco'),
-		gesture='kb:alt+r'
+		gesture= 'kb:alt+r'
 	)
 	def script_responseText(self, gesture):
 		fc = api.getFocusObject()
@@ -195,10 +207,10 @@ class AppModule(appModuleHandler.AppModule):
 			message(text)
 
 	@script(
-		category= 'whatsapp',
+		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Pulsa el botón adjuntar'),
-		gesture='kb:control+shift+a'
+		gesture= 'kb:control+shift+a'
 	)
 	def script_toAttach(self, gesture):
 		attach = self.get('AttachButton')
@@ -207,10 +219,10 @@ class AppModule(appModuleHandler.AppModule):
 			attach.doAction()
 
 	@script(
-		category= 'whatsapp',
+		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Pulsa el botón info del chat'),
-		gesture='kb:control+shift+i'
+		gesture= 'kb:control+shift+i'
 	)
 	def script_moreInfo(self, gesture):
 		info = self.get('TitleButton')
@@ -219,10 +231,10 @@ class AppModule(appModuleHandler.AppModule):
 			info.doAction()
 
 	@script(
-		category= 'whatsapp',
+		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Pulsa el botón de configuración'),
-		gesture='kb:control+shift+o'
+		gesture= 'kb:control+shift+o'
 	)
 	def script_settings(self, gesture):
 		settings = self.get('SettingsButton')
@@ -231,10 +243,10 @@ class AppModule(appModuleHandler.AppModule):
 			settings.doAction()
 
 	@script(
-		category= 'whatsapp',
+		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Pulsa el botón de nuevo chat'),
-		gesture='kb:control+shift+n'
+		gesture= 'kb:control+shift+n'
 	)
 	def script_newChat(self, gesture):
 		newChat = self.get('NewConvoButton')
@@ -243,10 +255,10 @@ class AppModule(appModuleHandler.AppModule):
 			newChat.doAction()
 
 	@script(
-		category= 'whatsapp',
+		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Pulsa el botón llamada de video'),
-		gesture='kb:control+shift+v'
+		gesture= 'kb:control+shift+v'
 	)
 	def script_videoCall(self, gesture):
 		videoCall = self.get('VideoCallButton')
@@ -255,10 +267,10 @@ class AppModule(appModuleHandler.AppModule):
 			videoCall.doAction()
 
 	@script(
-		category= 'whatsapp',
+		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Pulsa el botón llamada de audio'),
-		gesture='kb:control+shift+l'
+		gesture= 'kb:control+shift+l'
 	)
 	def script_audioCall(self, gesture):
 		audioCall = self.get('AudioCallButton')
