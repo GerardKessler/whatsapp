@@ -191,7 +191,7 @@ class AppModule(appModuleHandler.AppModule):
 	def script_chatName(self, gesture):
 		title = self.get('TitleButton')
 		if title:
-			message(title.firstChild.name)
+			message(" ".join([obj.name for obj in title.children if len(obj.name) < 50]))
 
 	@script(
 		category= category,
