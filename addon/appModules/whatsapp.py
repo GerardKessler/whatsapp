@@ -24,30 +24,31 @@ def mute(time, msg= False):
 		sleep(0.1)
 	Thread(target=killSpeak, args=(time,), daemon= True).start()
 
+# Función para romper la cadena de verbalización y callar al sintetizador durante el tiempo especificado
 def killSpeak(time):
 	speech.setSpeechMode(speech.SpeechMode.off)
 	sleep(time)
 	speech.setSpeechMode(speech.SpeechMode.talk)
 
 class AppModule(appModuleHandler.AppModule):
-
 	# Translators: Nombre de categoría en el diálogo gestos de entrada
 	category = _('whatsapp')
 
 	def __init__(self, *args, **kwargs):
 		super(AppModule, self).__init__(*args, **kwargs)
 		self.lastChat = None
-		self.soundsPath = os.path.join(appArgs.configPath, "addons", "whatsapp", "appModules", "sounds")
+		self.soundsPath = os.path.join(appArgs.configPath, 'addons', 'whatsapp', 'appModules', 'sounds')
 		self.configFile()
 
 	def configFile(self):
 		try:
-			with open(f"{appArgs.configPath}\\whatsapp.ini", "r") as f:
+			with open(f'{appArgs.configPath}\\whatsapp.ini', 'r') as f:
 				self.viewConfig = f.read()
 		except FileNotFoundError:
-			with open(f"{appArgs.configPath}\\whatsapp.ini", "w") as f:
-				f.write("desactivado")
+			with open(f'{appArgs.configPath}\\whatsapp.ini', 'w') as f:
+				f.write('desactivado')
 
+	# Función que recibe el UIAAutomationId por parámetro, y devuelve el objeto de coincidencia
 	def get(self, id):
 		for obj in api.getForegroundObject().children[1].children:
 			if obj.UIAAutomationId == id:
@@ -78,8 +79,9 @@ class AppModule(appModuleHandler.AppModule):
 
 	def event_gainFocus(self, obj, nextHandler):
 		try:
+			# Renombre del mensaje con documento adjunto por el texto de los objetos que tienen el nombre el archivo, tipo y tamaño
 			if obj.UIAAutomationId == 'BubbleListItem' and obj.children[1].UIAAutomationId == 'NameTextBlock':
-				obj.name = f'{obj.children[1].name} ({obj.children[2].name})'
+				obj.name = '{} ({})'.format(obj.children[1].name, obj.children[2].name)
 				nextHandler()
 			else:
 				nextHandler()
@@ -104,12 +106,12 @@ class AppModule(appModuleHandler.AppModule):
 		send = self.get('PttSendButton')
 		if send:
 			send.doAction()
-			playWaveFile(os.path.join(self.soundsPath, "send.wav"))
+			playWaveFile(os.path.join(self.soundsPath, 'send.wav'))
 			return
 		record = self.get('RightButton')
 		if record:
 			record.doAction()
-			playWaveFile(os.path.join(self.soundsPath, "start.wav"))
+			playWaveFile(os.path.join(self.soundsPath, 'start.wav'))
 
 	@script(
 		category= category,
@@ -121,7 +123,7 @@ class AppModule(appModuleHandler.AppModule):
 		cancel = self.get('PttDeleteButton')
 		if cancel:
 			cancel.doAction()
-			playWaveFile(os.path.join(self.soundsPath, "cancel.wav"))
+			playWaveFile(os.path.join(self.soundsPath, 'cancel.wav'))
 		else:
 			gesture.send()
 
@@ -144,15 +146,15 @@ class AppModule(appModuleHandler.AppModule):
 	)
 	def script_viewConfigToggle(self, gesture):
 		self.configFile()
-		with open(f"{appArgs.configPath}\\whatsapp.ini", "w") as f:
-			if self.viewConfig == "activado":
-				f.write("desactivado")
-				self.viewConfig = "desactivado"
+		with open(f'{appArgs.configPath}\\whatsapp.ini', 'w') as f:
+			if self.viewConfig == 'activado':
+				f.write('desactivado')
+				self.viewConfig = 'desactivado'
 				# Translators: Mensaje que indica la desactivación de los mensajes editados
 				message(_('Mensajes editados, desactivado'))
 			else:
-				f.write("activado")
-				self.viewConfig = "activado"
+				f.write('activado')
+				self.viewConfig = 'activado'
 				# Translators: Mensaje que anuncia la activación de los mensajes editados
 				message(_('Mensajes editados, activado'))
 
@@ -191,7 +193,7 @@ class AppModule(appModuleHandler.AppModule):
 	def script_chatName(self, gesture):
 		title = self.get('TitleButton')
 		if title:
-			message(" ".join([obj.name for obj in title.children if len(obj.name) < 50]))
+			message(' '.join([obj.name for obj in title.children if len(obj.name) < 50]))
 
 	@script(
 		category= category,
@@ -202,7 +204,7 @@ class AppModule(appModuleHandler.AppModule):
 	def script_responseText(self, gesture):
 		fc = api.getFocusObject()
 		if fc.UIAAutomationId == 'BubbleListItem':
-			text = "\n".join([item.name for item in fc.children if item.UIAAutomationId == 'TextBlock'])
+			text = '\n'.join([item.name for item in fc.children if item.UIAAutomationId == 'TextBlock'])
 			message(text)
 
 	@script(
