@@ -1,21 +1,23 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: whatsapp\n"
+"Project-Id-Version: Whatsapp 1.0\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
 "POT-Creation-Date: 2022-06-10 13:51-0300\n"
-"PO-Revision-Date: 2022-06-10 22:58+0200\n"
-"Last-Translator: Rémy Ruiz <remyruiz@gmail.com>\n"
-"Language-Team: \n"
-"Language: fr\n"
+"PO-Revision-Date: 2022-06-10 13:56-0300\n"
+"Last-Translator: Umut KORKMAZ <umutkork@gmail.com>\n"
+"Language-Team: Umut KORKMAZ <umutkork@gmail.com>\n"
+"Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: globalPlugins\n"
-"X-Poedit-SearchPath-1: appModules\n"
+"X-Poedit-SearchPath-0: appModules/whatsapp.py\n"
+"X-Poedit-SearchPath-1: globalPlugins/__pycache__/wsOpen.cpython-37.opt-1."
+"pyc\n"
+"X-Poedit-SearchPath-2: globalPlugins/wsOpen.py\n"
 
 #. Translators: Nombre de categoría en el diálogo gestos de entrada
 #. Add-on summary, usually the user visible name of the addon.
@@ -28,42 +30,42 @@ msgstr "whatsapp"
 #. Translators: Mensaje que anuncia que no se ha encontrado el elemento
 #: addon\appModules\whatsapp.py:58
 msgid "Elemento no encontrado"
-msgstr "Objet non-trouvé"
+msgstr "Öğe bulunamadı"
 
 #. Translators: Etiqueta del botón mensaje de voz
 #: addon\appModules\whatsapp.py:66
 msgid "Mensaje de voz"
-msgstr "Message vocal"
+msgstr "Sesli mesaj"
 
 #. Translators: Etiqueta del elemento mensajes archivados
 #: addon\appModules\whatsapp.py:69
 msgid "Chats Archivados"
-msgstr "Chats Archivées"
+msgstr "Arşivlenmiş Sohbetler"
 
 #. Translators: Etiqueta del botón atrás en los chatsArchivados
 #: addon\appModules\whatsapp.py:72
 msgid "Atrás"
-msgstr "Arrière"
+msgstr "Geri"
 
 #. Translators: Etiqueta del botón cancelar mensaje de voz
 #: addon\appModules\whatsapp.py:75
 msgid "Cancelar mensaje"
-msgstr "Annuler le message"
+msgstr "Mesajı iptal et"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:105
 msgid "Iniciar o finalizar la grabación de un mensaje de voz"
-msgstr "Démarrer et terminer l'enregistrement d'un nmessage vocal"
+msgstr "Sesli mesaj kaydetmeyi başlatma veya durdurma"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:123
 msgid "Cancela la grabación de los mensajes de voz"
-msgstr "Annule l'enregistrement des messages vocaux"
+msgstr "Sesli mesaj kaydını iptal et"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:135
 msgid "Verbaliza el tiempo de grabación de un mensaje"
-msgstr "Verbalise le temps d'enregistrement d'un message"
+msgstr "Sesli mesaj kayıt süresini bildir"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:146
@@ -71,108 +73,109 @@ msgid ""
 "Activa y desactiva la eliminación de los números de teléfono de los "
 "contactos no agendados en los mensajes"
 msgstr ""
-"Activer et désactiver l'élimination des numéros de téléphone dans les "
-"messages de contact non agender"
+"Mesajlarda eklenmemiş kişilerin telefon numaralarının kaldırılmasını "
+"etkinleştir veya devre dışı bırak"
 
 #. Translators: Mensaje que indica la desactivación de los mensajes editados
 #: addon\appModules\whatsapp.py:156
 msgid "Mensajes editados, desactivado"
-msgstr "Messages édités, désactivé"
+msgstr "Mesajı düzenle, devre dışı"
 
 #. Translators: Mensaje que anuncia la activación de los mensajes editados
 #: addon\appModules\whatsapp.py:161
 msgid "Mensajes editados, activado"
-msgstr "Messages édités, activé"
+msgstr "Mesajı düzenle, etkin"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:166
 msgid "Enfoca la lista de chats"
-msgstr "Focalise la liste des chats"
+msgstr "Sohbet listesine odaklan"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:176
 msgid ""
 "Conmuta entre la lista de mensajes y el cuadro de edición dentro de un chat"
-msgstr "Bascule entre la liste des messages et la zone d'édition dans un chat"
+msgstr ""
+"Bir sohbet içindeki mesaj listesi ve düzenleme kutusu arasında geçiş yapar"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:192
 msgid "Verbaliza el nombre del contacto o grupo"
-msgstr "Verbalise le nom du contact ou du groupe"
+msgstr "Kişinin veya grubun adını bildir"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:203
 msgid "Verbaliza la respuesta en el mensaje con el foco"
-msgstr "Verbalise la réponse dans le message focalisé"
+msgstr "Mesajdaki yanıta odaklan ve bildir"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:215
 msgid "Pulsa el botón adjuntar"
-msgstr "Appuyer sur le bouton joindre"
+msgstr "Ekle düğmesine basın"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:227
 msgid "Pulsa el botón info del chat"
-msgstr "Appuyer sur le bouton info du chat"
+msgstr "Sohbet bilgisi düğmesine basın"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:239
 msgid "Pulsa el botón de configuración"
-msgstr "Appuyer sur le bouton configurations"
+msgstr "Ayarlar düğmesine basın"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:251
 msgid "Pulsa el botón de nuevo chat"
-msgstr "Appuyer sur le bouton nouveau chat"
+msgstr "Yeni sohbet düğmesine basın"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:263
 msgid "Pulsa el botón llamada de video"
-msgstr "Appuyer sur le bouton appel vidéo"
+msgstr "Görüntülü arama düğmesine basın"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:275
 msgid "Pulsa el botón llamada de audio"
-msgstr "Appuyer sur le bouton appel audio"
+msgstr "Sesli arama düğmesine basın"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\globalPlugins\wsOpen.py:77
 msgid "Abre WhatsApp, o la enfoca si ya se encuentra abierta"
-msgstr "Ouvrer WhatsApp, ou la focalise si est déjà ouverte"
+msgstr "WhatsApp'ı açın veya zaten açıksa odaklanın"
 
 #. Translators: Título de la ventana
 #: addon\globalPlugins\wsOpen.py:86
 msgid "Selector de aplicación"
-msgstr "Sélecteur d'application"
+msgstr "Uygulama seçici"
 
 #. Translators: etiqueta del botón aceptar
 #: addon\globalPlugins\wsOpen.py:98
 msgid "Lanzar &aplicación"
-msgstr "Lancer &application"
+msgstr "Uygul&amayı başlat"
 
 #. Translators: etiqueta del botón cancelar
 #: addon\globalPlugins\wsOpen.py:101
 msgid "&Cerrar"
-msgstr "&Fermer"
+msgstr "&Kapat"
 
 #. Translators: título de selección de aplicación
 #: addon\globalPlugins\wsOpen.py:120
 msgid "Seleccione una de las aplicaciones de WhatsApp"
-msgstr "Sélectionner l'une des applications WhatsApp"
+msgstr "WhatsApp uygulamalarından birini seçin"
 
 #. Translators: Mensaje de aviso de selección de aplicación
 #: addon\globalPlugins\wsOpen.py:128
 msgid "Debe seleccionar una aplicación para continuar."
-msgstr "Vous devez sélectionner une application pour continuer."
+msgstr "Devam etmek için bir uygulama seçmelisiniz."
 
 #: addon\globalPlugins\wsOpen.py:128
 msgid "Información"
-msgstr "Informations"
+msgstr "Bilgi"
 
 #. Translators: Mensaje de aviso de aplicación no encontrada
 #: addon\globalPlugins\wsOpen.py:162
 msgid "No se ha encontrado la aplicación de WhatsApp"
-msgstr "L'application de WhatsApp n'a pas été trouvée"
+msgstr "WhatsApp uygulaması bulunamadı"
 
 #. Add-on description
 #. Translators: Long description to be shown for this add-on on add-on information from add-ons manager
@@ -182,6 +185,6 @@ msgid ""
 "funciones principales de la aplicación, y funciones de enfoque para una "
 "mejor interacción con la interfaz."
 msgstr ""
-"Extension qui renomme les boutons sans étiquette, ajoute des raccourcis "
-"clavier pour les fonctions principales de l'application et les fonctions "
-"qu'elles focalisent pour une meilleure interaction avec l'interface."
+"Etiketlenmemiş düğmeleri yeniden adlandıran, ana uygulama işlevleri için "
+"klavye kısayolları ekleyen ve arayüzle daha iyi etkileşim için odak "
+"işlevleri ekleyen eklenti."

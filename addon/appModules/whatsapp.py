@@ -8,6 +8,7 @@ import speech
 from globalVars import appArgs
 import appModuleHandler
 from scriptHandler import script
+import wx
 import api
 from ui import message
 from nvwave import playWaveFile
@@ -36,6 +37,8 @@ class AppModule(appModuleHandler.AppModule):
 
 	def __init__(self, *args, **kwargs):
 		super(AppModule, self).__init__(*args, **kwargs)
+		# Translators: Mensaje que anuncia que no se ha encontrado el elemento
+		self.notFound = _('Elemento no encontrado')
 		self.lastChat = None
 		self.soundsPath = os.path.join(appArgs.configPath, 'addons', 'whatsapp', 'sounds')
 		self.configFile()
@@ -54,8 +57,7 @@ class AppModule(appModuleHandler.AppModule):
 			if obj.UIAAutomationId == id:
 				return obj
 		if errorMessage:
-			# Translators: Mensaje que anuncia que no se ha encontrado el elemento
-			message(_('Elemento no encontrado'))
+			message(self.notFound)
 		if gesture:
 			gesture.send()
 
@@ -87,7 +89,6 @@ class AppModule(appModuleHandler.AppModule):
 			# Renombre del mensaje con documento adjunto por el texto de los objetos que tienen el nombre el archivo, tipo y tamaño
 			if obj.UIAAutomationId == 'BubbleListItem' and obj.children[1].UIAAutomationId == 'NameTextBlock':
 				obj.name = '{} ({})'.format(obj.children[1].name, obj.children[2].name)
-				nextHandler()
 			else:
 				nextHandler()
 		except:
@@ -95,7 +96,6 @@ class AppModule(appModuleHandler.AppModule):
 		try:
 			if obj.UIAAutomationId == 'ChatsListItem':
 				self.lastChat = obj
-				nextHandler()
 			else:
 				nextHandler()
 		except:
@@ -282,3 +282,11 @@ class AppModule(appModuleHandler.AppModule):
 		if audioCall:
 			message(audioCall.name)
 			audioCall.doAction()
+
+	@script(gesture="kb:f1")
+	def script_help(self, gesture):
+		# try:
+		playWaveFile(os.path.join(self.soundsPath, 'open.wav'))
+		wx.LaunchDefaultBrowser('file://' + addonHandler.Addon(os.path.join(appArgs.configPath, "addons", "whatsapp")).getDocFilePath(), flags=0)
+		# except:
+			# message(self.notFound)

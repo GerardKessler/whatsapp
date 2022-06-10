@@ -37,3 +37,10 @@ Cette extension ajoute des raccourcis clavier aux fonctions importantes de l'app
 * Activer la zone de recherche de messages; contrôle + maj + f
 * Activer le chat suivant; contrôle + tab
 * Activer le chat précédent; contrôle + maj + tab
+
+## Traductions:
+
+Les personnes suivantes ont collaboré à la traduction de l'extension:
+
+	* Umut Korkmaz, pour le  turc.  
+	* Rémy Ruiz, pour le français.  
