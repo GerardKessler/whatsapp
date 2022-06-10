@@ -10,7 +10,7 @@ import api
 import ui
 from scriptHandler import script
 from winUser import user32
-from winsound import PlaySound, SND_FILENAME, SND_ASYNC
+from nvwave import playWaveFile
 import shellapi
 import globalVars
 import wx
@@ -18,10 +18,13 @@ import os
 import sys
 import subprocess
 import ctypes
+from globalVars import appArgs
 from threading import Thread
 
 # Lína de traducción
 addonHandler.initTranslation()
+
+soundsPath = os.path.join(appArgs.configPath, 'addons', 'whatsapp', 'sounds')
 
 class disable_file_system_redirection:
 
@@ -67,19 +70,9 @@ def buscarApp(lista, valor):
 IS_WinON = False
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
-	def __init__(self):
-		super(GlobalPlugin, self).__init__()
-		if globalVars.appArgs.secure: return
-
-	def terminate(self):
-		try:
-			if not self._MainWindows:
-				self._MainWindows.Destroy()
-		except (AttributeError, RuntimeError):
-			pass
 
 	@script(
-		category= _('whatsapp'),
+		category= 'whatsapp',
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Abre WhatsApp, o la enfoca si ya se encuentra abierta')
 	)
@@ -131,6 +124,7 @@ class ViewApps(wx.Dialog):
 
 	def onAceptar(self, event):
 		if self.choiceSelection == 0:
+			# Translators: Mensaje de aviso de selección de aplicación
 			gui.messageBox(_('Debe seleccionar una aplicación para continuar.'), _("Información"), wx.ICON_INFORMATION)
 			self.choice.SetFocus()
 		else:
@@ -149,7 +143,7 @@ class ViewApps(wx.Dialog):
 class HiloComplemento(Thread):
 	def __init__(self):
 		super(HiloComplemento, self).__init__()
-		PlaySound('C:\\Windows\\Media\\Windows Proximity Connection.wav', SND_FILENAME | SND_ASYNC)
+		playWaveFile(os.path.join(soundsPath, 'open.wav'))
 
 		self.daemon = True
 
@@ -164,6 +158,7 @@ class HiloComplemento(Thread):
 					gui.mainFrame.prePopup()
 					self._MainWindows.Show()
 			else:
+				# Translators: Mensaje de aviso de aplicación no encontrada
 				ui.message(_('No se ha encontrado la aplicación de WhatsApp'))
 
 		wx.CallAfter(runApp)

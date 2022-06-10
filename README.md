@@ -3,7 +3,7 @@
 Autor: [Gerardo Kessler](http://gera.ar)  
 
 Importante:  
-Este complemento solo es compatible con la versión UWP de WhatsApp, actualmente llamada WhatsApp Beta. Asimismo en el caso de tener otros complementos instalados que se activen con la aplicación, como Whatsapp-desktop, se deberán deshabilitar para evitar conflictos.
+Este complemento solo es compatible con la versión UWP de WhatsApp, actualmente llamada WhatsApp Beta. Asimismo en el caso de tener otros complementos instalados que se activen con la aplicación, como Whatsapp-desktop, se deberán deshabilitar para evitar conflictos.  
 
 Este complemento añade atajos de teclado a funciones importantes de la aplicación, así como el renombre de objetos sin etiqueta, a saber:
 
@@ -18,7 +18,7 @@ Este complemento añade atajos de teclado a funciones importantes de la aplicaci
 * Abrir la aplicación; sin asignar
 * Grabar y enviar mensajes de voz; control + r
 * Descartar el mensaje de voz en grabación; control + shift + r
-* Conocer el tiempo transcurrido en grabación; control ++ t
+* Conocer el tiempo transcurrido en grabación; control + t
 * Conmutar entre la lista de mensajes y el cuadro de edición; alt + flecha izquierda
 * Enfocar la lista de chats; alt + flecha derecha
 * Verbalizar el nombre del contacto o grupo; control + shift + t

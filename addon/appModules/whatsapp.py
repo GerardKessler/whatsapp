@@ -37,7 +37,7 @@ class AppModule(appModuleHandler.AppModule):
 	def __init__(self, *args, **kwargs):
 		super(AppModule, self).__init__(*args, **kwargs)
 		self.lastChat = None
-		self.soundsPath = os.path.join(appArgs.configPath, 'addons', 'whatsapp', 'appModules', 'sounds')
+		self.soundsPath = os.path.join(appArgs.configPath, 'addons', 'whatsapp', 'sounds')
 		self.configFile()
 
 	def configFile(self):
@@ -49,10 +49,15 @@ class AppModule(appModuleHandler.AppModule):
 				f.write('desactivado')
 
 	# Función que recibe el UIAAutomationId por parámetro, y devuelve el objeto de coincidencia
-	def get(self, id):
+	def get(self, id, errorMessage, gesture):
 		for obj in api.getForegroundObject().children[1].children:
 			if obj.UIAAutomationId == id:
 				return obj
+		if errorMessage:
+			# Translators: Mensaje que anuncia que no se ha encontrado el elemento
+			message(_('Elemento no encontrado'))
+		if gesture:
+			gesture.send()
 
 	def event_NVDAObject_init(self, obj):
 		try:
@@ -103,14 +108,15 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+r'
 	)
 	def script_voiceMessage(self, gesture):
-		send = self.get('PttSendButton')
+		send = self.get('PttSendButton', False, None)
 		if send:
 			send.doAction()
 			playWaveFile(os.path.join(self.soundsPath, 'send.wav'))
 			return
-		record = self.get('RightButton')
+		record = self.get('RightButton', True, gesture)
 		if record:
 			record.doAction()
+			mute(1)
 			playWaveFile(os.path.join(self.soundsPath, 'start.wav'))
 
 	@script(
@@ -120,12 +126,10 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+shift+r'
 	)
 	def script_cancelVoiceMessage(self, gesture):
-		cancel = self.get('PttDeleteButton')
+		cancel = self.get('PttDeleteButton', False, gesture)
 		if cancel:
 			cancel.doAction()
 			playWaveFile(os.path.join(self.soundsPath, 'cancel.wav'))
-		else:
-			gesture.send()
 
 	@script(
 		category= category,
@@ -134,7 +138,7 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+t'
 	)
 	def script_timeAnnounce(self, gesture):
-		timer = self.get('PttTimer')
+		timer = self.get('PttTimer', False, gesture)
 		if timer:
 			message(timer.name)
 
@@ -176,11 +180,11 @@ class AppModule(appModuleHandler.AppModule):
 	)
 	def script_switch(self, gesture):
 		if api.getFocusObject().UIAAutomationId == 'BubbleListItem':
-			textBox = self.get('TextBox')
+			textBox = self.get('TextBox', False, None)
 			if textBox:
 				textBox.setFocus()
 		else:
-			listView = self.get('ListView')
+			listView = self.get('ListView', False, None)
 			if listView:
 				listView.lastChild.setFocus()
 
@@ -191,7 +195,7 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+shift+t'
 	)
 	def script_chatName(self, gesture):
-		title = self.get('TitleButton')
+		title = self.get('TitleButton', True, gesture)
 		if title:
 			message(' '.join([obj.name for obj in title.children if len(obj.name) < 50]))
 
@@ -214,7 +218,7 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+shift+a'
 	)
 	def script_toAttach(self, gesture):
-		attach = self.get('AttachButton')
+		attach = self.get('AttachButton', True, gesture)
 		if attach:
 			message(attach.name)
 			attach.doAction()
@@ -226,7 +230,7 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+shift+i'
 	)
 	def script_moreInfo(self, gesture):
-		info = self.get('TitleButton')
+		info = self.get('TitleButton', True, gesture)
 		if info:
 			message(info.name)
 			info.doAction()
@@ -238,7 +242,7 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+shift+o'
 	)
 	def script_settings(self, gesture):
-		settings = self.get('SettingsButton')
+		settings = self.get('SettingsButton', True, gesture)
 		if settings:
 			message(settings.name)
 			settings.doAction()
@@ -250,7 +254,7 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+shift+n'
 	)
 	def script_newChat(self, gesture):
-		newChat = self.get('NewConvoButton')
+		newChat = self.get('NewConvoButton', True, gesture)
 		if newChat:
 			message(newChat.name)
 			newChat.doAction()
@@ -262,7 +266,7 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+shift+v'
 	)
 	def script_videoCall(self, gesture):
-		videoCall = self.get('VideoCallButton')
+		videoCall = self.get('VideoCallButton', True, gesture)
 		if videoCall:
 			message(videoCall.name)
 			videoCall.doAction()
@@ -274,7 +278,7 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+shift+l'
 	)
 	def script_audioCall(self, gesture):
-		audioCall = self.get('AudioCallButton')
+		audioCall = self.get('AudioCallButton', True, gesture)
 		if audioCall:
 			message(audioCall.name)
 			audioCall.doAction()

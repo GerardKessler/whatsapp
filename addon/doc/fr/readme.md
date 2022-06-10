@@ -18,7 +18,7 @@ Cette extension ajoute des raccourcis clavier aux fonctions importantes de l'app
 * Ouvrir l'application; sans attribuer
 * Démarrer et envoyer l'enregistrement d'un message vocal; contrôle + r
 * Rejeter le message vocal en cours d'enregistrement; contrôle + maj + r
-* Connaître le temps écoulé en cours d'enregistrement; contrôle ++ t
+* Connaître le temps écoulé en cours d'enregistrement; contrôle + t
 * Basculer entre la liste des messages et la zone d'édition; alt + flèche gauche
 * Focaliser la liste des chats; alt + flèche droite
 * Verbaliser le nom du contact ou du groupe; contrôle + maj + t
