@@ -87,8 +87,10 @@ class AppModule(appModuleHandler.AppModule):
 	def event_gainFocus(self, obj, nextHandler):
 		try:
 			# Renombre del mensaje con documento adjunto por el texto de los objetos que tienen el nombre el archivo, tipo y tamaño
-			if obj.UIAAutomationId == 'BubbleListItem' and obj.children[1].UIAAutomationId == 'NameTextBlock':
-				obj.name = '{} ({})'.format(obj.children[1].name, obj.children[2].name)
+			if obj.UIAAutomationId == 'BubbleListItem' and (obj.children[1].UIAAutomationId == 'NameTextBlock' or obj.children[3].UIAAutomationId == 'NameTextBlock' or obj.children[4].UIAAutomationId == 'NameTextBlock'):
+				for data in obj.children:
+					if data.UIAAutomationId == 'NameTextBlock':
+						obj.name = '{} {}'.format(data.name, data.next.name)
 			else:
 				nextHandler()
 		except:
