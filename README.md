@@ -37,3 +37,10 @@ Este complemento añade atajos de teclado a funciones importantes de la aplicaci
 * Activar el cuadro de búsqueda de mensajes; control + shift + f
 * Activar el chat siguiente; control + tab
 * Activar el chat anterior; control + shift + tab
+
+## Traducción:
+
+Las siguientes personas colaboran con la traducción de este complemento
+
+* Rémy Ruiz (Francés)
+* Umut KORKMAZ (Turco)

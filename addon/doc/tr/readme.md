@@ -41,6 +41,6 @@ Bu Eklenti, etiketlenmemiş nesneleri yeniden adlandırmanın yanı sıra uygula
 ## Çeviriler:
 
 Aşağıdaki kişiler eklentinin çevrilmesine katkıda bulunmuştur:
-	
-	* Umut KORKMAZ, türkçe.  
-	* Rémy Ruiz, fransızca.  
+
+* Umut KORKMAZ, türkçe.  
+* Rémy Ruiz, fransızca.  

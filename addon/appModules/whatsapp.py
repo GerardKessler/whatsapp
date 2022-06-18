@@ -76,7 +76,7 @@ class AppModule(appModuleHandler.AppModule):
 				# Translators: Etiqueta del botón cancelar mensaje de voz
 				obj.name = _('Cancelar mensaje')
 			elif obj.name == '\ue8bb':
-				obj.name = _('cancel reply')
+				obj.name = _('Cancelar respuesta')
 			elif obj.UIAAutomationId == "SendMessages":
 				obj.name = _(obj.previous.name+": "+obj.firstChild.name)
 			elif obj.UIAAutomationId == "EditInfo":
@@ -87,6 +87,12 @@ class AppModule(appModuleHandler.AppModule):
 				obj.name = obj.previous.name + obj.firstChild.children[1].name
 			elif obj.name == 'WhatsApp.Design.ThemeData':
 				obj.name = obj.children[1].name
+			elif obj.UIAAutomationId == 'PttPauseButton':
+				# Translators: Etiqueta del botón pausar grabación
+				obj.name = _('Pausar grabación')
+			elif obj.UIAAutomationId == 'PttSendButton':
+				# Translators: Etiqueta del botón Enviar mensaje de voz
+				obj.name = _('Enviar mensaje de voz')
 		except:
 			pass
 		try:
