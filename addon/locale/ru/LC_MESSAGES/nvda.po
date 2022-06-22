@@ -1,0 +1,146 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WhatsApp\n"
+"POT-Creation-Date: 2022-06-12 19:10+0300\n"
+"PO-Revision-Date: 2022-06-12 19:11+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: appModules\n"
+"X-Poedit-SearchPath-1: globalPlugins\n"
+
+#: appModules/whatsapp.py:36
+msgid "whatsapp"
+msgstr "whatsApp"
+
+#: appModules/whatsapp.py:41
+msgid "Elemento no encontrado"
+msgstr "Элемент не найден"
+
+#: appModules/whatsapp.py:68
+msgid "Mensaje de voz"
+msgstr "Голосовое сообщение"
+
+#: appModules/whatsapp.py:71
+msgid "Chats Archivados"
+msgstr "Архивные чаты"
+
+#: appModules/whatsapp.py:74
+msgid "Atrás"
+msgstr "Назад"
+
+#: appModules/whatsapp.py:77
+msgid "Cancelar mensaje"
+msgstr "Отменить сообщение"
+
+#: appModules/whatsapp.py:109
+msgid "Iniciar o finalizar la grabación de un mensaje de voz"
+msgstr "Начало или завершение записи голосового сообщения"
+
+#: appModules/whatsapp.py:127
+msgid "Cancela la grabación de los mensajes de voz"
+msgstr "Отмена записи голосового сообщения"
+
+#: appModules/whatsapp.py:139
+msgid "Verbaliza el tiempo de grabación de un mensaje"
+msgstr "Произнести время записи сообщения"
+
+#: appModules/whatsapp.py:150
+msgid ""
+"Activa y desactiva la eliminación de los números de teléfono de los "
+"contactos no agendados en los mensajes"
+msgstr ""
+"Включает и выключает удаление телефонных номеров из незапланированных "
+"контактов в сообщениях"
+
+#: appModules/whatsapp.py:160
+msgid "Mensajes editados, desactivado"
+msgstr "Отредактированные сообщения, отключено"
+
+#: appModules/whatsapp.py:165
+msgid "Mensajes editados, activado"
+msgstr "Отредактированные сообщения, включено"
+
+#: appModules/whatsapp.py:170
+msgid "Enfoca la lista de chats"
+msgstr "Перейти на список чатов"
+
+#: appModules/whatsapp.py:180
+msgid ""
+"Conmuta entre la lista de mensajes y el cuadro de edición dentro de un chat"
+msgstr "Переключение между списком сообщений и полем редактирования в чате"
+
+#: appModules/whatsapp.py:196
+msgid "Verbaliza el nombre del contacto o grupo"
+msgstr "Произнести имя контакта или группы"
+
+#: appModules/whatsapp.py:207
+msgid "Verbaliza la respuesta en el mensaje con el foco"
+msgstr "Произнести ответ в сообщении, сосредоточившись на нем"
+
+#: appModules/whatsapp.py:219
+msgid "Pulsa el botón adjuntar"
+msgstr "Нажать кнопку прикрепления"
+
+#: appModules/whatsapp.py:231
+msgid "Pulsa el botón info del chat"
+msgstr "Нажать кнопку информации о чате"
+
+#: appModules/whatsapp.py:243
+msgid "Pulsa el botón de configuración"
+msgstr "Нажать кнопку настроек"
+
+#: appModules/whatsapp.py:255
+msgid "Pulsa el botón de nuevo chat"
+msgstr "Нажать кнопку нового чата"
+
+#: appModules/whatsapp.py:267
+msgid "Pulsa el botón llamada de video"
+msgstr "Нажать кнопку видеовызова"
+
+#: appModules/whatsapp.py:279
+msgid "Pulsa el botón llamada de audio"
+msgstr "Нажать кнопку аудио вызова"
+
+#: globalPlugins/wsOpen.py:77
+msgid "Abre WhatsApp, o la enfoca si ya se encuentra abierta"
+msgstr "Открыть WhatsApp или перейти в него, если он уже открыт."
+
+#: globalPlugins/wsOpen.py:86
+msgid "Selector de aplicación"
+msgstr "Выбор приложений"
+
+#: globalPlugins/wsOpen.py:98
+msgid "Lanzar &aplicación"
+msgstr "&Запустить приложения"
+
+#: globalPlugins/wsOpen.py:101
+msgid "&Cerrar"
+msgstr "&Закрыть"
+
+#: globalPlugins/wsOpen.py:120
+msgid "Seleccione una de las aplicaciones de WhatsApp"
+msgstr "Выберите одно из приложений WhatsApp"
+
+#: globalPlugins/wsOpen.py:128
+msgid "Debe seleccionar una aplicación para continuar."
+msgstr "Вы должны выбрать приложение, чтобы продолжить."
+
+#: globalPlugins/wsOpen.py:128
+msgid "Información"
+msgstr "Информация"
+
+#: globalPlugins/wsOpen.py:162
+msgid "No se ha encontrado la aplicación de WhatsApp"
+msgstr "Приложение WhatsApp не найдено"
+
+#~ msgid "Seleccione una aplicación de WhatsApp"
+#~ msgstr "Выберите приложение WhatsApp"
