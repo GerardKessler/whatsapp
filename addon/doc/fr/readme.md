@@ -42,5 +42,6 @@ Cette extension ajoute des raccourcis clavier aux fonctions importantes de l'app
 
 Les personnes suivantes ont collaboré à la traduction de l'extension:
 
-* Umut Korkmaz, pour le  turc.  
-* Rémy Ruiz, pour le français.  
+* Rémy Ruiz (Français)
+* Umut Korkmaz (Turc)
+* Valentin Kupriyanov (Russe)
