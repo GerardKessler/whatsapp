@@ -44,3 +44,4 @@ Las siguientes personas colaboran con la traducción de este complemento
 
 * Rémy Ruiz (Francés)
 * Umut KORKMAZ (Turco)
+* Valentin Kupriyanov (Ruso)

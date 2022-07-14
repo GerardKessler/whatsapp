@@ -10,6 +10,7 @@ import appModuleHandler
 from scriptHandler import script
 import wx
 import api
+import winUser
 from ui import message
 from nvwave import playWaveFile
 from re import search, sub
@@ -69,6 +70,9 @@ class AppModule(appModuleHandler.AppModule):
 			elif obj.name == 'WhatsApp.ChatListArchiveButtonCellVm':
 				# Translators: Etiqueta del elemento mensajes archivados
 				obj.name = _('Chats Archivados')
+			elif obj.name == '\ue76e' and obj.value == None:
+				# Translators: Etiqueta del botón reaccionar
+				obj.name = _('Reaccionar')
 			elif obj.UIAAutomationId == 'BackButton':
 				# Translators: Etiqueta del botón atrás en los chatsArchivados
 				obj.name = _('Atrás')
@@ -120,6 +124,19 @@ class AppModule(appModuleHandler.AppModule):
 				nextHandler()
 		except:
 			nextHandler()
+
+	@script(gesture="kb:space")
+	def script_playPause(self, gesture):
+		focus = api.getFocusObject()
+		try:
+			if focus.children[1].UIAAutomationId == 'IconTextBlock':
+				api.moveMouseToNVDAObject(focus.children[1])
+				winUser.mouse_event(winUser.MOUSEEVENTF_LEFTDOWN,0,0,None,None)
+				winUser.mouse_event(winUser.MOUSEEVENTF_LEFTUP,0,0,None,None)
+			else:
+				gesture.send()
+		except:
+			gesture.send()
 
 	@script(
 	category= category,
