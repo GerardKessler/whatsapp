@@ -11,6 +11,7 @@ from scriptHandler import script
 import wx
 import api
 import winUser
+import config
 from ui import message
 from nvwave import playWaveFile
 from re import search, sub
@@ -20,13 +21,31 @@ import addonHandler
 # Lína de traducción
 addonHandler.initTranslation()
 
+# Funciones de lectura y escritura de las configuraciones del complemento
+def initConfiguration():
+	confspec = {
+		'RemovePhoneNumberInMessages':'boolean(default=False)',
+	}
+	config.conf.spec['WhatsAppBeta'] = confspec
+
+def getConfig(key):
+	return config.conf["WhatsAppBeta"][key]
+
+def setConfig(key, value):
+	try:
+		config.conf.profiles[0]["WhatsAppBeta"][key] = value
+	except:
+		config.conf["WhatsAppBeta"][key] = value
+
+initConfiguration()
+
+# Función para romper la cadena de verbalización y callar al sintetizador durante el tiempo especificado
 def mute(time, msg= False):
 	if msg:
 		message(msg)
 		sleep(0.1)
 	Thread(target=killSpeak, args=(time,), daemon= True).start()
 
-# Función para romper la cadena de verbalización y callar al sintetizador durante el tiempo especificado
 def killSpeak(time):
 	speech.setSpeechMode(speech.SpeechMode.off)
 	sleep(time)
@@ -42,15 +61,7 @@ class AppModule(appModuleHandler.AppModule):
 		self.notFound = _('Elemento no encontrado')
 		self.lastChat = None
 		self.soundsPath = os.path.join(appArgs.configPath, 'addons', 'whatsapp', 'sounds')
-		self.configFile()
-
-	def configFile(self):
-		try:
-			with open(f'{appArgs.configPath}\\whatsapp.ini', 'r') as f:
-				self.viewConfig = f.read()
-		except FileNotFoundError:
-			with open(f'{appArgs.configPath}\\whatsapp.ini', 'w') as f:
-				f.write('desactivado')
+		self.temp_value = getConfig('RemovePhoneNumberInMessages')
 
 	# Función que recibe el UIAAutomationId por parámetro, y devuelve el objeto de coincidencia
 	def get(self, id, errorMessage, gesture):
@@ -71,7 +82,6 @@ class AppModule(appModuleHandler.AppModule):
 				# Translators: Etiqueta del elemento mensajes archivados
 				obj.name = _('Chats Archivados')
 			elif obj.name == '\ue76e' and obj.value == None:
-				# Translators: Etiqueta del botón reaccionar
 				obj.name = _('Reaccionar')
 			elif obj.UIAAutomationId == 'BackButton':
 				# Translators: Etiqueta del botón atrás en los chatsArchivados
@@ -100,7 +110,7 @@ class AppModule(appModuleHandler.AppModule):
 		except:
 			pass
 		try:
-			if self.viewConfig == 'desactivado': return
+			if not self.temp_value: return
 			if obj.UIAAutomationId == 'BubbleListItem':
 				obj.name = sub(r'\+\d[()\d\s‬-]{12,}', '', obj.name)
 		except:
@@ -186,18 +196,16 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+shift+e'
 	)
 	def script_viewConfigToggle(self, gesture):
-		self.configFile()
-		with open(f'{appArgs.configPath}\\whatsapp.ini', 'w') as f:
-			if self.viewConfig == 'activado':
-				f.write('desactivado')
-				self.viewConfig = 'desactivado'
-				# Translators: Mensaje que indica la desactivación de los mensajes editados
-				message(_('Mensajes editados, desactivado'))
-			else:
-				f.write('activado')
-				self.viewConfig = 'activado'
-				# Translators: Mensaje que anuncia la activación de los mensajes editados
-				message(_('Mensajes editados, activado'))
+		if self.temp_value:
+			setConfig('RemovePhoneNumberInMessages', False)
+			self.temp_value = False
+			# Translators: Mensaje que indica la desactivación de los mensajes editados
+			message(_('Mensajes editados, desactivado'))
+		else:
+			setConfig('RemovePhoneNumberInMessages', True)
+			self.temp_value = True
+			# Translators: Mensaje que anuncia la activación de los mensajes editados
+			message(_('Mensajes editados, activado'))
 
 	@script(
 	category= category,
