@@ -41,6 +41,7 @@ initConfiguration()
 
 # Función para romper la cadena de verbalización y callar al sintetizador durante el tiempo especificado
 def mute(time, msg= False):
+	if speech.getState().speechMode == speech.SpeechMode.off: return
 	if msg:
 		message(msg)
 		sleep(0.1)
