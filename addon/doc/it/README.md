@@ -3,7 +3,7 @@
 Autore: [Gerardo Kessler](http://gera.ar)  
 
 Importante:  
-Questo componente aggiuntivo è compatibile solo con la versione UWP di WhatsApp, attualmente chiamata WhatsApp Beta. Allo stesso modo, nel caso in cui siano installati altri componenti aggiuntivi che vengono attivati ​​con l'applicazione, come WhatsApp-desktop, devono essere disabilitati per evitare conflitti.
+Questo componente aggiuntivo è compatibile solo con la versione UWP di WhatsApp, attualmente chiamata [WhatsApp Beta](https://apps.microsoft.com/store/detail/whatsapp-beta/9NBDXK71NK08?hl=en-us&gl=US). Allo stesso modo, nel caso in cui siano installati altri componenti aggiuntivi che vengono attivati ​​con l'applicazione, come WhatsApp-desktop, devono essere disabilitati per evitare conflitti.
 
 Questo componente aggiunge scorciatoie da tastiera a importanti funzioni dell'applicazione, nonché la ridenominazione di oggetti senza etichetta, in particolare:
 
