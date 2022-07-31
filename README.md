@@ -47,3 +47,4 @@ Las siguientes personas colaboran con la traducción de este complemento
 * Umut KORKMAZ (Turco)
 * Valentin Kupriyanov (Ruso)
 * Scott Chesworth (Inglés)
+
