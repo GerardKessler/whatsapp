@@ -30,6 +30,7 @@ Questo componente aggiunge scorciatoie da tastiera a importanti funzioni dell'ap
 * Premere il pulsante impostazioni; control + shift + o
 * Premere il pulsante nuova conversazione; control + shift + n
 * Attivare e disattivare la cancellazione dei numeri di telefono nei messaggi da contatti non programmati; control + shift + e
+* Messa a fuoco non letti; alt + freccia giù
 
 ### Scorciatoie dell'applicazione
 

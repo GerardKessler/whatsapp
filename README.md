@@ -30,6 +30,7 @@ Este complemento añade atajos de teclado a funciones importantes de la aplicaci
 * Pulsar el botón configuraciones; control + shift + o
 * Pulsar el botón nuevo chat; control + shift + n
 * Activar y desactivar la eliminación de los números de teléfono en los mensajes de contactos no agendados; control + shift + e
+* Enfocar los mensajes no leídos; alt + flecha abajo
 
 ### Atajos de la aplicación
 

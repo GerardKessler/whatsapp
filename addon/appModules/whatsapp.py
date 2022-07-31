@@ -220,6 +220,21 @@ class AppModule(appModuleHandler.AppModule):
 	@script(
 		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Enfoca el elemento mensajes no leídos'),
+		gesture= 'kb:alt+downArrow'
+	)
+	def script_unreadFocus(self, gesture):
+		listView = self.get('ListView', False, None)
+		if listView:
+			for obj in reversed(listView.children):
+				if obj.childCount == 1 and obj.firstChild.UIAAutomationId == '' and not search(r'\d{1,2}/', obj.name[:3]):
+					obj.setFocus()
+					break
+
+
+	@script(
+		category= category,
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Conmuta entre la lista de mensajes y el cuadro de edición dentro de un chat'),
 		gesture= 'kb:alt+leftArrow'
 	)

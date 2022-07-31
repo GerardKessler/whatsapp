@@ -30,6 +30,7 @@ Cette extension ajoute des raccourcis clavier aux fonctions importantes de l'app
 * Appuyer sur le bouton configurations; contrôle + maj + o
 * Appuyer sur le bouton nouveau chat; contrôle + maj + n
 * Activer et désactiver l'élimination des numéros de téléphone dans les messages de contact non agender; contrôle + maj + e
+* Focus sur les messages non lus; alt + flèche vers le bas
 
 ### Raccourcis de l'application
 

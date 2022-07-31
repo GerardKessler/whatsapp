@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 'whatsapp' '1.2'\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2022-07-26 10:28-0300\n"
-"PO-Revision-Date: 2022-07-30 02:10+0100\n"
+"POT-Creation-Date: 2022-07-31 14:32-0300\n"
+"PO-Revision-Date: 2022-07-31 14:34-0300\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 2.4.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: en\n"
 
 #. Translators: Nombre de categoría en el diálogo gestos de entrada
 #. Add-on summary, usually the user visible name of the addon.
@@ -114,47 +114,52 @@ msgstr "Focus the chats list"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:223
+msgid "Enfoca el elemento mensajes no leídos"
+msgstr "Focus the unread messages element"
+
+#. Translators: Descripción del elemento en el diálogo gestos de entrada
+#: addon\appModules\whatsapp.py:238
 msgid ""
 "Conmuta entre la lista de mensajes y el cuadro de edición dentro de un chat"
 msgstr "Toggles between the message list and the edit box within a chat"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:239
+#: addon\appModules\whatsapp.py:254
 msgid "Verbaliza el nombre del contacto o grupo"
 msgstr "Speak the name of the active conversation with contact or group"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:250
+#: addon\appModules\whatsapp.py:265
 msgid "Verbaliza la respuesta en el mensaje con el foco"
 msgstr "Speak the quoted message"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:262
+#: addon\appModules\whatsapp.py:277
 msgid "Pulsa el botón adjuntar"
 msgstr "Press the Attach button"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:274
+#: addon\appModules\whatsapp.py:289
 msgid "Pulsa el botón info del chat"
 msgstr "Press the Chat Info button"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:286
+#: addon\appModules\whatsapp.py:301
 msgid "Pulsa el botón de configuración"
 msgstr "Press the Settings button"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:298
+#: addon\appModules\whatsapp.py:313
 msgid "Pulsa el botón de nuevo chat"
 msgstr "Press the New Chat button"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:310
+#: addon\appModules\whatsapp.py:325
 msgid "Pulsa el botón llamada de video"
 msgstr "Press the Video Call button"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:322
+#: addon\appModules\whatsapp.py:337
 msgid "Pulsa el botón llamada de audio"
 msgstr "Press the Audio Call button"
 
