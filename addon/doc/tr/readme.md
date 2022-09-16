@@ -30,7 +30,6 @@ Bu Eklenti, etiketlenmemiş nesneleri yeniden adlandırmanın yanı sıra uygula
 * Ayarlar düğmesine basın: CTRL + Shift + O
 * Yeni Sohbet düğmesine basın: CTRL + Shift + N
 * Mesajlarda eklenmemiş kişilerin telefon numaralarının kaldırılmasını etkinleştir veya devre dışı bırak: CTRL + Shift + E
-* Enfocar los mensajes no leídos; alt + flecha abajo
 * Okunmamış mesajlara odaklanın; alt + aşağı ok
 
 ### Uygulama kısayolları:
@@ -46,3 +45,5 @@ Aşağıdaki kişiler eklentinin çevrilmesine katkıda bulunmuştur:
 
 * Umut KORKMAZ, türkçe.  
 * Rémy Ruiz, fransızca.  
+* Valentin Kupriyanov (Rusça)
+* Scott Chesworth (İngilizce)

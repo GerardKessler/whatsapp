@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Whatsapp 1.0\n"
+"Project-Id-Version: Whatsapp 1.4\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
 "POT-Creation-Date: 2022-07-31 14:32-0300\n"
-"PO-Revision-Date: 2022-07-31 14:38-0300\n"
+"PO-Revision-Date: 2022-09-16 20:28+0300\n"
 "Last-Translator: Umut KORKMAZ <umutkork@gmail.com>\n"
 "Language-Team: Umut KORKMAZ <umutkork@gmail.com>\n"
 "Language: tr_TR\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: appModules/whatsapp.py\n"
@@ -44,7 +44,7 @@ msgstr "Arşivlenmiş Sohbetler"
 
 #: addon\appModules\whatsapp.py:85
 msgid "Reaccionar"
-msgstr ""
+msgstr "Tepki"
 
 #. Translators: Etiqueta del botón atrás en los chatsArchivados
 #: addon\appModules\whatsapp.py:88
@@ -57,28 +57,25 @@ msgid "Cancelar mensaje"
 msgstr "Mesajı iptal et"
 
 #: addon\appModules\whatsapp.py:93
-#, fuzzy
 #| msgid "Cancelar mensaje"
 msgid "Cancelar respuesta"
-msgstr "Mesajı iptal et"
+msgstr "Tepkiyi iptal et"
 
 #: addon\appModules\whatsapp.py:95 addon\appModules\whatsapp.py:97
 msgid ": "
-msgstr ""
+msgstr ": "
 
 #. Translators: Etiqueta del botón pausar grabación
 #: addon\appModules\whatsapp.py:106
-#, fuzzy
 #| msgid "Lanzar &aplicación"
 msgid "Pausar grabación"
-msgstr "Uygul&amayı başlat"
+msgstr "Kaydı duraklat"
 
 #. Translators: Etiqueta del botón Enviar mensaje de voz
 #: addon\appModules\whatsapp.py:109
-#, fuzzy
 #| msgid "Mensaje de voz"
 msgid "Enviar mensaje de voz"
-msgstr "Sesli mesaj"
+msgstr "Sesli mesaj gönder"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:154
