@@ -5,13 +5,7 @@ Autor: [Gerardo Kessler](http://gera.ar)
 Importante:  
 Este complemento solo es compatible con la versión UWP de WhatsApp, actualmente llamada [WhatsApp Beta](https://apps.microsoft.com/store/detail/whatsapp-beta/9NBDXK71NK08?hl=en-us&gl=US). Asimismo en el caso de tener otros complementos instalados que se activen con la aplicación, como Whatsapp-desktop, se deberán deshabilitar para evitar conflictos.  
 
-Este complemento añade atajos de teclado a funciones importantes de la aplicación, así como el renombre de objetos sin etiqueta, a saber:
-
-* Botón mensaje de voz, mal etiquetado cuando el cuadro está vacío.
-* Cancelar mensaje, al grabar un mensaje de voz.
-* Botón atrás en la ventana de chats archivados.
-* Opción chats archivados.
-* Botón cancelar, en el cuadro de búsqueda de mensajes.
+Este complemento añade atajos de teclado a funciones importantes de la aplicación, así como el renombre de objetos sin etiqueta.
 
 ## Lista de comandos
 
@@ -22,7 +16,7 @@ Este complemento añade atajos de teclado a funciones importantes de la aplicaci
 * Conmutar entre la lista de mensajes y el cuadro de edición; alt + flecha izquierda
 * Enfocar la lista de chats; alt + flecha derecha
 * Verbalizar el nombre del contacto o grupo; control + shift + t
-* Verbalizar el mensaje de respuesta; alt + r
+* Activar una ventana con el texto del mensaje; alt + r
 * Pulsar el botón adjuntar; control + shift + a
 * Pulsar el botón llamada de audio; control + shift + l
 * Pulsar el botón llamada de video; control + shift + v

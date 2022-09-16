@@ -12,7 +12,7 @@ import wx
 import api
 import winUser
 import config
-from ui import message
+from ui import message, browseableMessage
 from nvwave import playWaveFile
 from re import search, sub
 import os
@@ -41,7 +41,6 @@ initConfiguration()
 
 # Función para romper la cadena de verbalización y callar al sintetizador durante el tiempo especificado
 def mute(time, msg= False):
-	if speech.getState().speechMode == speech.SpeechMode.off: return
 	if msg:
 		message(msg)
 		sleep(0.1)
@@ -159,13 +158,11 @@ class AppModule(appModuleHandler.AppModule):
 		send = self.get('PttSendButton', False, None)
 		if send:
 			send.doAction()
-			playWaveFile(os.path.join(self.soundsPath, 'send.wav'))
 			return
 		record = self.get('RightButton', True, gesture)
 		if record:
 			record.doAction()
 			mute(1)
-			playWaveFile(os.path.join(self.soundsPath, 'start.wav'))
 
 	@script(
 		category= category,
@@ -266,11 +263,11 @@ class AppModule(appModuleHandler.AppModule):
 		description= _('Verbaliza la respuesta en el mensaje con el foco'),
 		gesture= 'kb:alt+r'
 	)
-	def script_responseText(self, gesture):
+	def script_viewText(self, gesture):
 		fc = api.getFocusObject()
 		if fc.UIAAutomationId == 'BubbleListItem':
 			text = '\n'.join([item.name for item in fc.children if item.UIAAutomationId == 'TextBlock'])
-			message(text)
+			browseableMessage(text, _('Texto del mensaje'))
 
 	@script(
 		category= category,
