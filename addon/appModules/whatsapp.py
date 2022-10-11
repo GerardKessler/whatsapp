@@ -65,7 +65,7 @@ class AppModule(appModuleHandler.AppModule):
 
 	# Función que recibe el UIAAutomationId por parámetro, y devuelve el objeto de coincidencia
 	def get(self, id, errorMessage, gesture):
-		for obj in api.getForegroundObject().children[1].children:
+		for obj in api.getForegroundObject().children[1].children[0].children:
 			if obj.UIAAutomationId == id:
 				return obj
 		if errorMessage:
