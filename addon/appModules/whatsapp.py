@@ -143,6 +143,10 @@ class AppModule(appModuleHandler.AppModule):
 				api.moveMouseToNVDAObject(focus.children[1])
 				winUser.mouse_event(winUser.MOUSEEVENTF_LEFTDOWN,0,0,None,None)
 				winUser.mouse_event(winUser.MOUSEEVENTF_LEFTUP,0,0,None,None)
+			if search('https?://', focus.name):
+				api.moveMouseToNVDAObject(focus)
+				winUser.mouse_event(winUser.MOUSEEVENTF_LEFTDOWN,0,0,None,None)
+				winUser.mouse_event(winUser.MOUSEEVENTF_LEFTUP,0,0,None,None)
 			else:
 				gesture.send()
 		except:
