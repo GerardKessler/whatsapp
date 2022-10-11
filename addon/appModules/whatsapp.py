@@ -92,7 +92,7 @@ class AppModule(appModuleHandler.AppModule):
 			elif obj.name == '\ue8bb':
 				obj.name = _('Cancelar respuesta')
 			elif obj.UIAAutomationId == "SendMessages":
-				obj.name = _(obj.previous.name+": "+obj.firstChild.name)
+				obj.name = '{}: {}'.format(obj.previous.name, obj.firstChild.name)
 			elif obj.UIAAutomationId == "EditInfo":
 				obj.name = _(obj.previous.name+": "+obj.firstChild.name)
 			elif obj.UIAAutomationId == "MuteDropdown":
