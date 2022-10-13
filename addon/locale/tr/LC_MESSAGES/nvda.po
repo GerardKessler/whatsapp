@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Whatsapp 1.4\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2022-07-31 14:32-0300\n"
-"PO-Revision-Date: 2022-09-16 20:28+0300\n"
+"POT-Creation-Date: 2022-10-13 06:28-0300\n"
+"PO-Revision-Date: 2022-10-13 06:31-0300\n"
 "Last-Translator: Umut KORKMAZ <umutkork@gmail.com>\n"
 "Language-Team: Umut KORKMAZ <umutkork@gmail.com>\n"
 "Language: tr_TR\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 2.4.3\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: appModules/whatsapp.py\n"
@@ -57,43 +57,36 @@ msgid "Cancelar mensaje"
 msgstr "Mesajı iptal et"
 
 #: addon\appModules\whatsapp.py:93
-#| msgid "Cancelar mensaje"
 msgid "Cancelar respuesta"
 msgstr "Tepkiyi iptal et"
 
-#: addon\appModules\whatsapp.py:95 addon\appModules\whatsapp.py:97
-msgid ": "
-msgstr ": "
-
 #. Translators: Etiqueta del botón pausar grabación
 #: addon\appModules\whatsapp.py:106
-#| msgid "Lanzar &aplicación"
 msgid "Pausar grabación"
 msgstr "Kaydı duraklat"
 
 #. Translators: Etiqueta del botón Enviar mensaje de voz
 #: addon\appModules\whatsapp.py:109
-#| msgid "Mensaje de voz"
 msgid "Enviar mensaje de voz"
 msgstr "Sesli mesaj gönder"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:154
+#: addon\appModules\whatsapp.py:158
 msgid "Iniciar o finalizar la grabación de un mensaje de voz"
 msgstr "Sesli mesaj kaydetmeyi başlatma veya durdurma"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:172
+#: addon\appModules\whatsapp.py:174
 msgid "Cancela la grabación de los mensajes de voz"
 msgstr "Sesli mesaj kaydını iptal et"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:184
+#: addon\appModules\whatsapp.py:186
 msgid "Verbaliza el tiempo de grabación de un mensaje"
 msgstr "Sesli mesaj kayıt süresini bildir"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:195
+#: addon\appModules\whatsapp.py:197
 msgid ""
 "Activa y desactiva la eliminación de los números de teléfono de los "
 "contactos no agendados en los mensajes"
@@ -102,69 +95,75 @@ msgstr ""
 "etkinleştir veya devre dışı bırak"
 
 #. Translators: Mensaje que indica la desactivación de los mensajes editados
-#: addon\appModules\whatsapp.py:203
+#: addon\appModules\whatsapp.py:205
 msgid "Mensajes editados, desactivado"
 msgstr "Mesajı düzenle, devre dışı"
 
 #. Translators: Mensaje que anuncia la activación de los mensajes editados
-#: addon\appModules\whatsapp.py:208
+#: addon\appModules\whatsapp.py:210
 msgid "Mensajes editados, activado"
 msgstr "Mesajı düzenle, etkin"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:213
+#: addon\appModules\whatsapp.py:215
 msgid "Enfoca la lista de chats"
 msgstr "Sohbet listesine odaklan"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:223
+#: addon\appModules\whatsapp.py:225
 msgid "Enfoca el elemento mensajes no leídos"
 msgstr "Okunmamış mesajlar öğesine odaklan"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:238
+#: addon\appModules\whatsapp.py:240
 msgid ""
 "Conmuta entre la lista de mensajes y el cuadro de edición dentro de un chat"
 msgstr ""
 "Bir sohbet içindeki mesaj listesi ve düzenleme kutusu arasında geçiş yapar"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:254
+#: addon\appModules\whatsapp.py:256
 msgid "Verbaliza el nombre del contacto o grupo"
 msgstr "Kişinin veya grubun adını bildir"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:265
+#: addon\appModules\whatsapp.py:267
 msgid "Verbaliza la respuesta en el mensaje con el foco"
 msgstr "Mesajdaki yanıta odaklan ve bildir"
 
+#: addon\appModules\whatsapp.py:274
+#, fuzzy
+#| msgid "Cancelar mensaje"
+msgid "Texto del mensaje"
+msgstr "Mesajı iptal et"
+
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:277
+#: addon\appModules\whatsapp.py:279
 msgid "Pulsa el botón adjuntar"
 msgstr "Ekle düğmesine basın"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:289
+#: addon\appModules\whatsapp.py:291
 msgid "Pulsa el botón info del chat"
 msgstr "Sohbet bilgisi düğmesine basın"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:301
+#: addon\appModules\whatsapp.py:303
 msgid "Pulsa el botón de configuración"
 msgstr "Ayarlar düğmesine basın"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:313
+#: addon\appModules\whatsapp.py:315
 msgid "Pulsa el botón de nuevo chat"
 msgstr "Yeni sohbet düğmesine basın"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:325
+#: addon\appModules\whatsapp.py:327
 msgid "Pulsa el botón llamada de video"
 msgstr "Görüntülü arama düğmesine basın"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:337
+#: addon\appModules\whatsapp.py:339
 msgid "Pulsa el botón llamada de audio"
 msgstr "Sesli arama düğmesine basın"
 
@@ -218,3 +217,6 @@ msgstr ""
 "Etiketlenmemiş düğmeleri yeniden adlandıran, ana uygulama işlevleri için "
 "klavye kısayolları ekleyen ve arayüzle daha iyi etkileşim için odak "
 "işlevleri ekleyen eklenti."
+
+#~ msgid ": "
+#~ msgstr ": "
