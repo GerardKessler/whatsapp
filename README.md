@@ -26,6 +26,23 @@ Este complemento añade atajos de teclado a funciones importantes de la aplicaci
 * Activar y desactivar la eliminación de los números de teléfono en los mensajes de contactos no agendados; control + shift + e
 * Enfocar los mensajes no leídos; alt + flecha abajo
 
+### Lista de mensajes
+
+Al enfocarse un mensaje de audio, se activan los siguientes gestos:
+
+* Barra espaciadora; reproduce y pausa el mensaje
+* flecha izquierda; retrocede el mensaje de audio (solo funciona con el audio detenido)
+* flecha derecha; avanza el mensaje de audio (solo funciona con el audio detenido)
+* control + v; conmuta entre las 3 velocidades de reproducción (solo funciona con el audio en reproducción)
+
+Al enfocarse un mensaje con un link:
+
+* intro; captura y abre el link en el navegador por defecto
+
+Al enfocarse un mensaje con archivo adjunto
+
+* alt + r; activa una ventana modal con los datos del archivo
+
 ### Atajos de la aplicación
 
 * Activar el cuadro de búsqueda de chats; control + f

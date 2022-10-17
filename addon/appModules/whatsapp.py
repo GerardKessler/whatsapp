@@ -2,9 +2,11 @@
 # Copyright (C) 2021 Gerardo Kessler <ReaperYOtrasYerbas@gmail.com>
 # This file is covered by the GNU General Public License.
 
+import webbrowser
 from threading import Thread
 from time import sleep
 import speech
+from keyboardHandler import KeyboardInputGesture
 from globalVars import appArgs
 import appModuleHandler
 from scriptHandler import script
@@ -14,6 +16,7 @@ import winUser
 import config
 from ui import message, browseableMessage
 from nvwave import playWaveFile
+import re
 from re import search, sub
 import os
 import addonHandler
@@ -47,6 +50,7 @@ def mute(time, msg= False):
 	Thread(target=killSpeak, args=(time,), daemon= True).start()
 
 def killSpeak(time):
+	if speech.getState().speechMode == speech.SpeechMode.off: return
 	speech.setSpeechMode(speech.SpeechMode.off)
 	sleep(time)
 	speech.setSpeechMode(speech.SpeechMode.talk)
@@ -116,41 +120,22 @@ class AppModule(appModuleHandler.AppModule):
 		except:
 			pass
 
-	def event_gainFocus(self, obj, nextHandler):
+	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
 		try:
-			# Renombre del mensaje con documento adjunto por el texto de los objetos que tienen el nombre el archivo, tipo y tamaño
-			if obj.UIAAutomationId == 'BubbleListItem' and (obj.children[1].UIAAutomationId == 'NameTextBlock' or obj.children[3].UIAAutomationId == 'NameTextBlock' or obj.children[4].UIAAutomationId == 'NameTextBlock'):
-				for data in obj.children:
-					if data.UIAAutomationId == 'NameTextBlock':
-						obj.name = '{} {}'.format(data.name, data.next.name)
-			else:
-				nextHandler()
+			if obj.UIAAutomationId == 'BubbleListItem':
+				clsList.insert(0, Messages)
 		except:
-			nextHandler()
+			pass
+
+	def event_gainFocus(self, obj, nextHandler):
 		try:
 			if obj.UIAAutomationId == 'ChatsListItem':
 				self.lastChat = obj
+				nextHandler()
 			else:
 				nextHandler()
 		except:
 			nextHandler()
-
-	@script(gesture="kb:space")
-	def script_playPause(self, gesture):
-		focus = api.getFocusObject()
-		try:
-			if focus.children[1].UIAAutomationId == 'IconTextBlock':
-				api.moveMouseToNVDAObject(focus.children[1])
-				winUser.mouse_event(winUser.MOUSEEVENTF_LEFTDOWN,0,0,None,None)
-				winUser.mouse_event(winUser.MOUSEEVENTF_LEFTUP,0,0,None,None)
-			if search('https?://', focus.name):
-				api.moveMouseToNVDAObject(focus)
-				winUser.mouse_event(winUser.MOUSEEVENTF_LEFTDOWN,0,0,None,None)
-				winUser.mouse_event(winUser.MOUSEEVENTF_LEFTUP,0,0,None,None)
-			else:
-				gesture.send()
-		except:
-			gesture.send()
 
 	@script(
 	category= category,
@@ -162,9 +147,14 @@ class AppModule(appModuleHandler.AppModule):
 		send = self.get('PttSendButton', False, None)
 		if send:
 			send.doAction()
+			# Translators: Mensaje de envío del mensaje de audio
+			message(_('Enviando...'))
+			mute(0.1)
 			return
 		record = self.get('RightButton', True, gesture)
 		if record:
+			# Translators: Mensaje de inicio de grabación de un mensaje de voz
+			message(_('Grabando'))
 			record.doAction()
 			mute(1)
 
@@ -178,7 +168,9 @@ class AppModule(appModuleHandler.AppModule):
 		cancel = self.get('PttDeleteButton', False, gesture)
 		if cancel:
 			cancel.doAction()
-			playWaveFile(os.path.join(self.soundsPath, 'cancel.wav'))
+			# Translators: Mensaje de cancelación de la grabación de un mensaje de voz
+			message(_('Cancelado'))
+			mute(0.1)
 
 	@script(
 		category= category,
@@ -233,7 +225,6 @@ class AppModule(appModuleHandler.AppModule):
 					obj.setFocus()
 					break
 
-
 	@script(
 		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
@@ -270,7 +261,7 @@ class AppModule(appModuleHandler.AppModule):
 	def script_viewText(self, gesture):
 		fc = api.getFocusObject()
 		if fc.UIAAutomationId == 'BubbleListItem':
-			text = '\n'.join([item.name for item in fc.children if item.UIAAutomationId == 'TextBlock'])
+			text = '\n'.join([item.name for item in fc.children if item.UIAAutomationId == 'TextBlock' or item.UIAAutomationId == 'NameTextBlock' or search(r"\d+\sKB\,\s", item.name)])
 			browseableMessage(text, _('Texto del mensaje'))
 
 	@script(
@@ -352,3 +343,69 @@ class AppModule(appModuleHandler.AppModule):
 		wx.LaunchDefaultBrowser('file://' + addonHandler.Addon(os.path.join(appArgs.configPath, "addons", "whatsapp")).getDocFilePath(), flags=0)
 		# except:
 			# message(self.notFound)
+
+class Messages():
+
+	# Translators: velocidades de reproducción
+	speeds = {
+		'2×': _('Normal'),
+		'1×': _('Medio'),
+		'1.5×': _('Rápido')
+	}
+
+	def initOverlayClass(self):
+		self.progress = None
+		self.play = None
+		for obj in self.children:
+			if obj.UIAAutomationId == 'Scrubber':
+				self.progress = obj
+			elif obj.UIAAutomationId == 'IconTextBlock':
+				self.play = obj
+
+		self.bindGestures({
+			"kb:space": "playPause",
+			"kb:leftArrow": "rewind",
+			"kb:rightArrow": "advanced",
+			"kb:control+v": "speed",
+			"kb:enter": "linkOpen"
+			})
+
+	def script_playPause(self, gesture):
+		if self.play:
+			api.moveMouseToNVDAObject(self.play)
+			winUser.mouse_event(winUser.MOUSEEVENTF_LEFTDOWN,0,0,None,None)
+			winUser.mouse_event(winUser.MOUSEEVENTF_LEFTUP,0,0,None,None)
+
+	def script_linkOpen(self, gesture):
+		if search('https?://', self.name, re.I):
+			webbrowser.open(search(r"https?://\S+", self.name, re.I)[0])
+		else:
+			gesture.send()
+
+	def script_rewind(self, gesture):
+		if self.progress:
+			self.progress.setFocus()
+			gesture.send()
+			self.setFocus()
+			mute(0.1)
+		else:
+			gesture.send()
+
+	def script_advanced(self, gesture):
+		if self.progress:
+			self.progress.setFocus()
+			gesture.send()
+			self.setFocus()
+			mute(0.1)
+		else:
+			gesture.send()
+
+	def script_speed(self, gesture):
+		for obj in self.children:
+			if obj.UIAAutomationId == 'PlaybackSpeedButton':
+				obj.doAction()
+				self.setFocus()
+				message(self.speeds[obj.name])
+				return
+		# Translators: Mensaje que avisa de la inexistencia de mensajes en reproducción
+		message(_('Ningún mensaje de audio en reproducción'))

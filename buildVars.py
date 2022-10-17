@@ -25,7 +25,7 @@ addon_info = {
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
 	"addon_description": _("""Complemento que renombra botones sin etiqueta, añade atajos de teclado para funciones principales de la aplicación, y funciones de enfoque para una mejor interacción con la interfaz."""),
 	# version
-	"addon_version": "1.5",
+	"addon_version": "1.6",
 	# Author(s)
 	"addon_author": "Gerardo Kessler <reaperyotrasyerbas@gmail.com>",
 	# URL for the add-on documentation support
