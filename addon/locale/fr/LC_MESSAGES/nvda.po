@@ -2,8 +2,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: whatsapp\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2022-10-13 06:28-0300\n"
 "PO-Revision-Date: 2022-10-13 06:30-0300\n"
+=======
+"POT-Creation-Date: 2022-10-11 20:12-0300\n"
+"PO-Revision-Date: 2022-10-11 20:13-0300\n"
+>>>>>>> 1eacbd34f36e837e3a876cf78a74edd700d5edef
 "Last-Translator: Rémy Ruiz <remyruiz@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
