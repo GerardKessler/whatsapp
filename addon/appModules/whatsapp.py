@@ -261,7 +261,7 @@ class AppModule(appModuleHandler.AppModule):
 	def script_viewText(self, gesture):
 		fc = api.getFocusObject()
 		if fc.UIAAutomationId == 'BubbleListItem':
-			text = '\n'.join([item.name for item in fc.children if item.UIAAutomationId == 'TextBlock' or item.UIAAutomationId == 'NameTextBlock' or search(r"\d+\s[KM]B\,\s", item.name)])
+			text = '\n'.join([item.name for item in fc.children if item.UIAAutomationId == 'TextBlock' or item.UIAAutomationId == 'NameTextBlock' or search(r"\d+\s(KB|MB|bytes)\,\s", item.name)])
 			browseableMessage(text, _('Texto del mensaje'))
 
 	@script(
