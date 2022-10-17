@@ -1,16 +1,17 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Whatsapp 1.4\n"
+"Project-Id-Version: Whatsapp 1.6\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
 "POT-Creation-Date: 2022-10-17 09:16-0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: tr\n"
+"Last-Translator: Umut KORKMAZ <umutkork@gmail.com>\n"
+"Language-Team: Umut KORKMAZ <umutkork@gmail.com>\n"
+"Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. Translators: Nombre de categoría en el diálogo gestos de entrada
 #. Add-on summary, usually the user visible name of the addon.
@@ -71,12 +72,12 @@ msgstr "Sesli mesaj kaydetmeyi başlatma veya durdurma"
 #. Translators: Mensaje de envío del mensaje de audio
 #: addon\appModules\whatsapp.py:151
 msgid "Enviando..."
-msgstr ""
+msgstr "Gönderiliyor..."
 
 #. Translators: Mensaje de inicio de grabación de un mensaje de voz
 #: addon\appModules\whatsapp.py:157
 msgid "Grabando"
-msgstr ""
+msgstr "Kaydediliyor"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:164
@@ -86,7 +87,7 @@ msgstr "Sesli mesaj kaydını iptal et"
 #. Translators: Mensaje de cancelación de la grabación de un mensaje de voz
 #: addon\appModules\whatsapp.py:172
 msgid "Cancelado"
-msgstr ""
+msgstr "İptal edildi"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:178
@@ -140,10 +141,9 @@ msgid "Verbaliza la respuesta en el mensaje con el foco"
 msgstr "Mesajdaki yanıta odaklan ve bildir"
 
 #: addon\appModules\whatsapp.py:265
-#, fuzzy
 #| msgid "Cancelar mensaje"
 msgid "Texto del mensaje"
-msgstr "Mesajı iptal et"
+msgstr "Mesaj metni"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:270
@@ -177,25 +177,25 @@ msgstr "Sesli arama düğmesine basın"
 
 #: addon\appModules\whatsapp.py:351
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: addon\appModules\whatsapp.py:352
 msgid "Medio"
-msgstr ""
+msgstr "Orta"
 
 #: addon\appModules\whatsapp.py:353
 msgid "Rápido"
-msgstr ""
+msgstr "Hızlı"
 
 #. Translators: Mensaje que avisa de la inexistencia de mensajes en reproducción
 #: addon\appModules\whatsapp.py:411
 msgid "Ningún mensaje de audio en reproducción"
-msgstr ""
+msgstr "Sesli mesaj oynatılmıyor"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\globalPlugins\wsOpen.py:77
 msgid "Abre WhatsApp, o la enfoca si ya se encuentra abierta"
-msgstr "WhatsApp'ı açın veya zaten açıksa odaklanın"
+msgstr "WhatsApp Uygulamasını açar veya zaten açıksa odaklanır"
 
 #. Translators: Título de la ventana
 #: addon\globalPlugins\wsOpen.py:86
