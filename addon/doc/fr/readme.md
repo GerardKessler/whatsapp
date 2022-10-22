@@ -3,15 +3,10 @@
 Auteur: [Gerardo Kessler](http://gera.ar)  
 
 Important:  
-Cette extension est uniquement compatible avec la version UWP de WhatsApp, actuellement appelée [WhatsApp Beta](https://apps.microsoft.com/store/detail/whatsapp-beta/9NBDXK71NK08?hl=en-us&gl=US). De plus, en cas d'autres extensions installées qui sont activées avec l'application, telles que WhatsApp-Desktop, elles doivent être désactivées pour éviter les conflits.
+Cette extension est uniquement compatible avec la version UWP de WhatsApp, actuellement appelée [WhatsApp Beta.]](https://apps.microsoft.com/store/detail/whatsapp-beta/9NBDXK71NK08?hl=en-us&gl=US)  
+De plus, en cas d'autres extensions installées qui sont activées avec l'application, telles que Whatsapp-desktop, elles doivent être désactivées pour éviter les conflits.  
 
-Cette extension ajoute des raccourcis clavier aux fonctions importantes de l'application, ainsi que la renommée d'objets sans étiquette, à savoir:
-
-* Bouton message vocal, mal étiqueté lorsque la zone est vide.
-* Annuler le message, lors de l'enregistrement d'un message vocal.
-* Bouton arrière dans la fenêtre des chats archivées.
-* Option chats archivées.
-* Bouton annuler, dans la zone de recherche des messages.
+Cette extension ajoute des raccourcis clavier aux fonctions importantes de l'application, ainsi que la renommée d'objets sans étiquette.
 
 ## Liste des commandes clavier
 
@@ -22,7 +17,7 @@ Cette extension ajoute des raccourcis clavier aux fonctions importantes de l'app
 * Basculer entre la liste des messages et la zone d'édition; alt + flèche gauche
 * Focaliser la liste des chats; alt + flèche droite
 * Verbaliser le nom du contact ou du groupe; contrôle + maj + t
-* Verbaliser le message de réponse; alt + r
+* Activer une fenêtre avec le texte du message; alt + r
 * Appuyer sur le bouton joindre; contrôle + maj + a
 * Appuyer sur le bouton appel audio; contrôle + maj + l
 * Appuyer sur le bouton appel vidéo; contrôle + maj + v
@@ -30,7 +25,24 @@ Cette extension ajoute des raccourcis clavier aux fonctions importantes de l'app
 * Appuyer sur le bouton configurations; contrôle + maj + o
 * Appuyer sur le bouton nouveau chat; contrôle + maj + n
 * Activer et désactiver l'élimination des numéros de téléphone dans les messages de contact non agender; contrôle + maj + e
-* Focus sur les messages non lus; alt + flèche vers le bas
+* Focus sur les messages non lus; alt + flèche bas
+
+### Liste de messages
+
+Lors de la focalisation  d'un message audio, les gestes suivants sont activés:
+
+* Barre d'espace; lit et met en pause le message
+* flèche  gauche; recule le message audio (cela ne fonctionne qu'avec l'audio détenu)
+* flèche droite; avance le message audio (cela ne fonctionne qu'avec l'audio détenu)
+* contrôle + v; bascule entre les 3 vitesses de lecture (cela ne fonctionne qu'avec l'audio en cours de lecture)
+
+Lors de la focalisation d'un message avec un lien:
+
+* entrée; capture et ouvre le lien dans le navigateur par défaut
+
+Lors de la focalisation d'un message avec un fichier joint:
+
+* alt + r; active une fenêtre modale avec les données du fichier
 
 ### Raccourcis de l'application
 
@@ -46,3 +58,5 @@ Les personnes suivantes ont collaboré à la traduction de l'extension:
 * Rémy Ruiz (Français)
 * Umut Korkmaz (Turc)
 * Valentin Kupriyanov (Russe)
+* Scott Chesworth (Anglais)
+
