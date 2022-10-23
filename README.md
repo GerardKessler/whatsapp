@@ -2,12 +2,6 @@
 
 Autor: [Gerardo Kessler](http://gera.ar)  
 
-Importante:  
-Este complemento solo es compatible con la versión UWP de WhatsApp, actualmente llamada [WhatsApp Beta. ](https://apps.microsoft.com/store/detail/whatsapp-beta/9NBDXK71NK08?hl=en-us&gl=US)  
-Asimismo en el caso de tener otros complementos instalados que se activen con la aplicación, como Whatsapp-desktop, se deberán deshabilitar para evitar conflictos.  
-
-Este complemento añade atajos de teclado a funciones importantes de la aplicación, así como el renombre de objetos sin etiqueta.
-
 ## Lista de comandos
 
 * Abrir la aplicación; sin asignar
@@ -51,7 +45,7 @@ Al enfocarse un mensaje con archivo adjunto
 * Activar el chat siguiente; control + tab
 * Activar el chat anterior; control + shift + tab
 
-## Traducción:
+## Traducción
 
 Las siguientes personas colaboran con la traducción de este complemento
 
@@ -59,4 +53,3 @@ Las siguientes personas colaboran con la traducción de este complemento
 * Umut KORKMAZ (Turco)
 * Valentin Kupriyanov (Ruso)
 * Scott Chesworth (Inglés)
-

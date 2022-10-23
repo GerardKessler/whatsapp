@@ -2,12 +2,6 @@
 
 Auteur: [Gerardo Kessler](http://gera.ar)  
 
-Important:  
-Cette extension est uniquement compatible avec la version UWP de WhatsApp, actuellement appelée [WhatsApp Beta.]](https://apps.microsoft.com/store/detail/whatsapp-beta/9NBDXK71NK08?hl=en-us&gl=US)  
-De plus, en cas d'autres extensions installées qui sont activées avec l'application, telles que Whatsapp-desktop, elles doivent être désactivées pour éviter les conflits.  
-
-Cette extension ajoute des raccourcis clavier aux fonctions importantes de l'application, ainsi que la renommée d'objets sans étiquette.
-
 ## Liste des commandes clavier
 
 * Ouvrir l'application; sans attribuer

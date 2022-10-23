@@ -2,12 +2,6 @@
 
 yazar: [Gerardo Kessler](http://gera.ar)  
 
-Önemli:
-Bu eklenti yalnızca şu anda [WhatsApp Beta olarak adlandırılan WhatsApp'ın UWP sürümüyle uyumludur. ](https://apps.microsoft.com/store/detail/whatsapp-beta/9NBDXK71NK08?hl=en-us&gl=US)
-Aynı şekilde, WhatsApp-masaüstü gibi uygulama ile etkinleştirilen diğer eklentilerin yüklü olması durumunda, çakışmaları önlemek için devre dışı bırakılmalıdır.  
-
-Bu eklenti, etiketlenmemiş nesnelerin yeniden adlandırılmasının yanı sıra önemli uygulama işlevlerine klavye kısayolları ekler.
-
 ## Klavye komut listesi:
 
 * Whatsapp uygulamasını aç veya odaklan: Atanmamış.

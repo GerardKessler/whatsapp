@@ -2,17 +2,6 @@
 
 Autore: [Gerardo Kessler](http://gera.ar)  
 
-Importante:  
-Questo componente aggiuntivo è compatibile solo con la versione UWP di WhatsApp, attualmente chiamata [WhatsApp Beta](https://apps.microsoft.com/store/detail/whatsapp-beta/9NBDXK71NK08?hl=en-us&gl=US). Allo stesso modo, nel caso in cui siano installati altri componenti aggiuntivi che vengono attivati ​​con l'applicazione, come WhatsApp-desktop, devono essere disabilitati per evitare conflitti.
-
-Questo componente aggiunge scorciatoie da tastiera a importanti funzioni dell'applicazione, nonché la ridenominazione di oggetti senza etichetta, in particolare:
-
-* Pulsante del messaggio vocale, etichettato erroneamente quando la casella è vuota.
-* Annulla messaggio, durante la registrazione di un messaggio vocale.
-* Pulsante Indietro nella finestra delle chat archiviate.
-* Opzione chat archiviate.
-* Pulsante Annulla, nella casella di ricerca del messaggio.
-
 ## elenco delle scorciatoie da tastiera
 
 * Apri l'applicazione; non assegnato
