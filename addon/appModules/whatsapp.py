@@ -148,15 +148,19 @@ class AppModule(appModuleHandler.AppModule):
 		if send:
 			send.doAction()
 			# Translators: Mensaje de envío del mensaje de audio
-			message(_('Enviando...'))
+			mcontrol+ressage(_('Enviando...'))
 			mute(0.1)
 			return
 		record = self.get('RightButton', True, gesture)
 		if record:
-			# Translators: Mensaje de inicio de grabación de un mensaje de voz
-			message(_('Grabando'))
-			record.doAction()
-			mute(1)
+			if record.previous.description == '':
+				# Translators: Mensaje de inicio de grabación de un mensaje de voz
+				message(_('Grabando'))
+				record.doAction()
+				mute(1)
+			else:
+				# Translators: Aviso de que el cuadro de edicón de mensaje no está vacío
+				message(_('El cuadro de edición no está vacío'))
 
 	@script(
 		category= category,
@@ -260,9 +264,16 @@ class AppModule(appModuleHandler.AppModule):
 	)
 	def script_viewText(self, gesture):
 		fc = api.getFocusObject()
-		if fc.UIAAutomationId == 'BubbleListItem':
-			text = '\n'.join([item.name for item in fc.children if item.UIAAutomationId == 'TextBlock' or item.UIAAutomationId == 'NameTextBlock' or item.UIAAutomationId == 'Text' or search(r"\d+\s(KB|MB|bytes)\,\s", item.name)])
-			browseableMessage(text, _('Texto del mensaje'))
+		try:
+			if not fc.UIAAutomationId == 'BubbleListItem': return
+			text = '\n'.join([item.name for item in fc.children if (item.UIAAutomationId == 'TextBlock' and item.next.next.UIAAutomationId == 'ReadMore')])
+			if text:
+				browseableMessage(text, _('Texto del mensaje'))
+			else:
+				# Translators: Mensaje de que no hay texto para mostrar
+				message(_('No hay texto para mostrar'))
+		except:
+			pass
 
 	@script(
 		category= category,
