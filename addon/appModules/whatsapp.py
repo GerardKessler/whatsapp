@@ -148,7 +148,7 @@ class AppModule(appModuleHandler.AppModule):
 		if send:
 			send.doAction()
 			# Translators: Mensaje de envío del mensaje de audio
-			mcontrol+ressage(_('Enviando...'))
+			message(_('Enviando...'))
 			mute(0.1)
 			return
 		record = self.get('RightButton', True, gesture)

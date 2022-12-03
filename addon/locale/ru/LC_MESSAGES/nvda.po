@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WhatsApp\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2022-10-17 09:16-0300\n"
+"POT-Creation-Date: 2022-12-03 05:04-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -37,7 +37,7 @@ msgstr "Архивные чаты"
 
 #: addon\appModules\whatsapp.py:89
 msgid "Reaccionar"
-msgstr ""
+msgstr "Реагировать"
 
 #. Translators: Etiqueta del botón atrás en los chatsArchivados
 #: addon\appModules\whatsapp.py:92
@@ -77,30 +77,35 @@ msgstr "Начало или завершение записи голосовог
 #. Translators: Mensaje de envío del mensaje de audio
 #: addon\appModules\whatsapp.py:151
 msgid "Enviando..."
-msgstr ""
+msgstr "Отправка..."
 
 #. Translators: Mensaje de inicio de grabación de un mensaje de voz
-#: addon\appModules\whatsapp.py:157
+#: addon\appModules\whatsapp.py:158
 msgid "Grabando"
-msgstr ""
+msgstr "запись"
+
+#. Translators: Aviso de que el cuadro de edicón de mensaje no está vacío
+#: addon\appModules\whatsapp.py:163
+msgid "El cuadro de edición no está vacío"
+msgstr "Поле редактирования не пусто"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:164
+#: addon\appModules\whatsapp.py:168
 msgid "Cancela la grabación de los mensajes de voz"
 msgstr "Отмена записи голосового сообщения"
 
 #. Translators: Mensaje de cancelación de la grabación de un mensaje de voz
-#: addon\appModules\whatsapp.py:172
+#: addon\appModules\whatsapp.py:176
 msgid "Cancelado"
-msgstr ""
+msgstr "Отменено"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:178
+#: addon\appModules\whatsapp.py:182
 msgid "Verbaliza el tiempo de grabación de un mensaje"
 msgstr "Произнести время записи сообщения"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:189
+#: addon\appModules\whatsapp.py:193
 msgid ""
 "Activa y desactiva la eliminación de los números de teléfono de los "
 "contactos no agendados en los mensajes"
@@ -109,93 +114,98 @@ msgstr ""
 "контактов в сообщениях"
 
 #. Translators: Mensaje que indica la desactivación de los mensajes editados
-#: addon\appModules\whatsapp.py:197
+#: addon\appModules\whatsapp.py:201
 msgid "Mensajes editados, desactivado"
 msgstr "Отредактированные сообщения, отключено"
 
 #. Translators: Mensaje que anuncia la activación de los mensajes editados
-#: addon\appModules\whatsapp.py:202
+#: addon\appModules\whatsapp.py:206
 msgid "Mensajes editados, activado"
 msgstr "Отредактированные сообщения, включено"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:207
+#: addon\appModules\whatsapp.py:211
 msgid "Enfoca la lista de chats"
 msgstr "Перейти на список чатов"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:217
+#: addon\appModules\whatsapp.py:221
 msgid "Enfoca el elemento mensajes no leídos"
 msgstr "Сфокусируйте элемент непрочитанных сообщений"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:231
+#: addon\appModules\whatsapp.py:235
 msgid ""
 "Conmuta entre la lista de mensajes y el cuadro de edición dentro de un chat"
 msgstr "Переключение между списком сообщений и полем редактирования в чате"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:247
+#: addon\appModules\whatsapp.py:251
 msgid "Verbaliza el nombre del contacto o grupo"
 msgstr "Произнести имя контакта или группы"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:258
+#: addon\appModules\whatsapp.py:262
 msgid "Verbaliza la respuesta en el mensaje con el foco"
 msgstr "Произнести ответ в сообщении, сосредоточившись на нем"
 
-#: addon\appModules\whatsapp.py:265
+#: addon\appModules\whatsapp.py:271
 #, fuzzy
 #| msgid "Cancelar mensaje"
 msgid "Texto del mensaje"
 msgstr "Отменить сообщение"
 
+#. Translators: Mensaje de que no hay texto para mostrar
+#: addon\appModules\whatsapp.py:274
+msgid "No hay texto para mostrar"
+msgstr "Нет текста для отображения"
+
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:270
+#: addon\appModules\whatsapp.py:281
 msgid "Pulsa el botón adjuntar"
 msgstr "Нажать кнопку прикрепления"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:282
+#: addon\appModules\whatsapp.py:293
 msgid "Pulsa el botón info del chat"
 msgstr "Нажать кнопку информации о чате"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:294
+#: addon\appModules\whatsapp.py:305
 msgid "Pulsa el botón de configuración"
 msgstr "Нажать кнопку настроек"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:306
+#: addon\appModules\whatsapp.py:317
 msgid "Pulsa el botón de nuevo chat"
 msgstr "Нажать кнопку нового чата"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:318
+#: addon\appModules\whatsapp.py:329
 msgid "Pulsa el botón llamada de video"
 msgstr "Нажать кнопку видеовызова"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:330
+#: addon\appModules\whatsapp.py:341
 msgid "Pulsa el botón llamada de audio"
 msgstr "Нажать кнопку аудио вызова"
 
-#: addon\appModules\whatsapp.py:351
+#: addon\appModules\whatsapp.py:362
 msgid "Normal"
-msgstr ""
+msgstr "Обычный"
 
-#: addon\appModules\whatsapp.py:352
+#: addon\appModules\whatsapp.py:363
 msgid "Medio"
-msgstr ""
+msgstr "Середина"
 
-#: addon\appModules\whatsapp.py:353
+#: addon\appModules\whatsapp.py:364
 msgid "Rápido"
-msgstr ""
+msgstr "Быстро"
 
 #. Translators: Mensaje que avisa de la inexistencia de mensajes en reproducción
-#: addon\appModules\whatsapp.py:411
+#: addon\appModules\whatsapp.py:422
 msgid "Ningún mensaje de audio en reproducción"
-msgstr ""
+msgstr "Не воспроизводится звуковое сообщение"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\globalPlugins\wsOpen.py:77
