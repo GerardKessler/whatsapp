@@ -2,6 +2,8 @@
 
 Autor: [Gerardo Kessler](http://gera.ar)  
 
+Importante: Este complemento solo funciona con la versión UWP de la aplicación.
+
 ## Lista de comandos
 
 * Abrir la aplicación; sin asignar
@@ -16,9 +18,8 @@ Autor: [Gerardo Kessler](http://gera.ar)
 * Pulsar el botón llamada de audio; control + shift + l
 * Pulsar el botón llamada de video; control + shift + v
 * Pulsar el botón info del chat; control + shift + i
-* Pulsar el botón configuraciones; control + shift + o
-* Pulsar el botón nuevo chat; control + shift + n
-* Activar y desactivar la eliminación de los números de teléfono en los mensajes de contactos no agendados; control + shift + e
+* Activar la ventana de filtros; control + shift + o
+* Activar y desactivar la eliminación de los números de teléfono en los mensajes de contactos no agendados; control + shift + u
 * Enfocar los mensajes no leídos; alt + flecha abajo
 
 ### Lista de mensajes
@@ -32,7 +33,7 @@ Al enfocarse un mensaje de audio, se activan los siguientes gestos:
 
 Al enfocarse un mensaje con un link:
 
-* intro; captura y abre el link en el navegador por defecto
+* control + intro; captura y abre el link en el navegador por defecto
 
 Al enfocarse un mensaje con archivo adjunto
 

@@ -16,9 +16,8 @@ Author: [Gerardo Kessler](http://gera.ar)
 * Press the Audio call button; control + shift + l
 * Press the Video call button; control + shift + v
 * Press the Chat info button; control + shift + i
-* Press the Options button; control + shift + o
-* Press the New chat button; control + shift + n
-* Toggle edited posts (if enabled, phone numbers of people who aren't in your contacts will be stripped when reading the message list); control + shift + e
+* Activate the filter window; control + shift + o
+* Toggle edited posts (if enabled, phone numbers of people who aren't in your contacts will be stripped when reading the message list); control + shift + u
 * Focus start of unread messages; alt + down arrow
 
 ### Message list
@@ -32,7 +31,7 @@ Focusing on an audio message activates the following gestures:
 
 When focusing a message with a link:
 
-* enter; capture and open the link in the default browser
+* control + enter; capture and open the link in the default browser
 
 ## App Shortcuts (these are native shortcuts provided by WhatsApp):
 

@@ -16,9 +16,8 @@ Auteur: [Gerardo Kessler](http://gera.ar)
 * Appuyer sur le bouton appel audio; contrôle + maj + l
 * Appuyer sur le bouton appel vidéo; contrôle + maj + v
 * Appuyer sur le bouton info du chat; contrôle + maj + i
-* Appuyer sur le bouton configurations; contrôle + maj + o
-* Appuyer sur le bouton nouveau chat; contrôle + maj + n
-* Activer et désactiver l'élimination des numéros de téléphone dans les messages de contact non agender; contrôle + maj + e
+* Activer la fenêtre de filtre; contrôle + maj + o
+* Activer et désactiver l'élimination des numéros de téléphone dans les messages de contact non agender; contrôle + maj + u
 * Focus sur les messages non lus; alt + flèche bas
 
 ### Liste de messages
@@ -32,7 +31,7 @@ Lors de la focalisation  d'un message audio, les gestes suivants sont activés:
 
 Lors de la focalisation d'un message avec un lien:
 
-* entrée; capture et ouvre le lien dans le navigateur par défaut
+* contrôle + entrée; capture et ouvre le lien dans le navigateur par défaut
 
 Lors de la focalisation d'un message avec un fichier joint:
 

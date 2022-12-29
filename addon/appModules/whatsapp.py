@@ -56,8 +56,8 @@ def killSpeak(time):
 	speech.setSpeechMode(speech.SpeechMode.talk)
 
 class AppModule(appModuleHandler.AppModule):
-	# Translators: Nombre de categoría en el diálogo gestos de entrada
-	category = _('whatsapp')
+
+	category = 'whatsapp'
 
 	def __init__(self, *args, **kwargs):
 		super(AppModule, self).__init__(*args, **kwargs)
@@ -70,8 +70,11 @@ class AppModule(appModuleHandler.AppModule):
 	# Función que recibe el UIAAutomationId por parámetro, y devuelve el objeto de coincidencia
 	def get(self, id, errorMessage, gesture):
 		for obj in api.getForegroundObject().children[1].children[0].children:
-			if obj.UIAAutomationId == id:
-				return obj
+			try:
+				if obj.UIAAutomationId == id:
+					return obj
+			except:
+				pass
 		if errorMessage:
 			message(self.notFound)
 		if gesture:
@@ -140,7 +143,7 @@ class AppModule(appModuleHandler.AppModule):
 	@script(
 	category= category,
 	# Translators: Descripción del elemento en el diálogo gestos de entrada
-	description= _('Iniciar o finalizar la grabación de un mensaje de voz'),
+	description= _('Inicia o finaliza la grabación de un mensaje de voz'),
 		gesture= 'kb:control+r'
 	)
 	def script_voiceMessage(self, gesture):
@@ -191,7 +194,7 @@ class AppModule(appModuleHandler.AppModule):
 		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Activa y desactiva la eliminación de los números de teléfono de los contactos no agendados en los mensajes'),
-		gesture= 'kb:control+shift+e'
+		gesture= 'kb:control+shift+u'
 	)
 	def script_viewConfigToggle(self, gesture):
 		if self.temp_value:
@@ -302,7 +305,7 @@ class AppModule(appModuleHandler.AppModule):
 	@script(
 		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
-		description= _('Pulsa el botón de configuración'),
+		description= _('Activa la ventana de filtros'),
 		gesture= 'kb:control+shift+o'
 	)
 	def script_settings(self, gesture):
@@ -310,18 +313,6 @@ class AppModule(appModuleHandler.AppModule):
 		if settings:
 			message(settings.name)
 			settings.doAction()
-
-	@script(
-		category= category,
-		# Translators: Descripción del elemento en el diálogo gestos de entrada
-		description= _('Pulsa el botón de nuevo chat'),
-		gesture= 'kb:control+shift+n'
-	)
-	def script_newChat(self, gesture):
-		newChat = self.get('NewConvoButton', True, gesture)
-		if newChat:
-			message(newChat.name)
-			newChat.doAction()
 
 	@script(
 		category= category,
@@ -378,7 +369,7 @@ class Messages():
 			"kb:leftArrow": "rewind",
 			"kb:rightArrow": "advanced",
 			"kb:control+v": "speed",
-			"kb:enter": "linkOpen"
+			"kb:control+enter": "linkOpen"
 			})
 
 	def script_playPause(self, gesture):

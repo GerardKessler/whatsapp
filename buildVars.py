@@ -23,9 +23,9 @@ addon_info = {
 	"addon_summary": _("whatsapp"),
 	# Add-on description
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
-	"addon_description": _("""Complemento que renombra botones sin etiqueta, añade atajos de teclado para funciones principales de la aplicación, y funciones de enfoque para una mejor interacción con la interfaz."""),
+	"addon_description": _("""Complemento que renombra botones sin etiqueta, añade atajos de teclado para funciones principales de la aplicación, y funciones de enfoque para una mejor interacción con la interfaz. Solo disponible para la versión UWP."""),
 	# version
-	"addon_version": "1.7",
+	"addon_version": "1.8",
 	# Author(s)
 	"addon_author": "Gerardo Kessler <reaperyotrasyerbas@gmail.com>",
 	# URL for the add-on documentation support
