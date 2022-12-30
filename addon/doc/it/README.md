@@ -35,7 +35,7 @@ Quando si mette a fuoco un messaggio con un collegamento:
 
 Concentrandosi su un messaggio con allegato
 
-* alt+r; attiva una finestra modale con i dati del file
+* alt+r; verbalizzare i dati del file
 
 ### Scorciatoie dell'applicazione
 

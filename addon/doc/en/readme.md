@@ -33,6 +33,10 @@ When focusing a message with a link:
 
 * control + enter; capture and open the link in the default browser
 
+Focusing on a message with attachment
+
+* alt + r; verbalize the file data
+
 ## App Shortcuts (these are native shortcuts provided by WhatsApp):
 
 * Chat search box; control + f

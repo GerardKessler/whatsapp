@@ -37,7 +37,7 @@ Al enfocarse un mensaje con un link:
 
 Al enfocarse un mensaje con archivo adjunto
 
-* alt + r; activa una ventana modal con los datos del archivo
+* alt + r; verbaliza los datos del archivo
 
 ### Atajos de la aplicación
 

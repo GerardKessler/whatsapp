@@ -35,7 +35,7 @@ Lors de la focalisation d'un message avec un lien:
 
 Lors de la focalisation d'un message avec un fichier joint:
 
-* alt + r; active une fenêtre modale avec les données du fichier
+* alt + r; se concentrer sur un message avec pièce jointe
 
 ### Raccourcis de l'application
 
