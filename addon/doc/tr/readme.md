@@ -2,6 +2,8 @@
 
 yazar: [Gerardo Kessler](http://gera.ar)  
 
+Önemli: Bu eklenti, yalnızca uygulamanın UWP sürümüyle çalışır.
+
 ## Klavye komut listesi:
 
 * Whatsapp uygulamasını aç veya odaklan: Atanmamış.
@@ -20,6 +22,7 @@ yazar: [Gerardo Kessler](http://gera.ar)
 * Yeni Sohbet düğmesine bas: CTRL + Shift + N
 * Mesajlarda eklenmemiş kişilerin telefon numaralarının kaldırılmasını etkinleştir veya devre dışı bırak: CTRL + Shift + E
 * Okunmamış mesajlara odaklan; alt + aşağı ok
+* Açık sohbetin son mesajlarını söyleyin; alt + 1 ila 9
 
 ### mesaj listesi
 

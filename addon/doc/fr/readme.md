@@ -2,6 +2,8 @@
 
 Auteur: [Gerardo Kessler](http://gera.ar)  
 
+Important: cette extension ne fonctionne qu'avec la version UWP de l'application.
+
 ## Liste des commandes clavier
 
 * Ouvrir l'application; sans attribuer
@@ -18,7 +20,8 @@ Auteur: [Gerardo Kessler](http://gera.ar)
 * Appuyer sur le bouton info du chat; contrôle + maj + i
 * Activer la fenêtre de filtre; contrôle + maj + o
 * Activer et désactiver l'élimination des numéros de téléphone dans les messages de contact non agender; contrôle + maj + u
-* Focus sur les messages non lus; alt + flèche bas
+* Focaliser les messages non lus; alt + flèche bas
+* Verbaliser les derniers messages de chat ouverts; alt + 1 à 9
 
 ### Liste de messages
 
@@ -35,14 +38,7 @@ Lors de la focalisation d'un message avec un lien:
 
 Lors de la focalisation d'un message avec un fichier joint:
 
-* alt + r; se concentrer sur un message avec pièce jointe
-
-### Raccourcis de l'application
-
-* Activer la zone de recherche de chats; contrôle + f
-* Activer la zone de recherche de messages; contrôle + maj + f
-* Activer le chat suivant; contrôle + tab
-* Activer le chat précédent; contrôle + maj + tab
+* alt + r; verbaliser les données du fichier
 
 ## Traductions:
 
@@ -52,4 +48,3 @@ Les personnes suivantes ont collaboré à la traduction de l'extension:
 * Umut Korkmaz (Turc)
 * Valentin Kupriyanov (Russe)
 * Scott Chesworth (Anglais)
-

@@ -2,6 +2,8 @@
 
 Author: [Gerardo Kessler](http://gera.ar)  
 
+Important: This addon only works with the UWP version of the app.
+
 ## Command List:
 
 * Open the application; unassigned by default, choose which keystroke to use in NVDA/Preferences/Input Gestures
@@ -19,6 +21,7 @@ Author: [Gerardo Kessler](http://gera.ar)
 * Activate the filter window; control + shift + o
 * Toggle edited posts (if enabled, phone numbers of people who aren't in your contacts will be stripped when reading the message list); control + shift + u
 * Focus start of unread messages; alt + down arrow
+* Say the last messages of the open chat; alt + 1 to 9
 
 ### Message list
 
@@ -36,13 +39,6 @@ When focusing a message with a link:
 Focusing on a message with attachment
 
 * alt + r; verbalize the file data
-
-## App Shortcuts (these are native shortcuts provided by WhatsApp):
-
-* Chat search box; control + f
-* Message search box; control + shift + f
-* Next chat; control + tab
-* Previous chat; control + shift + tab
 
 ## Translations:
 

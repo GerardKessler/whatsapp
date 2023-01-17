@@ -21,6 +21,7 @@ Importante: Este complemento solo funciona con la versión UWP de la aplicación
 * Activar la ventana de filtros; control + shift + o
 * Activar y desactivar la eliminación de los números de teléfono en los mensajes de contactos no agendados; control + shift + u
 * Enfocar los mensajes no leídos; alt + flecha abajo
+* Verbalizar los últimos mensajes del chat abierto; alt + 1 al 9
 
 ### Lista de mensajes
 
@@ -38,13 +39,6 @@ Al enfocarse un mensaje con un link:
 Al enfocarse un mensaje con archivo adjunto
 
 * alt + r; verbaliza los datos del archivo
-
-### Atajos de la aplicación
-
-* Activar el cuadro de búsqueda de chats; control + f
-* Activar el cuadro de búsqueda de mensajes; control + shift + f
-* Activar el chat siguiente; control + tab
-* Activar el chat anterior; control + shift + tab
 
 ## Traducción
 

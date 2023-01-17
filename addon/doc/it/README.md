@@ -2,6 +2,8 @@
 
 Autore: [Gerardo Kessler](http://gera.ar)  
 
+Importante: questo plug-in funziona solo con la versione UWP dell'app.
+
 ## elenco delle scorciatoie da tastiera
 
 * Apri l'applicazione; non assegnato
@@ -19,6 +21,7 @@ Autore: [Gerardo Kessler](http://gera.ar)
 * Attiva la finestra del filtro; control + shift + o
 * Attivare e disattivare la cancellazione dei numeri di telefono nei messaggi da contatti non programmati; control + shift + u
 * Messa a fuoco non letti; alt + freccia giù
+* Pronuncia gli ultimi messaggi della chat aperta; alt + da 1 a 9
 
 ### Elenco dei messaggi
 

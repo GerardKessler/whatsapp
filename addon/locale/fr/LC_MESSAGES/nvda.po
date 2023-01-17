@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #. Translators: Mensaje que anuncia que no se ha encontrado el elemento
 #: addon\appModules\whatsapp.py:65
@@ -57,10 +57,8 @@ msgstr "Envoyer message vocal"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:146
-#, fuzzy
-#| msgid "Iniciar o finalizar la grabación de un mensaje de voz"
 msgid "Inicia o finaliza la grabación de un mensaje de voz"
-msgstr "Démarrer et terminer l'enregistrement d'un nmessage vocal"
+msgstr "Démarre et termine l'enregistrement d'un nmessage vocal"
 
 #. Translators: Mensaje de envío del mensaje de audio
 #: addon\appModules\whatsapp.py:154
@@ -98,7 +96,7 @@ msgid ""
 "Activa y desactiva la eliminación de los números de teléfono de los "
 "contactos no agendados en los mensajes"
 msgstr ""
-"Activer et désactiver l'élimination des numéros de téléphone dans les "
+"Active et désactive l'élimination des numéros de téléphone dans les "
 "messages de contact non agender"
 
 #. Translators: Mensaje que indica la desactivación de los mensajes editados
@@ -119,7 +117,7 @@ msgstr "Focalise la liste des chats"
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:224
 msgid "Enfoca el elemento mensajes no leídos"
-msgstr "Focus sur l'élément messages non lus"
+msgstr "Focalise l'élément messages non lus"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:238
@@ -149,27 +147,27 @@ msgstr "Il n'y a pas de texte à afficher"
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:284
 msgid "Pulsa el botón adjuntar"
-msgstr "Appuyer sur le bouton joindre"
+msgstr "Appuie sur le bouton joindre"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:296
 msgid "Pulsa el botón info del chat"
-msgstr "Appuyer sur le bouton info du chat"
+msgstr "Appuie sur le bouton info du chat"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:308
 msgid "Activa la ventana de filtros"
-msgstr "Activer la fenêtre de filtre"
+msgstr "Active la fenêtre de filtre"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:320
 msgid "Pulsa el botón llamada de video"
-msgstr "Appuyer sur le bouton appel vidéo"
+msgstr "Appuie sur le bouton appel vidéo"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:332
 msgid "Pulsa el botón llamada de audio"
-msgstr "Appuyer sur le bouton appel audio"
+msgstr "Appuie sur le bouton appel audio"
 
 #: addon\appModules\whatsapp.py:353
 msgid "Normal"
@@ -191,7 +189,7 @@ msgstr "Aucun message audio en cours de lecture"
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\globalPlugins\wsOpen.py:77
 msgid "Abre WhatsApp, o la enfoca si ya se encuentra abierta"
-msgstr "Ouvrer WhatsApp, ou la focalise si est déjà ouverte"
+msgstr "Ouvre WhatsApp, ou la focalise si est déjà ouverte"
 
 #. Translators: Título de la ventana
 #: addon\globalPlugins\wsOpen.py:86
@@ -245,9 +243,3 @@ msgstr ""
 "Extension qui renomme les boutons sans étiquette, ajoute des raccourcis "
 "clavier pour les fonctions principales de l'application et les fonctions "
 "qu'elles focalisent pour une meilleure interaction avec l'interface."
-
-#~ msgid "Pulsa el botón de configuración"
-#~ msgstr "Appuyer sur le bouton configurations"
-
-#~ msgid "Pulsa el botón de nuevo chat"
-#~ msgstr "Appuyer sur le bouton nouveau chat"

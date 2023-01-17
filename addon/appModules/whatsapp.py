@@ -19,6 +19,7 @@ from nvwave import playWaveFile
 import re
 from re import search, sub
 import os
+import NVDAObjects
 import addonHandler
 
 # Lína de traducción
@@ -64,6 +65,7 @@ class AppModule(appModuleHandler.AppModule):
 		# Translators: Mensaje que anuncia que no se ha encontrado el elemento
 		self.notFound = _('Elemento no encontrado')
 		self.lastChat = None
+		self.messageList = None
 		self.soundsPath = os.path.join(appArgs.configPath, 'addons', 'whatsapp', 'sounds')
 		self.temp_value = getConfig('RemovePhoneNumberInMessages')
 
@@ -139,6 +141,19 @@ class AppModule(appModuleHandler.AppModule):
 				nextHandler()
 		except:
 			nextHandler()
+
+	@script(gestures=[f'kb:alt+{i}' for i in range(1, 10)])
+	def script_lastMessages(self, gesture):
+		x = int(gesture.displayName[-1])
+		if not self.messageList:
+			self.messageList = self.get('ListView', False, None)
+		count = self.messageList.UIAChildren.Length
+		try:
+			messageElement = self.messageList.UIAChildren.GetElement(count-x)
+			messageObject = NVDAObjects.UIA.UIA(UIAElement=messageElement)
+			message(messageObject.name)
+		except:
+			pass
 
 	@script(
 	category= category,
