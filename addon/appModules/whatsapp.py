@@ -66,8 +66,9 @@ class AppModule(appModuleHandler.AppModule):
 		self.notFound = _('Elemento no encontrado')
 		self.lastChat = None
 		self.messageList = None
+		self.messageObject = None
 		self.soundsPath = os.path.join(appArgs.configPath, 'addons', 'whatsapp', 'sounds')
-		self.temp_value = getConfig('RemovePhoneNumberInMessages')
+		self.remove_phone_number = getConfig('RemovePhoneNumberInMessages')
 
 	# Función que recibe el UIAAutomationId por parámetro, y devuelve el objeto de coincidencia
 	def get(self, id, errorMessage, gesture):
@@ -84,44 +85,25 @@ class AppModule(appModuleHandler.AppModule):
 
 	def event_NVDAObject_init(self, obj):
 		try:
-			if obj.UIAAutomationId == 'RightButton' and obj.previous.description == '':
-				# Translators: Etiqueta del botón mensaje de voz
-				obj.name = _('Mensaje de voz')
-			elif obj.name == 'WhatsApp.ChatListArchiveButtonCellVm':
-				# Translators: Etiqueta del elemento mensajes archivados
-				obj.name = _('Chats Archivados')
-			elif obj.name == '\ue76e' and obj.value == None:
-				obj.name = _('Reaccionar')
-			elif obj.UIAAutomationId == 'BackButton':
-				# Translators: Etiqueta del botón atrás en los chatsArchivados
-				obj.name = _('Atrás')
-			elif obj.UIAAutomationId == 'PttDeleteButton':
-				# Translators: Etiqueta del botón cancelar mensaje de voz
-				obj.name = _('Cancelar mensaje')
-			elif obj.name == '\ue8bb':
-				obj.name = _('Cancelar respuesta')
-			elif obj.UIAAutomationId == "SendMessages":
-				obj.name = '{}: {}'.format(obj.previous.name, obj.firstChild.name)
-			elif obj.UIAAutomationId == "EditInfo":
-				obj.name = '{}: {}'.format(obj.previous.name, obj.firstChild.name)
-			elif obj.UIAAutomationId == "MuteDropdown":
-				obj.name = obj.children[0].name
-			elif obj.UIAAutomationId == "ThemeCombobox":
-				obj.name = obj.previous.name + obj.firstChild.children[1].name
-			elif obj.name == 'WhatsApp.Design.ThemeData':
-				obj.name = obj.children[1].name
-			elif obj.UIAAutomationId == 'PttPauseButton':
-				# Translators: Etiqueta del botón pausar grabación
-				obj.name = _('Pausar grabación')
-			elif obj.UIAAutomationId == 'PttSendButton':
-				# Translators: Etiqueta del botón Enviar mensaje de voz
-				obj.name = _('Enviar mensaje de voz')
+			if obj.UIAAutomationId == 'ChatsListItem':
+				self.lastChat = obj
+				return
 		except:
 			pass
 		try:
-			if not self.temp_value: return
-			if obj.UIAAutomationId == 'BubbleListItem':
-				obj.name = sub(r'\+\d[()\d\s‬-]{12,}', '', obj.name)
+			if obj.UIAAutomationId != 'BubbleListItem' or not self.remove_phone_number: return
+			obj.name = sub(r'\+\d[()\d\s‬-]{12,}', '', obj.name)
+		except:
+			pass
+		try:
+			for element in obj.children:
+				try:
+					if element.UIAAutomationId == 'ForwardedHeader':
+						obj.name = f'Reenviado: {obj.name}'
+					if element.UIAAutomationId == 'ReactionBubble':
+						obj.name = f'{obj.name} ({element.name})'
+				except:
+					pass
 		except:
 			pass
 
@@ -132,16 +114,6 @@ class AppModule(appModuleHandler.AppModule):
 		except:
 			pass
 
-	def event_gainFocus(self, obj, nextHandler):
-		try:
-			if obj.UIAAutomationId == 'ChatsListItem':
-				self.lastChat = obj
-				nextHandler()
-			else:
-				nextHandler()
-		except:
-			nextHandler()
-
 	@script(gestures=[f'kb:alt+{i}' for i in range(1, 10)])
 	def script_lastMessages(self, gesture):
 		x = int(gesture.displayName[-1])
@@ -150,10 +122,17 @@ class AppModule(appModuleHandler.AppModule):
 		count = self.messageList.UIAChildren.Length
 		try:
 			messageElement = self.messageList.UIAChildren.GetElement(count-x)
-			messageObject = NVDAObjects.UIA.UIA(UIAElement=messageElement)
-			message(messageObject.name)
+			self.messageObject = NVDAObjects.UIA.UIA(UIAElement=messageElement)
+			message(self.messageObject.name)
 		except:
 			pass
+
+	@script(gesture="kb:alt+enter")
+	def script_messageFocus(self, gesture):
+		try:
+			self.messageObject.setFocus()
+		except:
+			gesture.send()
 
 	@script(
 	category= category,
@@ -212,14 +191,14 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+shift+u'
 	)
 	def script_viewConfigToggle(self, gesture):
-		if self.temp_value:
+		if self.remove_phone_number:
 			setConfig('RemovePhoneNumberInMessages', False)
-			self.temp_value = False
+			self.remove_phone_number = False
 			# Translators: Mensaje que indica la desactivación de los mensajes editados
 			message(_('Mensajes editados, desactivado'))
 		else:
 			setConfig('RemovePhoneNumberInMessages', True)
-			self.temp_value = True
+			self.remove_phone_number = True
 			# Translators: Mensaje que anuncia la activación de los mensajes editados
 			message(_('Mensajes editados, activado'))
 
@@ -283,12 +262,6 @@ class AppModule(appModuleHandler.AppModule):
 	def script_viewText(self, gesture):
 		fc = api.getFocusObject()
 		try:
-			try:
-				if fc.children[-3].UIAAutomationId == 'SaveButton':
-					message('{}, {}'.format(fc.children[-6].name, fc.children[-5].name))
-					return
-			except:
-				pass
 			if not fc.UIAAutomationId == 'BubbleListItem': return
 			text = '\n'.join([item.name for item in fc.children if (item.UIAAutomationId == 'TextBlock' and item.next.next.UIAAutomationId == 'ReadMore')])
 			if text:
