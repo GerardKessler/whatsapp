@@ -1,5 +1,4 @@
-﻿# -*- coding: utf-8 -*-
-# Copyright (C) 2021 Gerardo Kessler <ReaperYOtrasYerbas@gmail.com>
+﻿# -*- coding: utf-8 -*-# Copyright (C) 2021 Gerardo Kessler <ReaperYOtrasYerbas@gmail.com>
 # This file is covered by the GNU General Public License.
 
 import webbrowser
@@ -15,12 +14,16 @@ import api
 import winUser
 import config
 from ui import message, browseableMessage
+from NVDAObjects.UIA import UIA
+import UIAHandler
 from nvwave import playWaveFile
 import re
 from re import search, sub
 import os
 import NVDAObjects
 import addonHandler
+import tones
+from logHandler import log
 
 # Lína de traducción
 addonHandler.initTranslation()
@@ -66,9 +69,50 @@ class AppModule(appModuleHandler.AppModule):
 		self.notFound = _('Elemento no encontrado')
 		self.lastChat = None
 		self.messageList = None
-		self.messageObject = None
 		self.soundsPath = os.path.join(appArgs.configPath, 'addons', 'whatsapp', 'sounds')
-		self.remove_phone_number = getConfig('RemovePhoneNumberInMessages')
+		self.temp_value = getConfig('RemovePhoneNumberInMessages')
+		self._UIATweak=False
+		#variable para guardar si se anuncia cuando se escribe.
+		self.__AnouncingTyping=True
+		self.__contactIsTyping=False
+		#mensajes de escribiendo
+		self.__typingMessages=[
+			"escribiendo…",
+		]
+
+
+	def getLastMessage(self, index):
+		try:
+			messagesList = self.get("ListView", False, None)
+			count = messagesList.UIAChildren.Length
+			chatMessage = messagesList.UIAChildren.GetElement(count-index)
+			chatMessage = UIA(UIAElement=chatMessage)
+			log.info(chatMessage)
+			return chatMessage
+		except Exception as e:
+			log.info(e)
+			return None
+
+	def event_nameChange(self, obj, nextHandler):
+		if obj.name in self.__typingMessages:
+			message(f"{obj.previous.name} está {obj.name}.")
+			self.__lastChatMessage =self.getLastMessage(1)
+			self.__contactIsTyping=True
+			t=Thread(target=self._sonifyTyping)
+			if not t.isAlive():
+				t.start()
+		else:
+			self.__contactIsTyping = False
+			compare = self.getLastMessage(1)
+			if compare != self.__lastChatMessage:
+				self.__lastChatMessage = compare
+				message(self.__lastChatMessage.name)
+
+	def _sonifyTyping(self):
+		log.info("miau")
+		while self.__contactIsTyping:
+			playWaveFile(os.path.join(self.soundsPath, "typing.wav"))
+			sleep(0.2)
 
 	# Función que recibe el UIAAutomationId por parámetro, y devuelve el objeto de coincidencia
 	def get(self, id, errorMessage, gesture):
@@ -85,25 +129,44 @@ class AppModule(appModuleHandler.AppModule):
 
 	def event_NVDAObject_init(self, obj):
 		try:
-			if obj.UIAAutomationId == 'ChatsListItem':
-				self.lastChat = obj
-				return
+			if obj.UIAAutomationId == 'RightButton' and obj.previous.description == '':
+				# Translators: Etiqueta del botón mensaje de voz
+				obj.name = _('Mensaje de voz')
+			elif obj.name == 'WhatsApp.ChatListArchiveButtonCellVm':
+				# Translators: Etiqueta del elemento mensajes archivados
+				obj.name = _('Chats Archivados')
+			elif obj.name == '\ue76e' and obj.value == None:
+				obj.name = _('Reaccionar')
+			elif obj.UIAAutomationId == 'BackButton':
+				# Translators: Etiqueta del botón atrás en los chatsArchivados
+				obj.name = _('Atrás')
+			elif obj.UIAAutomationId == 'PttDeleteButton':
+				# Translators: Etiqueta del botón cancelar mensaje de voz
+				obj.name = _('Cancelar mensaje')
+			elif obj.name == '\ue8bb':
+				obj.name = _('Cancelar respuesta')
+			elif obj.UIAAutomationId == "SendMessages":
+				obj.name = '{}: {}'.format(obj.previous.name, obj.firstChild.name)
+			elif obj.UIAAutomationId == "EditInfo":
+				obj.name = '{}: {}'.format(obj.previous.name, obj.firstChild.name)
+			elif obj.UIAAutomationId == "MuteDropdown":
+				obj.name = obj.children[0].name
+			elif obj.UIAAutomationId == "ThemeCombobox":
+				obj.name = obj.previous.name + obj.firstChild.children[1].name
+			elif obj.name == 'WhatsApp.Design.ThemeData':
+				obj.name = obj.children[1].name
+			elif obj.UIAAutomationId == 'PttPauseButton':
+				# Translators: Etiqueta del botón pausar grabación
+				obj.name = _('Pausar grabación')
+			elif obj.UIAAutomationId == 'PttSendButton':
+				# Translators: Etiqueta del botón Enviar mensaje de voz
+				obj.name = _('Enviar mensaje de voz')
 		except:
 			pass
 		try:
-			if obj.UIAAutomationId != 'BubbleListItem' or not self.remove_phone_number: return
-			obj.name = sub(r'\+\d[()\d\s‬-]{12,}', '', obj.name)
-		except:
-			pass
-		try:
-			for element in obj.children:
-				try:
-					if element.UIAAutomationId == 'ForwardedHeader':
-						obj.name = f'Reenviado: {obj.name}'
-					if element.UIAAutomationId == 'ReactionBubble':
-						obj.name = f'{obj.name} ({element.name})'
-				except:
-					pass
+			if not self.temp_value: return
+			if obj.UIAAutomationId == 'BubbleListItem':
+				obj.name = sub(r'\+\d[()\d\s‬-]{12,}', '', obj.name)
 		except:
 			pass
 
@@ -114,25 +177,38 @@ class AppModule(appModuleHandler.AppModule):
 		except:
 			pass
 
+	def event_gainFocus(self, obj, nextHandler):
+	#evento experimental
+		try:
+			#some UIA events manipulation
+			if self._UIATweak:
+				pass
+			else:
+				contactInfo = self.get('TitleButton', False, None)
+				chatList = self.get("ListView", False, None)
+				contactInfo = contactInfo.getChild(1)
+				UIAHandler.handler.removeEventHandlerGroup(contactInfo.UIAElement, UIAHandler.handler.localEventHandlerGroup)
+				UIAHandler.handler.removeEventHandlerGroup(chatList.UIAElement, UIAHandler.handler.localEventHandlerGroup)
+				UIAHandler.handler.addEventHandlerGroup(contactInfo.UIAElement, UIAHandler.handler.localEventHandlerGroup)
+				UIAHandler.handler.addEventHandlerGroup(chatList.UIAElement, UIAHandler.handler.localEventHandlerGroup)
+				self._UIATweak=True
+			if obj.UIAAutomationId == 'ChatsListItem':
+				self.lastChat = obj
+		except NotImplementedError:
+			log.info("UIA selectivo desactivado.")
+		except Exception as e:
+			log.warning(e)
+		finally:
+			nextHandler()
+
 	@script(gestures=[f'kb:alt+{i}' for i in range(1, 10)])
 	def script_lastMessages(self, gesture):
 		x = int(gesture.displayName[-1])
-		if not self.messageList:
-			self.messageList = self.get('ListView', False, None)
-		count = self.messageList.UIAChildren.Length
-		try:
-			messageElement = self.messageList.UIAChildren.GetElement(count-x)
-			self.messageObject = NVDAObjects.UIA.UIA(UIAElement=messageElement)
-			message(self.messageObject.name)
-		except:
-			pass
-
-	@script(gesture="kb:alt+enter")
-	def script_messageFocus(self, gesture):
-		try:
-			self.messageObject.setFocus()
-		except:
-			gesture.send()
+		requiredMessage = self.getLastMessage(x)
+		if requiredMessage:
+			message(requiredMessage.name)
+		else:
+			tones.beep(100, 100)
 
 	@script(
 	category= category,
@@ -191,14 +267,14 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+shift+u'
 	)
 	def script_viewConfigToggle(self, gesture):
-		if self.remove_phone_number:
+		if self.temp_value:
 			setConfig('RemovePhoneNumberInMessages', False)
-			self.remove_phone_number = False
+			self.temp_value = False
 			# Translators: Mensaje que indica la desactivación de los mensajes editados
 			message(_('Mensajes editados, desactivado'))
 		else:
 			setConfig('RemovePhoneNumberInMessages', True)
-			self.remove_phone_number = True
+			self.temp_value = True
 			# Translators: Mensaje que anuncia la activación de los mensajes editados
 			message(_('Mensajes editados, activado'))
 
@@ -262,6 +338,12 @@ class AppModule(appModuleHandler.AppModule):
 	def script_viewText(self, gesture):
 		fc = api.getFocusObject()
 		try:
+			try:
+				if fc.children[-3].UIAAutomationId == 'SaveButton':
+					message('{}, {}'.format(fc.children[-6].name, fc.children[-5].name))
+					return
+			except:
+				pass
 			if not fc.UIAAutomationId == 'BubbleListItem': return
 			text = '\n'.join([item.name for item in fc.children if (item.UIAAutomationId == 'TextBlock' and item.next.next.UIAAutomationId == 'ReadMore')])
 			if text:
@@ -341,7 +423,6 @@ class AppModule(appModuleHandler.AppModule):
 			# message(self.notFound)
 
 class Messages():
-
 	# Translators: velocidades de reproducción
 	speeds = {
 		'2×': _('Normal'),
@@ -405,3 +486,4 @@ class Messages():
 				return
 		# Translators: Mensaje que avisa de la inexistencia de mensajes en reproducción
 		message(_('Ningún mensaje de audio en reproducción'))
+
