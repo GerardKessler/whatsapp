@@ -18,7 +18,14 @@ from ui import message, browseableMessage
 from nvwave import playWaveFile
 import re
 from re import search, sub
+import sys
 import os
+dirAddon = os.path.dirname(__file__)
+sys.path.append(dirAddon)
+sys.path.append(os.path.join(dirAddon, "lib"))
+import emoji
+emoji.__path__.append(os.path.join(dirAddon, "lib", "emoji"))
+del sys.path[-2:]
 import NVDAObjects
 import addonHandler
 
@@ -29,7 +36,8 @@ addonHandler.initTranslation()
 def initConfiguration():
 	confspec = {
 		'RemovePhoneNumberInMessages':'boolean(default=False)',
-		'AddonSounds':'boolean(default=False)'
+		'AddonSounds':'boolean(default=False)',
+		'RemoveEmojis':'boolean(default=False)'
 	}
 	config.conf.spec['WhatsApp'] = confspec
 
@@ -58,7 +66,7 @@ def killSpeak(time):
 	speech.setSpeechMode(speech.SpeechMode.talk)
 
 # Ruta de la carpeta con los sonidos
-sounds_path = os.path.join(os.path.dirname(__file__), '..', 'sounds')
+sounds_path = os.path.join(dirAddon, '..', 'sounds')
 
 class AppModule(appModuleHandler.AppModule):
 
@@ -73,6 +81,7 @@ class AppModule(appModuleHandler.AppModule):
 		self.message_object = None
 		self.remove_phone_number = getConfig('RemovePhoneNumberInMessages')
 		self.addon_sounds = getConfig('AddonSounds')
+		self.remove_emojis = getConfig('RemoveEmojis')
 
 	# Función que recibe el UIAAutomationId por parámetro, y devuelve el objeto de coincidencia
 	def get(self, id, errorMessage, gesture):
@@ -95,8 +104,11 @@ class AppModule(appModuleHandler.AppModule):
 		except:
 			pass
 		try:
-			if obj.UIAAutomationId != 'BubbleListItem' or not self.remove_phone_number: return
-			obj.name = sub(r'\+\d[()\d\s‬-]{12,}', '', obj.name)
+			if obj.UIAAutomationId != 'BubbleListItem' or not self.remove_phone_number and not self.remove_emojis: return
+			if self.remove_phone_number:
+				obj.name = sub(r'\+\d[()\d\s‬-]{12,}', '', obj.name)
+			if self.remove_emojis:
+				obj.name = emoji.replace_emoji(obj.name, '')
 		except:
 			pass
 		try:
@@ -195,7 +207,7 @@ class AppModule(appModuleHandler.AppModule):
 		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Activa y desactiva los sonidos del complemento'),
-		gesture= 'kb:control+shift+s'
+		gesture= 'kb:control+alt+s'
 	)
 	def script_soundsConfigToggle(self, gesture):
 		if self.addon_sounds:
@@ -213,9 +225,9 @@ class AppModule(appModuleHandler.AppModule):
 		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Activa y desactiva la eliminación de los números de teléfono de los contactos no agendados en los mensajes'),
-		gesture= 'kb:control+shift+u'
+		gesture= 'kb:control+alt+n'
 	)
-	def script_viewConfigToggle(self, gesture):
+	def script_viewNumbersToggle(self, gesture):
 		if self.remove_phone_number:
 			setConfig('RemovePhoneNumberInMessages', False)
 			self.remove_phone_number = False
@@ -226,6 +238,24 @@ class AppModule(appModuleHandler.AppModule):
 			self.remove_phone_number = True
 			# Translators: Mensaje que anuncia la activación de los mensajes editados
 			message(_('Mensajes editados, activado'))
+
+	@script(
+		category= category,
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Activa y desactiva la opción para ocultar los emojis en los mensajes'),
+		gesture= 'kb:control+alt+e'
+	)
+	def script_emojisToggle(self, gesture):
+		if self.remove_emojis:
+			setConfig('RemoveEmojis', False)
+			self.remove_emojis = False
+			# Translators: Mensaje que indica la desactivación de la opción para ocultar emojis
+			message(_('Ocultar emojis, desactivado'))
+		else:
+			setConfig('RemoveEmojis', True)
+			self.remove_emojis = True
+			# Translators: Mensaje que anuncia la activación de la opción para ocultar emojis
+			message(_('Ocultar emojis, activado'))
 
 	@script(
 	category= category,
@@ -337,7 +367,7 @@ class AppModule(appModuleHandler.AppModule):
 		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Pulsa el botón llamada de video'),
-		gesture= 'kb:control+shift+space'
+		gesture= 'kb:control+shift+v'
 	)
 	def script_videoCall(self, gesture):
 		videoCall = self.get('VideoCallButton', True, gesture)
@@ -366,13 +396,6 @@ class AppModule(appModuleHandler.AppModule):
 			# message(self.notFound)
 
 class Messages():
-
-	# Translators: velocidades de reproducción
-	speeds = {
-		'2×': _('Normal'),
-		'1×': _('Medio'),
-		'1.5×': _('Rápido')
-	}
 
 	def initOverlayClass(self):
 		self.progress = None
@@ -426,7 +449,6 @@ class Messages():
 			if obj.UIAAutomationId == 'PlaybackSpeedButton':
 				obj.doAction()
 				self.setFocus()
-				message(self.speeds[obj.name])
 				return
 		# Translators: Mensaje que avisa de la inexistencia de mensajes en reproducción
 		message(_('Ningún mensaje de audio en reproducción'))
