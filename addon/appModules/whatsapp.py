@@ -337,7 +337,7 @@ class AppModule(appModuleHandler.AppModule):
 		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Pulsa el botón llamada de video'),
-		gesture= 'kb:control+shift+v'
+		gesture= 'kb:control+shift+space'
 	)
 	def script_videoCall(self, gesture):
 		videoCall = self.get('VideoCallButton', True, gesture)
@@ -387,7 +387,7 @@ class Messages():
 			"kb:space": "playPause",
 			"kb:leftArrow": "rewind",
 			"kb:rightArrow": "advanced",
-			"kb:control+v": "speed",
+			"kb:control+space": "speed",
 			"kb:control+enter": "linkOpen"
 			})
 
