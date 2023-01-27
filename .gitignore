@@ -1,6 +1,7 @@
 addon/doc/*.css
 
 *_docHandler.py
+*.txt
 *.html
 *.ini
 *.mo

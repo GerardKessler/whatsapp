@@ -29,6 +29,7 @@ addonHandler.initTranslation()
 def initConfiguration():
 	confspec = {
 		'RemovePhoneNumberInMessages':'boolean(default=False)',
+		'AddonSounds':'boolean(default=False)'
 	}
 	config.conf.spec['WhatsAppBeta'] = confspec
 
@@ -56,6 +57,9 @@ def killSpeak(time):
 	sleep(time)
 	speech.setSpeechMode(speech.SpeechMode.talk)
 
+# Ruta de la carpeta con los sonidos
+sounds_path = os.path.join(os.path.dirname(__file__), '..', 'sounds')
+
 class AppModule(appModuleHandler.AppModule):
 
 	category = 'whatsapp'
@@ -63,12 +67,12 @@ class AppModule(appModuleHandler.AppModule):
 	def __init__(self, *args, **kwargs):
 		super(AppModule, self).__init__(*args, **kwargs)
 		# Translators: Mensaje que anuncia que no se ha encontrado el elemento
-		self.notFound = _('Elemento no encontrado')
-		self.lastChat = None
-		self.messageList = None
-		self.messageObject = None
-		self.soundsPath = os.path.join(appArgs.configPath, 'addons', 'whatsapp', 'sounds')
+		self.not_found = _('Elemento no encontrado')
+		self.last_chat = None
+		self.message_list = None
+		self.message_object = None
 		self.remove_phone_number = getConfig('RemovePhoneNumberInMessages')
+		self.addon_sounds = getConfig('AddonSounds')
 
 	# Función que recibe el UIAAutomationId por parámetro, y devuelve el objeto de coincidencia
 	def get(self, id, errorMessage, gesture):
@@ -79,14 +83,14 @@ class AppModule(appModuleHandler.AppModule):
 			except:
 				pass
 		if errorMessage:
-			message(self.notFound)
+			message(self.not_found)
 		if gesture:
 			gesture.send()
 
 	def event_NVDAObject_init(self, obj):
 		try:
 			if obj.UIAAutomationId == 'ChatsListItem':
-				self.lastChat = obj
+				self.last_chat = obj
 				return
 		except:
 			pass
@@ -117,20 +121,20 @@ class AppModule(appModuleHandler.AppModule):
 	@script(gestures=[f'kb:alt+{i}' for i in range(1, 10)])
 	def script_lastMessages(self, gesture):
 		x = int(gesture.displayName[-1])
-		if not self.messageList:
-			self.messageList = self.get('ListView', False, None)
-		count = self.messageList.UIAChildren.Length
+		if not self.message_list:
+			self.message_list = self.get('ListView', False, None)
+		count = self.message_list.UIAChildren.Length
 		try:
-			messageElement = self.messageList.UIAChildren.GetElement(count-x)
-			self.messageObject = NVDAObjects.UIA.UIA(UIAElement=messageElement)
-			message(self.messageObject.name)
+			messageElement = self.message_list.UIAChildren.GetElement(count-x)
+			self.message_object = NVDAObjects.UIA.UIA(UIAElement=messageElement)
+			message(self.message_object.name)
 		except:
 			pass
 
 	@script(gesture="kb:alt+enter")
 	def script_messageFocus(self, gesture):
 		try:
-			self.messageObject.setFocus()
+			self.message_object.setFocus()
 		except:
 			gesture.send()
 
@@ -145,18 +149,20 @@ class AppModule(appModuleHandler.AppModule):
 		if send:
 			send.doAction()
 			# Translators: Mensaje de envío del mensaje de audio
-			message(_('Enviando...'))
+			if not self.addon_sounds: message(_('Enviando...'))
+			if self.addon_sounds: playWaveFile(os.path.join(sounds_path, 'sending.wav'))
 			mute(0.1)
 			return
 		record = self.get('RightButton', True, gesture)
 		if record:
 			if record.previous.description == '':
 				# Translators: Mensaje de inicio de grabación de un mensaje de voz
-				message(_('Grabando'))
+				if not self.addon_sounds: message(_('Grabando'))
+				if self.addon_sounds: playWaveFile(os.path.join(sounds_path, 'recording.wav'))
 				record.doAction()
 				mute(1)
 			else:
-				# Translators: Aviso de que el cuadro de edicón de mensaje no está vacío
+				# Translators: Aviso de que el cuadro de edición de mensaje no está vacío
 				message(_('El cuadro de edición no está vacío'))
 
 	@script(
@@ -170,7 +176,8 @@ class AppModule(appModuleHandler.AppModule):
 		if cancel:
 			cancel.doAction()
 			# Translators: Mensaje de cancelación de la grabación de un mensaje de voz
-			message(_('Cancelado'))
+			if not self.addon_sounds: message(_('Cancelado'))
+			if self.addon_sounds: playWaveFile(os.path.join(sounds_path, 'cancel.wav'))
 			mute(0.1)
 
 	@script(
@@ -183,6 +190,24 @@ class AppModule(appModuleHandler.AppModule):
 		timer = self.get('PttTimer', False, gesture)
 		if timer:
 			message(timer.name)
+
+	@script(
+		category= category,
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Activa y desactiva los sonidos del complemento'),
+		gesture= 'kb:control+shift+s'
+	)
+	def script_soundsConfigToggle(self, gesture):
+		if self.addon_sounds:
+			setConfig('AddonSounds', False)
+			self.addon_sounds = False
+			# Translators: Mensaje que indica la desactivación de los sonidos del complemento
+			message(_('Sonidos del complemento, desactivados'))
+		else:
+			setConfig('AddonSounds', True)
+			self.addon_sounds = True
+			# Translators: Mensaje que anuncia la activación de los sonidos del complemento
+			message(_('Sonidos del complemento, activados'))
 
 	@script(
 		category= category,
@@ -209,8 +234,8 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:alt+rightArrow'
 	)
 	def script_chatsList(self, gesture):
-		if self.lastChat:
-			self.lastChat.setFocus()
+		if self.last_chat:
+			self.last_chat.setFocus()
 
 	@script(
 		category= category,
@@ -335,7 +360,7 @@ class AppModule(appModuleHandler.AppModule):
 	@script(gesture="kb:f1")
 	def script_help(self, gesture):
 		# try:
-		playWaveFile(os.path.join(self.soundsPath, 'open.wav'))
+		if self.addon_sounds: playWaveFile(os.path.join(sounds_path, 'open.wav'))
 		wx.LaunchDefaultBrowser('file://' + addonHandler.Addon(os.path.join(appArgs.configPath, "addons", "whatsapp")).getDocFilePath(), flags=0)
 		# except:
 			# message(self.notFound)

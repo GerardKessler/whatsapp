@@ -20,6 +20,7 @@ Importante: Este complemento solo funciona con la versión UWP de la aplicación
 * Pulsar el botón info del chat; control + shift + i
 * Activar la ventana de filtros; control + shift + o
 * Activar y desactivar la eliminación de los números de teléfono en los mensajes de contactos no agendados; control + shift + u
+* Activar o desactivar los sonidos del complemento; control + shift + s
 * Enfocar los mensajes no leídos; alt + flecha abajo
 * Verbalizar los últimos mensajes del chat abierto; alt + 1 al 9
 
@@ -30,7 +31,7 @@ Al enfocarse un mensaje de audio, se activan los siguientes gestos:
 * Barra espaciadora; reproduce y pausa el mensaje
 * flecha izquierda; retrocede el mensaje de audio (solo funciona con el audio detenido)
 * flecha derecha; avanza el mensaje de audio (solo funciona con el audio detenido)
-* control + v; conmuta entre las 3 velocidades de reproducción (solo funciona con el audio en reproducción)
+* control + barra espaciadora; conmuta entre las 3 velocidades de reproducción (solo funciona con el audio en reproducción)
 
 Al enfocarse un mensaje con un link:
 
