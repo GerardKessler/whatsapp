@@ -31,16 +31,16 @@ def initConfiguration():
 		'RemovePhoneNumberInMessages':'boolean(default=False)',
 		'AddonSounds':'boolean(default=False)'
 	}
-	config.conf.spec['WhatsAppBeta'] = confspec
+	config.conf.spec['WhatsApp'] = confspec
 
 def getConfig(key):
-	return config.conf["WhatsAppBeta"][key]
+	return config.conf["WhatsApp"][key]
 
 def setConfig(key, value):
 	try:
-		config.conf.profiles[0]["WhatsAppBeta"][key] = value
+		config.conf.profiles[0]["WhatsApp"][key] = value
 	except:
-		config.conf["WhatsAppBeta"][key] = value
+		config.conf["WhatsApp"][key] = value
 
 initConfiguration()
 
