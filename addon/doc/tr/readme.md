@@ -20,7 +20,9 @@ yazar: [Gerardo Kessler](http://gera.ar)
 * Sohbet Bilgisi düğmesine bas: CTRL + Shift + i
 * Ayarlar düğmesine bas: CTRL + Shift + O
 * Yeni Sohbet düğmesine bas: CTRL + Shift + N
-* Mesajlarda eklenmemiş kişilerin telefon numaralarının kaldırılmasını etkinleştir veya devre dışı bırak: CTRL + Shift + E
+* Mesajlarda eklenmemiş kişilerin telefon numaralarının kaldırılmasını etkinleştir veya devre dışı bırak: CTRL + Alt + n
+* Eklenti seslerini açıp kapatın; kontrol + alt + s
+* Mesajlarda emojilerin görüntülenmesini etkinleştirin ve devre dışı bırakın; kontrol + alt + e
 * Okunmamış mesajlara odaklan; alt + aşağı ok
 * Açık sohbetin son mesajlarını söyleyin; alt + 1 ila 9
 
@@ -31,7 +33,7 @@ Bir sesli mesaja odaklanmak aşağıdaki hareketleri etkinleştirir:
 * Boşluk çubuğu; mesajı oynat ve duraklat
 * sol ok; sesli mesajı geri sar (yalnızca sesli mesaj durdurulmuşsa çalışır)
 * sağ ok; Önceki sesli mesaj (yalnızca ses durdurulduğunda çalışır)
-* kontrol + v; 3 oynatma hızı arasında geçiş yapar (yalnızca mesaj oynatılırken çalışır)
+* kontrol + boşluk; 3 oynatma hızı arasında geçiş yapar (yalnızca mesaj oynatılırken çalışır)
 
 Bağlantı içeren bir mesaja odaklanırken:
 

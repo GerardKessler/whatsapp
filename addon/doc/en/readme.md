@@ -19,7 +19,9 @@ Important: This addon only works with the UWP version of the app.
 * Press the Video call button; control + shift + v
 * Press the Chat info button; control + shift + i
 * Activate the filter window; control + shift + o
-* Toggle edited posts (if enabled, phone numbers of people who aren't in your contacts will be stripped when reading the message list); control + shift + u
+* Toggle edited posts (if enabled, phone numbers of people who aren't in your contacts will be stripped when reading the message list); control + alt + n
+* Activar y desactivar los sonidos del complemento; control + alt + s
+* Activar y desactivar la visualización de los emojis en los mensajes; control + alt + e
 * Focus start of unread messages; alt + down arrow
 * Say the last messages of the open chat; alt + 1 to 9
 
@@ -30,7 +32,7 @@ Focusing on an audio message activates the following gestures:
 * Space; play and pause the message
 * left arrow; rewinds the audio message (only works with stopped audio)
 * right arrow; advance audio message (only works with audio stopped)
-* control + v; toggle between 3 playback speeds (only works with audio being played)
+* control + space; toggle between 3 playback speeds (only works with audio being played)
 
 When focusing a message with a link:
 

@@ -19,7 +19,9 @@ Important: cette extension ne fonctionne qu'avec la version UWP de l'application
 * Appuyer sur le bouton appel vidéo; contrôle + maj + v
 * Appuyer sur le bouton info du chat; contrôle + maj + i
 * Activer la fenêtre de filtre; contrôle + maj + o
-* Activer et désactiver l'élimination des numéros de téléphone dans les messages de contact non agender; contrôle + maj + u
+* Activer et désactiver l'élimination des numéros de téléphone dans les messages de contact non agender; contrôle + alt + n
+* Activer et désactiver les sons de l'extension; contrôle + alt + s
+* Activer et désactiver la visualisation des emojis dans les messages; control + alt + e
 * Focaliser les messages non lus; alt + flèche bas
 * Verbaliser les derniers messages de chat ouverts; alt + 1 à 9
 
@@ -30,7 +32,7 @@ Lors de la focalisation  d'un message audio, les gestes suivants sont activés:
 * Barre d'espace; lit et met en pause le message
 * flèche  gauche; recule le message audio (cela ne fonctionne qu'avec l'audio détenu)
 * flèche droite; avance le message audio (cela ne fonctionne qu'avec l'audio détenu)
-* contrôle + v; bascule entre les 3 vitesses de lecture (cela ne fonctionne qu'avec l'audio en cours de lecture)
+* contrôle + barre d'espace; bascule entre les 3 vitesses de lecture (cela ne fonctionne qu'avec l'audio en cours de lecture)
 
 Lors de la focalisation d'un message avec un lien:
 

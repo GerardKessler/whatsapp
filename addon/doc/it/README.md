@@ -19,7 +19,10 @@ Importante: questo plug-in funziona solo con la versione UWP dell'app.
 * Premere il pulsante videochiamata; control + shift + v
 * Premere il pulsante delle informazioni sulla chat; control + shift + i
 * Attiva la finestra del filtro; control + shift + o
-* Attivare e disattivare la cancellazione dei numeri di telefono nei messaggi da contatti non programmati; control + shift + u
+* Attivare e disattivare la cancellazione dei numeri di telefono nei messaggi da contatti non programmati; control + alt + n
+* Attiva e disattiva i suoni del plug-in; control + alt + s
+* Activar y desactivar los sonidos del complemento; control + alt + s
+* Attivare e disattivare la visualizzazione degli emoji nei messaggi; control + alt + e
 * Messa a fuoco non letti; alt + freccia giù
 * Pronuncia gli ultimi messaggi della chat aperta; alt + da 1 a 9
 
@@ -30,7 +33,7 @@ Concentrandosi su un messaggio audio si attivano i seguenti gesti:
 * Barra spaziatrice; riprodurre e mettere in pausa il messaggio
 * freccia sinistra; riavvolge il messaggio audio (funziona solo con audio interrotto)
 * freccia destra; messaggio audio avanzato (funziona solo con l'audio interrotto)
-* controllo + v; alterna tra 3 velocità di riproduzione (funziona solo con l'audio in riproduzione)
+* controllo + spaziatrice; alterna tra 3 velocità di riproduzione (funziona solo con l'audio in riproduzione)
 
 Quando si mette a fuoco un messaggio con un collegamento:
 

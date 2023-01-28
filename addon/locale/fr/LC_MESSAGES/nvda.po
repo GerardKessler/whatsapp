@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #. Translators: Mensaje que anuncia que no se ha encontrado el elemento
 #: addon\appModules\whatsapp.py:78
@@ -55,17 +55,17 @@ msgstr "Verbalise le temps d'enregistrement d'un message"
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:210
 msgid "Activa y desactiva los sonidos del complemento"
-msgstr ""
+msgstr "Active et désactive les sons de l'extension"
 
 #. Translators: Mensaje que indica la desactivación de los sonidos del complemento
 #: addon\appModules\whatsapp.py:218
 msgid "Sonidos del complemento, desactivados"
-msgstr ""
+msgstr "Sons de l'extension, désactivé"
 
 #. Translators: Mensaje que anuncia la activación de los sonidos del complemento
 #: addon\appModules\whatsapp.py:223
 msgid "Sonidos del complemento, activados"
-msgstr ""
+msgstr "Sons de l'extension, activé"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:228
@@ -88,26 +88,18 @@ msgstr "Messages édités, activé"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:246
-#, fuzzy
-#| msgid ""
-#| "Activa y desactiva la eliminación de los números de teléfono de los "
-#| "contactos no agendados en los mensajes"
 msgid "Activa y desactiva la opción para ocultar los emojis en los mensajes"
-msgstr ""
-"Active et désactive l'élimination des numéros de téléphone dans les messages "
-"de contact non agender"
+msgstr "Active et désactive l'option pour masquer les emojis dans les messages"
 
 #. Translators: Mensaje de visualización de emojis, Desactivado
 #: addon\appModules\whatsapp.py:254
-#, fuzzy
-#| msgid "Mensajes editados, desactivado"
 msgid "Ocultar emojis, desactivado"
-msgstr "Messages édités, désactivé"
+msgstr "Masquer emojis, désactivé"
 
 #. Translators: Mensaje de visualización de emojis, activado
 #: addon\appModules\whatsapp.py:259
 msgid "Ocultar emojis, activado"
-msgstr ""
+msgstr "Masquer emojis, activé"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:264
@@ -223,11 +215,6 @@ msgstr "whatsapp"
 #. Add-on description
 #. Translators: Long description to be shown for this add-on on add-on information from add-ons manager
 #: buildVars.py:26
-#, fuzzy
-#| msgid ""
-#| "Complemento que renombra botones sin etiqueta, añade atajos de teclado "
-#| "para funciones principales de la aplicación, y funciones de enfoque para "
-#| "una mejor interacción con la interfaz."
 msgid ""
 "Complemento que renombra botones sin etiqueta, añade atajos de teclado para "
 "funciones principales de la aplicación, y funciones de enfoque para una "
@@ -235,7 +222,8 @@ msgid ""
 msgstr ""
 "Extension qui renomme les boutons sans étiquette, ajoute des raccourcis "
 "clavier pour les fonctions principales de l'application et les fonctions "
-"qu'elles focalisent pour une meilleure interaction avec l'interface."
+"qu'elles focalisent pour une meilleure interaction avec l'interface. "
+"Disponible uniquement pour la version UWP."
 
 #~ msgid "Mensaje de voz"
 #~ msgstr "Message vocal"
