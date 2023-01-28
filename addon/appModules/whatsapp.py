@@ -232,13 +232,13 @@ class AppModule(appModuleHandler.AppModule):
 		if self.remove_phone_number:
 			setConfig('RemovePhoneNumberInMessages', False)
 			self.remove_phone_number = False
-			# Translators: Mensaje que indica la desactivación de los mensajes editados
-			message(_('Mensajes editados, desactivado'))
+			# Translators: Mensaje de la opción de remover números telefónicos, desactivado
+			message(_('Eliminar números telefónicos, desactivado'))
 		else:
 			setConfig('RemovePhoneNumberInMessages', True)
 			self.remove_phone_number = True
-			# Translators: Mensaje que anuncia la activación de los mensajes editados
-			message(_('Mensajes editados, activado'))
+			# Translators: Mensaje de la opción de remover números telefónicos, activado
+			message(_('Eliminar números telefónicos, activado'))
 
 	@script(
 		category= category,
