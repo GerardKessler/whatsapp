@@ -37,7 +37,7 @@ def initConfiguration():
 	confspec = {
 		'RemovePhoneNumberInMessages':'boolean(default=False)',
 		'AddonSounds':'boolean(default=False)',
-		'RemoveEmojis':'boolean(default=False)'
+		'RemoveEmojis':'boolean(default=True)'
 	}
 	config.conf.spec['WhatsApp'] = confspec
 
@@ -108,6 +108,7 @@ class AppModule(appModuleHandler.AppModule):
 			if self.remove_phone_number:
 				obj.name = sub(r'\+\d[()\d\s‬-]{12,}', '', obj.name)
 			if self.remove_emojis:
+				print(emoji.emoji_count(obj.name))
 				obj.name = emoji.replace_emoji(obj.name, '')
 		except:
 			pass
@@ -249,12 +250,12 @@ class AppModule(appModuleHandler.AppModule):
 		if self.remove_emojis:
 			setConfig('RemoveEmojis', False)
 			self.remove_emojis = False
-			# Translators: Mensaje que indica la desactivación de la opción para ocultar emojis
+			# Translators: Mensaje de visualización de emojis, Desactivado
 			message(_('Ocultar emojis, desactivado'))
 		else:
 			setConfig('RemoveEmojis', True)
 			self.remove_emojis = True
-			# Translators: Mensaje que anuncia la activación de la opción para ocultar emojis
+			# Translators: Mensaje de visualización de emojis, activado
 			message(_('Ocultar emojis, activado'))
 
 	@script(
@@ -306,7 +307,10 @@ class AppModule(appModuleHandler.AppModule):
 	def script_chatName(self, gesture):
 		title = self.get('TitleButton', True, gesture)
 		if title:
-			message(' '.join([obj.name for obj in title.children if len(obj.name) < 50]))
+			contact_name = ' '.join([obj.name for obj in title.children if len(obj.name) < 50])
+			if self.remove_emojis:
+				contact_name = emoji.replace_emoji(contact_name, '')
+			message(contact_name)
 
 	@script(
 		category= category,
