@@ -20,8 +20,8 @@ Important: This addon only works with the UWP version of the app.
 * Press the Chat info button; control + shift + i
 * Activate the filter window; control + shift + o
 * Toggle edited posts (if enabled, phone numbers of people who aren't in your contacts will be stripped when reading the message list); control + alt + n
-* Activar y desactivar los sonidos del complemento; control + alt + s
-* Activar y desactivar la visualización de los emojis en los mensajes; control + alt + e
+* Toggle plugin sounds activation; control + alt + s
+* Toggle the display of emojis in messages; control + alt + e
 * Focus start of unread messages; alt + down arrow
 * Say the last messages of the open chat; alt + 1 to 9
 

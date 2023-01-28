@@ -19,9 +19,9 @@ Importante: Este complemento solo funciona con la versión UWP de la aplicación
 * Pulsar el botón llamada de video; control + shift + v
 * Pulsar el botón info del chat; control + shift + i
 * Activar la ventana de filtros; control + shift + o
-* Activar y desactivar la eliminación de los números de teléfono en los mensajes de contactos no agendados; control + alt + n
-* Activar o desactivar los sonidos del complemento; control + alt + s
-* Activar o desactivar la visualización de los emojis en los mensajes; control + alt + e
+* Alternar la eliminación de los números de teléfono en los mensajes de contactos no agendados; control + alt + n
+* Alternar la activación de los sonidos del complemento; control + alt + s
+* Alternar  la visualización de los emojis en los mensajes; control + alt + e
 * Enfocar los mensajes no leídos; alt + flecha abajo
 * Verbalizar los últimos mensajes del chat abierto; alt + 1 al 9
 
