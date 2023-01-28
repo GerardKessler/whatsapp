@@ -320,6 +320,13 @@ class AppModule(appModuleHandler.AppModule):
 	)
 	def script_viewText(self, gesture):
 		fc = api.getFocusObject()
+		for i in range(fc.childCount):
+			try:
+				if fc.children[i].UIAAutomationId == 'OpenButton':
+					message('{}; {}'.format(fc.children[i-2].name, fc.children[i-1].name))
+					return
+			except:
+				pass
 		try:
 			if not fc.UIAAutomationId == 'BubbleListItem': return
 			text = '\n'.join([item.name for item in fc.children if (item.UIAAutomationId == 'TextBlock' and item.next.next.UIAAutomationId == 'ReadMore')])
