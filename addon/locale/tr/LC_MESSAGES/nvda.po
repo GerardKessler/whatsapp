@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Whatsapp 1.6\n"
+"Project-Id-Version: Whatsapp 2.0\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
 "POT-Creation-Date: 2023-01-27 22:21-0300\n"
 "PO-Revision-Date: \n"
@@ -20,10 +20,9 @@ msgstr "Öğe bulunamadı"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:157
-#, fuzzy
 #| msgid "Iniciar o finalizar la grabación de un mensaje de voz"
 msgid "Inicia o finaliza la grabación de un mensaje de voz"
-msgstr "Sesli mesaj kaydetmeyi başlatma veya durdurma"
+msgstr "Sesli mesaj kaydını başlatır veya durdurur"
 
 #. Translators: Mensaje de envío del mensaje de audio
 #: addon\appModules\whatsapp.py:165
@@ -43,7 +42,7 @@ msgstr "Düzenleme kutusu boş değil"
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:184
 msgid "Cancela la grabación de los mensajes de voz"
-msgstr "Sesli mesaj kaydını iptal et"
+msgstr "Sesli mesaj kaydını iptal eder"
 
 #. Translators: Mensaje de cancelación de la grabación de un mensaje de voz
 #: addon\appModules\whatsapp.py:192
@@ -53,22 +52,22 @@ msgstr "İptal edildi"
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:199
 msgid "Verbaliza el tiempo de grabación de un mensaje"
-msgstr "Sesli mesaj kayıt süresini bildir"
+msgstr "Sesli mesaj kayıt süresini duyurur"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:210
 msgid "Activa y desactiva los sonidos del complemento"
-msgstr ""
+msgstr "Eklenti seslerini açar veya kapatır"
 
 #. Translators: Mensaje que indica la desactivación de los sonidos del complemento
 #: addon\appModules\whatsapp.py:218
 msgid "Sonidos del complemento, desactivados"
-msgstr ""
+msgstr "Eklenti sesleri, devre dışı"
 
 #. Translators: Mensaje que anuncia la activación de los sonidos del complemento
 #: addon\appModules\whatsapp.py:223
 msgid "Sonidos del complemento, activados"
-msgstr ""
+msgstr "Eklenti Sesleri, etkin"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:228
@@ -77,7 +76,7 @@ msgid ""
 "contactos no agendados en los mensajes"
 msgstr ""
 "Mesajlarda eklenmemiş kişilerin telefon numaralarının kaldırılmasını "
-"etkinleştir veya devre dışı bırak"
+"etkinleştirir veya devre dışı bırakır"
 
 #. Translators: Mensaje que indica la desactivación de los mensajes editados
 #: addon\appModules\whatsapp.py:236
@@ -91,36 +90,32 @@ msgstr "Mesajı düzenle, etkin"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:246
-#, fuzzy
 #| msgid ""
 #| "Activa y desactiva la eliminación de los números de teléfono de los "
 #| "contactos no agendados en los mensajes"
 msgid "Activa y desactiva la opción para ocultar los emojis en los mensajes"
-msgstr ""
-"Mesajlarda eklenmemiş kişilerin telefon numaralarının kaldırılmasını "
-"etkinleştir veya devre dışı bırak"
+msgstr "Mesajlardaki emojileri gizleme seçeneğini açıp kapatır"
 
 #. Translators: Mensaje de visualización de emojis, Desactivado
 #: addon\appModules\whatsapp.py:254
-#, fuzzy
 #| msgid "Mensajes editados, desactivado"
 msgid "Ocultar emojis, desactivado"
-msgstr "Mesajı düzenle, devre dışı"
+msgstr "Emojileri gizle, devre dışı"
 
 #. Translators: Mensaje de visualización de emojis, activado
 #: addon\appModules\whatsapp.py:259
 msgid "Ocultar emojis, activado"
-msgstr ""
+msgstr "Emojileri gizle, etkin"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:264
 msgid "Enfoca la lista de chats"
-msgstr "Sohbet listesine odaklan"
+msgstr "Sohbet listesine odaklanır"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:274
 msgid "Enfoca el elemento mensajes no leídos"
-msgstr "Okunmamış mesajlar öğesine odaklan"
+msgstr "Okunmamış mesajlar öğesine odaklanır"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:288
@@ -132,12 +127,12 @@ msgstr ""
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:304
 msgid "Verbaliza el nombre del contacto o grupo"
-msgstr "Kişinin veya grubun adını bildir"
+msgstr "Kişinin veya grubun adını duyurur"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:318
 msgid "Verbaliza la respuesta en el mensaje con el foco"
-msgstr "Mesajdaki yanıta odaklan ve bildir"
+msgstr "Mesajdaki yanıta odaklanır ve duyurur"
 
 #: addon\appModules\whatsapp.py:327
 msgid "Texto del mensaje"
@@ -151,27 +146,27 @@ msgstr "Görüntülenecek metin yok"
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:337
 msgid "Pulsa el botón adjuntar"
-msgstr "Ekle düğmesine basın"
+msgstr "Ekle düğmesine basar"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:349
 msgid "Pulsa el botón info del chat"
-msgstr "Sohbet bilgisi düğmesine basın"
+msgstr "Sohbet bilgisi düğmesine basar"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:361
 msgid "Activa la ventana de filtros"
-msgstr "Filtre penceresini etkinleştir"
+msgstr "Filtre penceresini etkinleştirir"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:373
 msgid "Pulsa el botón llamada de video"
-msgstr "Görüntülü arama düğmesine basın"
+msgstr "Görüntülü aramayı başlatır"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:385
 msgid "Pulsa el botón llamada de audio"
-msgstr "Sesli arama düğmesine basın"
+msgstr "Sesli aramayı başlatır"
 
 #. Translators: Mensaje que avisa de la inexistencia de mensajes en reproducción
 #: addon\appModules\whatsapp.py:458
@@ -227,7 +222,6 @@ msgstr "whatsapp"
 #. Add-on description
 #. Translators: Long description to be shown for this add-on on add-on information from add-ons manager
 #: buildVars.py:26
-#, fuzzy
 #| msgid ""
 #| "Complemento que renombra botones sin etiqueta, añade atajos de teclado "
 #| "para funciones principales de la aplicación, y funciones de enfoque para "
@@ -238,8 +232,8 @@ msgid ""
 "mejor interacción con la interfaz. Solo disponible para la versión UWP."
 msgstr ""
 "Etiketlenmemiş düğmeleri yeniden adlandıran, ana uygulama işlevleri için "
-"klavye kısayolları ekleyen ve arayüzle daha iyi etkileşim için odak "
-"işlevleri ekleyen eklenti."
+"klavye kısayolları ve daha iyi arayüz etkileşimi için odak işlevleri "
+"ekleyen eklenti. Yalnızca UWP sürümü için kullanılabilir."
 
 #~ msgid "Mensaje de voz"
 #~ msgstr "Sesli mesaj"
