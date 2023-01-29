@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 'whatsapp' '1.2'\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2023-01-27 22:21-0300\n"
+"POT-Creation-Date: 2023-01-29 08:24-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -83,15 +83,17 @@ msgstr ""
 "Activate or deactivate edited posts (when active, phone numbers of people "
 "who aren't in your contacts will be silenced when reading the message list)"
 
-#. Translators: Mensaje que indica la desactivación de los mensajes editados
+#. Translators: Mensaje de la opción de remover números telefónicos, desactivado
 #: addon\appModules\whatsapp.py:236
-msgid "Mensajes editados, desactivado"
+#, fuzzy
+#| msgid "Mensajes editados, desactivado"
+msgid "Eliminar números telefónicos, desactivado"
 msgstr "Disabled edited posts"
 
-#. Translators: Mensaje que anuncia la activación de los mensajes editados
+#. Translators: Mensaje de la opción de remover números telefónicos, activado
 #: addon\appModules\whatsapp.py:241
-msgid "Mensajes editados, activado"
-msgstr "Enabled edited posts"
+msgid "Eliminar números telefónicos, activado"
+msgstr ""
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
 #: addon\appModules\whatsapp.py:246
@@ -142,42 +144,42 @@ msgstr "Speak the name of the active conversation with contact or group"
 msgid "Verbaliza la respuesta en el mensaje con el foco"
 msgstr "Speak the quoted message"
 
-#: addon\appModules\whatsapp.py:327
+#: addon\appModules\whatsapp.py:334
 msgid "Texto del mensaje"
 msgstr "Message text"
 
 #. Translators: Mensaje de que no hay texto para mostrar
-#: addon\appModules\whatsapp.py:330
+#: addon\appModules\whatsapp.py:337
 msgid "No hay texto para mostrar"
 msgstr "There is no text to display"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:337
+#: addon\appModules\whatsapp.py:344
 msgid "Pulsa el botón adjuntar"
 msgstr "Press the Attach button"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:349
+#: addon\appModules\whatsapp.py:356
 msgid "Pulsa el botón info del chat"
 msgstr "Press the Chat Info button"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:361
+#: addon\appModules\whatsapp.py:368
 msgid "Activa la ventana de filtros"
 msgstr "Activate the filter window"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:373
+#: addon\appModules\whatsapp.py:380
 msgid "Pulsa el botón llamada de video"
 msgstr "Press the Video Call button"
 
 #. Translators: Descripción del elemento en el diálogo gestos de entrada
-#: addon\appModules\whatsapp.py:385
+#: addon\appModules\whatsapp.py:392
 msgid "Pulsa el botón llamada de audio"
 msgstr "Press the Audio Call button"
 
 #. Translators: Mensaje que avisa de la inexistencia de mensajes en reproducción
-#: addon\appModules\whatsapp.py:458
+#: addon\appModules\whatsapp.py:465
 msgid "Ningún mensaje de audio en reproducción"
 msgstr "No audio message playing"
 
@@ -243,6 +245,9 @@ msgstr ""
 "Add-on that renames unlabeled buttons, adds keyboard shortcuts for main "
 "application functions, and improves focus functions for better interaction "
 "with the interface."
+
+#~ msgid "Mensajes editados, activado"
+#~ msgstr "Enabled edited posts"
 
 #~ msgid "Mensaje de voz"
 #~ msgstr "Voice message"
