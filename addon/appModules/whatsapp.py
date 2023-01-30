@@ -36,8 +36,8 @@ addonHandler.initTranslation()
 def initConfiguration():
 	confspec = {
 		'RemovePhoneNumberInMessages':'boolean(default=False)',
-		'AddonSounds':'boolean(default=False)',
-		'RemoveEmojis':'boolean(default=True)'
+		'AddonSounds':'boolean(default=True)',
+		'RemoveEmojis':'boolean(default=False)'
 	}
 	config.conf.spec['WhatsApp'] = confspec
 
