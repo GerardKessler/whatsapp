@@ -23,6 +23,7 @@ import os
 import NVDAObjects
 import addonHandler
 import tones
+import mouseHandler
 from logHandler import log
 
 # Lína de traducción
@@ -79,34 +80,54 @@ class AppModule(appModuleHandler.AppModule):
 		self.__typingMessages=[
 			"escribiendo…",
 		]
+		#inicializamos una lista circular vacía
+		self.__circularMessagesList=CircularList(9)
 
 
-	def getLastMessage(self, index):
+	def _getLastMessage(self, index):
 		try:
-			messagesList = self.get("ListView", False, None)
-			count = messagesList.UIAChildren.Length
-			chatMessage = messagesList.UIAChildren.GetElement(count-index)
-			chatMessage = UIA(UIAElement=chatMessage)
-			log.info(chatMessage)
-			return chatMessage
+			return self.__circularMessagesList[index-1]
 		except Exception as e:
-			log.info(e)
 			return None
+
+	def _retrieveLastMessages(self):
+		ml=self.get("ListView", False, None)
+		cm=ml.UIAChildren.Length
+		c=self.__circularMessagesList
+		c.clear()
+		r=reversed(range(cm))
+		for i in r:
+			if c.length == c.size:
+				break
+			m=ml.UIAChildren.GetElement(i)
+			m=UIA(UIAElement=m)
+			t=m._getMessageType()
+			if t=="audio" or t=="text":
+				c.append(m)
 
 	def event_nameChange(self, obj, nextHandler):
 		if obj.name in self.__typingMessages:
 			message(f"{obj.previous.name} está {obj.name}.")
-			self.__lastChatMessage =self.getLastMessage(1)
+			self.__lastChatMessage =self._getLastMessage(1)
 			self.__contactIsTyping=True
 			t=Thread(target=self._sonifyTyping)
 			if not t.isAlive():
 				t.start()
-		else:
-			self.__contactIsTyping = False
-			compare = self.getLastMessage(1)
+			else:	
+				self.__contactIsTyping = False
+			compare = self._getLastMessage(1)
 			if compare != self.__lastChatMessage:
 				self.__lastChatMessage = compare
+				self.__circularMessagesList.insert(0, self.__lastChatMessage)
 				message(self.__lastChatMessage.name)
+		try:
+			if obj.UIAElement.CurrentClassName == "RichTextBlock" and obj.parent.UIAAutomationId=="TitleButton":
+				message(obj.name)
+				Thread(target=self._retrieveLastMessages).start()
+		except AttributeError:
+			pass
+		finally:
+			nextHandler()
 
 	def _sonifyTyping(self):
 		log.info("miau")
@@ -178,19 +199,19 @@ class AppModule(appModuleHandler.AppModule):
 			pass
 
 	def event_gainFocus(self, obj, nextHandler):
-	#evento experimental
+		#evento experimental
 		try:
 			#some UIA events manipulation
 			if self._UIATweak:
 				pass
 			else:
-				contactInfo = self.get('TitleButton', False, None)
-				chatList = self.get("ListView", False, None)
-				contactInfo = contactInfo.getChild(1)
+				titleButton = self.get('TitleButton', False, None)
+				contactInfo = titleButton.getChild(1)
+				contactName=titleButton.getChild(0)
 				UIAHandler.handler.removeEventHandlerGroup(contactInfo.UIAElement, UIAHandler.handler.localEventHandlerGroup)
-				UIAHandler.handler.removeEventHandlerGroup(chatList.UIAElement, UIAHandler.handler.localEventHandlerGroup)
+				UIAHandler.handler.removeEventHandlerGroup(contactName.UIAElement, UIAHandler.handler.localEventHandlerGroup)
 				UIAHandler.handler.addEventHandlerGroup(contactInfo.UIAElement, UIAHandler.handler.localEventHandlerGroup)
-				UIAHandler.handler.addEventHandlerGroup(chatList.UIAElement, UIAHandler.handler.localEventHandlerGroup)
+				UIAHandler.handler.addEventHandlerGroup(contactName.UIAElement, UIAHandler.handler.localEventHandlerGroup)
 				self._UIATweak=True
 			if obj.UIAAutomationId == 'ChatsListItem':
 				self.lastChat = obj
@@ -203,10 +224,16 @@ class AppModule(appModuleHandler.AppModule):
 
 	@script(gestures=[f'kb:alt+{i}' for i in range(1, 10)])
 	def script_lastMessages(self, gesture):
-		x = int(gesture.displayName[-1])
-		requiredMessage = self.getLastMessage(x)
+		x = int(gesture.mainKeyName)
+		requiredMessage = self._getLastMessage(x)
 		if requiredMessage:
-			message(requiredMessage.name)
+			if requiredMessage._getMessageType()=="audio":
+				tones.beep(2000, 20)
+				playMessage=requiredMessage.getChild(1)
+				api.moveMouseToNVDAObject(playMessage)
+				mouseHandler.doPrimaryClick()
+			else:
+				message(requiredMessage.name)
 		else:
 			tones.beep(100, 100)
 
@@ -430,6 +457,9 @@ class Messages():
 		'1.5×': _('Rápido')
 	}
 
+	#indicador de tipo de mensajes
+	__messageType=None
+
 	def initOverlayClass(self):
 		self.progress = None
 		self.play = None
@@ -439,6 +469,12 @@ class Messages():
 			elif obj.UIAAutomationId == 'IconTextBlock':
 				self.play = obj
 
+		if(self.play):
+			self.__messageType="audio"
+		if(not self.play and self.childCount>1):
+			self.__messageType="text"
+		if(self.childCount==1):
+			self.__messageType="info"
 		self.bindGestures({
 			"kb:space": "playPause",
 			"kb:leftArrow": "rewind",
@@ -487,3 +523,27 @@ class Messages():
 		# Translators: Mensaje que avisa de la inexistencia de mensajes en reproducción
 		message(_('Ningún mensaje de audio en reproducción'))
 
+
+	def _getMessageType(self):
+		return self.__messageType
+
+#lista circular para mensajes
+class CircularList(list):
+	def __init__(self, size):
+		self.__size=size
+
+	def append(self, e):
+		if len(self)<self.__size:
+			super().append(e)
+		else:
+			super().append(e)
+			self.pop(0)
+
+	@property
+	def size(self):
+		return self.__size
+	
+	@property
+	def length(self):
+		return len(self)
+	
