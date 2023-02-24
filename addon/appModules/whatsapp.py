@@ -115,6 +115,9 @@ class AppModule(appModuleHandler.AppModule):
 		try:
 			for element in obj.children:
 				try:
+					if element.UIAAutomationId == 'ProgressRing':
+						pattern= search(r'\d\d:\d\d\s[pa]\.\sm\.', obj.name)
+						obj.name = obj.name.replace(pattern[0], f'{element.next.name} ({pattern[0]})')
 					if element.UIAAutomationId == 'ForwardedHeader':
 						obj.name = f'Reenviado: {obj.name}'
 					if element.UIAAutomationId == 'ReactionBubble':
@@ -158,6 +161,7 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:control+r'
 	)
 	def script_voiceMessage(self, gesture):
+		focus= api.getFocusObject()
 		send = self.get('PttSendButton', False, None)
 		if send:
 			send.doAction()
@@ -173,6 +177,7 @@ class AppModule(appModuleHandler.AppModule):
 				if not self.addon_sounds: message(_('Grabando'))
 				if self.addon_sounds: playWaveFile(os.path.join(sounds_path, 'recording.wav'))
 				record.doAction()
+				focus.setFocus()
 				mute(1)
 			else:
 				# Translators: Aviso de que el cuadro de edición de mensaje no está vacío
