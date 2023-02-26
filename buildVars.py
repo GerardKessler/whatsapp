@@ -27,7 +27,7 @@ addon_info = {
 	# version
 	"addon_version": "2.1",
 	# Author(s)
-	"addon_author": "Gerardo Kessler <reaperyotrasyerbas@gmail.com>",
+	"addon_author": "Gerardo Kessler <gera.ar@yahoo.com>",
 	# URL for the add-on documentation support
 	"addon_url": "https://github.com/GerardKessler/whatsapp",
 	# Documentation file name
