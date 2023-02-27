@@ -177,7 +177,6 @@ class AppModule(appModuleHandler.AppModule):
 				if not self.addon_sounds: message(_('Grabando'))
 				if self.addon_sounds: playWaveFile(os.path.join(sounds_path, 'recording.wav'))
 				record.doAction()
-				focus.setFocus()
 				mute(1)
 			else:
 				# Translators: Aviso de que el cuadro de edición de mensaje no está vacío
