@@ -66,7 +66,7 @@ def killSpeak(time):
 	speech.setSpeechMode(speech.SpeechMode.talk)
 
 # Ruta de la carpeta con los sonidos
-sounds_path = os.path.join(dirAddon, '..', 'sounds')
+sounds_path = os.path.join(dirAddon, 'sounds')
 
 class AppModule(appModuleHandler.AppModule):
 
@@ -178,9 +178,15 @@ class AppModule(appModuleHandler.AppModule):
 				if self.addon_sounds: playWaveFile(os.path.join(sounds_path, 'recording.wav'))
 				record.doAction()
 				mute(1)
+				Thread(target=self.sendGesture, args=('shift+tab', 2), daemon=True).start()
 			else:
 				# Translators: Aviso de que el cuadro de edición de mensaje no está vacío
 				message(_('El cuadro de edición no está vacío'))
+
+	def sendGesture(self, kb, amount):
+		sleep(0.5)
+		for x in range(amount):
+			KeyboardInputGesture.fromName(kb).send()
 
 	@script(
 		category= category,
