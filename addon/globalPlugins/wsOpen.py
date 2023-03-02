@@ -24,7 +24,7 @@ from threading import Thread
 # Lína de traducción
 addonHandler.initTranslation()
 
-soundsPath = os.path.join(appArgs.configPath, 'addons', 'whatsapp', 'sounds')
+soundsPath = os.path.join(appArgs.configPath, 'addons', 'whatsapp', 'appModules', 'whatsapp', 'sounds')
 
 class disable_file_system_redirection:
 
