@@ -85,7 +85,7 @@ class AppModule(appModuleHandler.AppModule):
 
 	# Función que recibe el UIAAutomationId por parámetro, y devuelve el objeto de coincidencia
 	def get(self, id, errorMessage, gesture):
-		for obj in api.getForegroundObject().children[1].children[0].children:
+		for obj in api.getForegroundObject().getChild(1).getChild(0).children:
 			try:
 				if obj.UIAAutomationId == id:
 					return obj
@@ -104,26 +104,12 @@ class AppModule(appModuleHandler.AppModule):
 		except:
 			pass
 		try:
-			if obj.UIAAutomationId != 'BubbleListItem' or not self.remove_phone_number and not self.remove_emojis: return
+			if obj.UIAAutomationId != 'BubbleListItem': return
 			if self.remove_phone_number:
 				obj.name = sub(r'\+\d[()\d\s‬-]{12,}', '', obj.name)
 			if self.remove_emojis:
 				print(emoji.emoji_count(obj.name))
 				obj.name = emoji.replace_emoji(obj.name, '')
-		except:
-			pass
-		try:
-			for element in obj.children:
-				try:
-					if element.UIAAutomationId == 'ProgressRing':
-						pattern= search(r'\d\d:\d\d\s[pa]\.\sm\.', obj.name)
-						obj.name = obj.name.replace(pattern[0], f'{element.next.name} ({pattern[0]})')
-					if element.UIAAutomationId == 'ForwardedHeader':
-						obj.name = f'Reenviado: {obj.name}'
-					if element.UIAAutomationId == 'ReactionBubble':
-						obj.name = f'{obj.name} ({element.name})'
-				except:
-					pass
 		except:
 			pass
 
@@ -332,8 +318,8 @@ class AppModule(appModuleHandler.AppModule):
 		fc = api.getFocusObject()
 		for i in range(fc.childCount):
 			try:
-				if fc.children[i].UIAAutomationId == 'OpenButton':
-					message('{}; {}'.format(fc.children[i-2].name, fc.children[i-1].name))
+				if fc.getChild(i).UIAAutomationId == 'OpenButton':
+					message('{}; {}'.format(fc.getChild(i-2).name, fc.getChild(i-1).name))
 					return
 			except:
 				pass
@@ -421,11 +407,17 @@ class Messages():
 	def initOverlayClass(self):
 		self.progress = None
 		self.play = None
-		for obj in self.children:
-			if obj.UIAAutomationId == 'Scrubber':
-				self.progress = obj
-			elif obj.UIAAutomationId == 'IconTextBlock':
-				self.play = obj
+		for element in self.children:
+			if hasattr(element, 'UIAAutomationId') and element.UIAAutomationId == 'Duration':
+				self.name= self.name.replace('Audio', f'Audio {element.name}-', 1)
+			if hasattr(element, 'UIAAutomationId') and element.UIAAutomationId == 'ForwardedHeader':
+				self.name= f'Reenviado: {self.name}'
+			if hasattr(element, 'UIAAutomationId') and element.UIAAutomationId == 'ReactionBubble':
+				self.name= f'{self.name} ({element.name})'
+			if hasattr(element, 'UIAAutomationId') and element.UIAAutomationId == 'Scrubber':
+				self.progress= element
+			elif hasattr(element, 'UIAAutomationId') and element.UIAAutomationId == 'IconTextBlock':
+				self.play = element
 
 		self.bindGestures({
 			"kb:space": "playPause",
