@@ -435,7 +435,7 @@ class Messages():
 
 	def script_linkOpen(self, gesture):
 		if search('https?://', self.name, re.I):
-			webbrowser.open(search(r"https?://\S+", self.name, re.I)[0])
+			webbrowser.open(search(r"https?://[^\‎]+", self.name, re.I)[0])
 		else:
 			gesture.send()
 
