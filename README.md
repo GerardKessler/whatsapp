@@ -30,9 +30,8 @@ Importante: Este complemento solo funciona con la versión UWP de la aplicación
 Al enfocarse un mensaje de audio, se activan los siguientes gestos:
 
 * Barra espaciadora; reproduce y pausa el mensaje
-* flecha izquierda; retrocede el mensaje de audio (solo funciona con el audio detenido)
-* flecha derecha; avanza el mensaje de audio (solo funciona con el audio detenido)
 * control + barra espaciadora; conmuta entre las 3 velocidades de reproducción (solo funciona con el audio en reproducción)
+* Alt + flecha arriba; Verbaliza el tiempo total del audio en los mensajes de voz
 
 Al enfocarse un mensaje con un link:
 

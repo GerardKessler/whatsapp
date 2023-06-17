@@ -1,6 +1,7 @@
 ﻿# -*- coding: utf-8 -*-
 # Copyright (C) 2021 Gerardo Kessler <ReaperYOtrasYerbas@gmail.com>
 # This file is covered by the GNU General Public License.
+# Colaboraciones importantes de Williams Cuevas
 
 import webbrowser
 from threading import Thread
@@ -85,7 +86,7 @@ class AppModule(appModuleHandler.AppModule):
 
 	# Función que recibe el UIAAutomationId por parámetro, y devuelve el objeto de coincidencia
 	def get(self, id, errorMessage, gesture):
-		for obj in api.getForegroundObject().getChild(1).getChild(0).children:
+		for obj in api.getForegroundObject().children[1].children[0].children:
 			try:
 				if obj.UIAAutomationId == id:
 					return obj
@@ -104,12 +105,26 @@ class AppModule(appModuleHandler.AppModule):
 		except:
 			pass
 		try:
-			if obj.UIAAutomationId != 'BubbleListItem': return
+			if obj.UIAAutomationId != 'BubbleListItem' or not self.remove_phone_number and not self.remove_emojis: return
 			if self.remove_phone_number:
 				obj.name = sub(r'\+\d[()\d\s‬-]{12,}', '', obj.name)
 			if self.remove_emojis:
 				print(emoji.emoji_count(obj.name))
 				obj.name = emoji.replace_emoji(obj.name, '')
+		except:
+			pass
+		try:
+			for element in obj.children:
+				try:
+					if element.UIAAutomationId == 'ProgressRing':
+						pattern= search(r'\d\d:\d\d\s[pa]\.\sm\.', obj.name)
+						obj.name = obj.name.replace(pattern[0], f'{element.next.name} ({pattern[0]})')
+					if element.UIAAutomationId == 'ForwardedHeader':
+						obj.name = f'Reenviado: {obj.name}'
+					if element.UIAAutomationId == 'ReactionBubble':
+						obj.name = f'{obj.name} ({element.name})'
+				except:
+					pass
 		except:
 			pass
 
@@ -124,7 +139,7 @@ class AppModule(appModuleHandler.AppModule):
 	def script_lastMessages(self, gesture):
 		x = int(gesture.displayName[-1])
 		if not self.message_list:
-			self.message_list = self.get('ListView', False, None)
+			self.message_list = self.get('MessagesList', False, None)
 		count = self.message_list.UIAChildren.Length
 		try:
 			messageElement = self.message_list.UIAChildren.GetElement(count-x)
@@ -290,7 +305,7 @@ class AppModule(appModuleHandler.AppModule):
 			if textBox:
 				textBox.setFocus()
 		else:
-			listView = self.get('ListView', False, None)
+			listView = self.get('MessagesList', False, None)
 			if listView:
 				listView.lastChild.setFocus()
 
@@ -318,8 +333,8 @@ class AppModule(appModuleHandler.AppModule):
 		fc = api.getFocusObject()
 		for i in range(fc.childCount):
 			try:
-				if fc.getChild(i).UIAAutomationId == 'OpenButton':
-					message('{}; {}'.format(fc.getChild(i-2).name, fc.getChild(i-1).name))
+				if fc.children[i].UIAAutomationId == 'OpenButton':
+					message('{}; {}'.format(fc.children[i-2].name, fc.children[i-1].name))
 					return
 			except:
 				pass
@@ -407,23 +422,16 @@ class Messages():
 	def initOverlayClass(self):
 		self.progress = None
 		self.play = None
-		for element in self.children:
-			if hasattr(element, 'UIAAutomationId') and element.UIAAutomationId == 'Duration':
-				self.name= self.name.replace('Audio', f'Audio {element.name}-', 1)
-			if hasattr(element, 'UIAAutomationId') and element.UIAAutomationId == 'ForwardedHeader':
-				self.name= f'Reenviado: {self.name}'
-			if hasattr(element, 'UIAAutomationId') and element.UIAAutomationId == 'ReactionBubble':
-				self.name= f'{self.name} ({element.name})'
-			if hasattr(element, 'UIAAutomationId') and element.UIAAutomationId == 'Scrubber':
-				self.progress= element
-			elif hasattr(element, 'UIAAutomationId') and element.UIAAutomationId == 'IconTextBlock':
-				self.play = element
+		for obj in self.children:
+			if obj.UIAAutomationId == 'Scrubber':
+				self.progress = obj
+			elif obj.UIAAutomationId == 'IconTextBlock':
+				self.play = obj
 
 		self.bindGestures({
 			"kb:space": "playPause",
-			"kb:leftArrow": "rewind",
-			"kb:rightArrow": "advanced",
 			"kb:control+space": "speed",
+			"kb:alt+upArrow": "durationAudioAnnounce",
 			"kb:control+enter": "linkOpen"
 			})
 
@@ -435,25 +443,7 @@ class Messages():
 
 	def script_linkOpen(self, gesture):
 		if search('https?://', self.name, re.I):
-			webbrowser.open(search(r"https?://[^\‎]+", self.name, re.I)[0])
-		else:
-			gesture.send()
-
-	def script_rewind(self, gesture):
-		if self.progress:
-			self.progress.setFocus()
-			gesture.send()
-			self.setFocus()
-			mute(0.1)
-		else:
-			gesture.send()
-
-	def script_advanced(self, gesture):
-		if self.progress:
-			self.progress.setFocus()
-			gesture.send()
-			self.setFocus()
-			mute(0.1)
+			webbrowser.open(search(r"https?://\S+", self.name, re.I)[0])
 		else:
 			gesture.send()
 
@@ -465,3 +455,12 @@ class Messages():
 				return
 		# Translators: Mensaje que avisa de la inexistencia de mensajes en reproducción
 		message(_('Ningún mensaje de audio en reproducción'))
+
+	def script_durationAudioAnnounce(self, gesture):
+		for obj in self.children:
+			try:
+				if obj.UIAAutomationId == 'ProgressRing':
+					message(obj.next.name)
+					break
+			except:
+				pass
