@@ -286,12 +286,12 @@ class AppModule(appModuleHandler.AppModule):
 		gesture= 'kb:alt+downArrow'
 	)
 	def script_unreadFocus(self, gesture):
-		listView = self.get('ListView', False, None)
-		if listView:
-			for obj in reversed(listView.children):
-				if obj.childCount == 1 and obj.firstChild.UIAAutomationId == '' and not search(r'\d{1,2}/', obj.name[:3]):
-					obj.setFocus()
-					break
+		messagesObject = self.message_list = self.get('MessagesList', False, None)
+		if not messagesObject: return
+		for obj in reversed(messagesObject.children):
+			if obj.childCount == 1 and obj.firstChild.UIAAutomationId == '' and search(r'\d{1,3}\s\w+', obj.name):
+				obj.setFocus()
+				break
 
 	@script(
 		category= category,
