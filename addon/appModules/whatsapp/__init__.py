@@ -107,7 +107,7 @@ class AppModule(appModuleHandler.AppModule):
 		try:
 			if obj.UIAAutomationId != 'BubbleListItem' or not self.remove_phone_number and not self.remove_emojis: return
 			if self.remove_phone_number:
-				obj.name = sub(r'\+\d[()\d\s‬-]{12,}', '', obj.name)
+				obj.name = sub(r'[^@]\+\d[()\d\s‬-]{12,}', '', obj.name)
 			if self.remove_emojis:
 				print(emoji.emoji_count(obj.name))
 				obj.name = emoji.replace_emoji(obj.name, '')
