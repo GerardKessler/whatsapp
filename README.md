@@ -11,7 +11,6 @@ Importante: Este complemento solo funciona con la versión UWP de la aplicación
 * Descartar el mensaje de voz en grabación; control + shift + r
 * Conocer el tiempo transcurrido en grabación; control + t
 * Conmutar entre la lista de mensajes y el cuadro de edición; alt + flecha izquierda
-* Enfocar la lista de chats; alt + flecha derecha
 * Verbalizar el nombre del contacto o grupo; control + shift + t
 * Activar una ventana con el texto del mensaje; alt + r
 * Pulsar el botón adjuntar; control + shift + a

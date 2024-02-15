@@ -77,7 +77,6 @@ class AppModule(appModuleHandler.AppModule):
 		super(AppModule, self).__init__(*args, **kwargs)
 		# Translators: Mensaje que anuncia que no se ha encontrado el elemento
 		self.not_found = _('Elemento no encontrado')
-		self.last_chat = None
 		self.message_list = None
 		self.message_object = None
 		self.remove_phone_number = getConfig('RemovePhoneNumberInMessages')
@@ -98,12 +97,6 @@ class AppModule(appModuleHandler.AppModule):
 			gesture.send()
 
 	def event_NVDAObject_init(self, obj):
-		try:
-			if obj.UIAAutomationId == 'ChatsListItem':
-				self.last_chat = obj
-				return
-		except:
-			pass
 		try:
 			if obj.UIAAutomationId != 'BubbleListItem' or not self.remove_phone_number and not self.remove_emojis: return
 			if self.remove_phone_number:
@@ -163,7 +156,7 @@ class AppModule(appModuleHandler.AppModule):
 	)
 	def script_voiceMessage(self, gesture):
 		focus= api.getFocusObject()
-		send = self.get('PttSendButton', False, None)
+		send = self.get('SendVoiceMessageButton', False, None)
 		if send:
 			send.doAction()
 			# Translators: Mensaje de envío del mensaje de audio
@@ -268,16 +261,6 @@ class AppModule(appModuleHandler.AppModule):
 			self.remove_emojis = True
 			# Translators: Mensaje de visualización de emojis, activado
 			message(_('Ocultar emojis, activado'))
-
-	@script(
-	category= category,
-	# Translators: Descripción del elemento en el diálogo gestos de entrada
-	description= _('Enfoca la lista de chats'),
-		gesture= 'kb:alt+rightArrow'
-	)
-	def script_chatsList(self, gesture):
-		if self.last_chat:
-			self.last_chat.setFocus()
 
 	@script(
 		category= category,
