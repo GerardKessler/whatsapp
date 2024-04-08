@@ -277,7 +277,7 @@ class AppModule(appModuleHandler.AppModule):
 	)
 	def script_switch(self, gesture):
 		if api.getFocusObject().UIAAutomationId == 'BubbleListItem':
-			textBox = self.get('TextBox', False, None)
+			textBox = self.get('InputBarTextBox', False, None)
 			if textBox:
 				textBox.setFocus()
 		else:
