@@ -10,7 +10,7 @@ Importante: Este complemento solo funciona con la versión UWP de la aplicación
 * Grabar y enviar mensajes de voz; control + r
 * Descartar el mensaje de voz en grabación; control + shift + r
 * Conocer el tiempo transcurrido en grabación; control + t
-* Conmutar entre la lista de mensajes y el cuadro de edición; alt + flecha izquierda
+* Enfocar la lista de mensajes; alt + flecha izquierda
 * Verbalizar el nombre del contacto o grupo; control + shift + t
 * Activar una ventana con el texto del mensaje; alt + r
 * Pulsar el botón adjuntar; control + shift + a
@@ -22,7 +22,6 @@ Importante: Este complemento solo funciona con la versión UWP de la aplicación
 * Alternar la activación de los sonidos del complemento; control + alt + s
 * Alternar  la visualización de los emojis en los mensajes; control + alt + e
 * Enfocar los mensajes no leídos; alt + flecha abajo
-* Verbalizar los últimos mensajes del chat abierto; alt + 1 al 9
 
 ### Lista de mensajes
 

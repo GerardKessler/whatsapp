@@ -61,7 +61,7 @@ def mute(time, msg= False):
 	Thread(target=killSpeak, args=(time,), daemon= True).start()
 
 def killSpeak(time):
-	if speech.getState().speechMode == speech.SpeechMode.off: return
+	if speech.getState().speechMode != speech.SpeechMode.talk: return
 	speech.setSpeechMode(speech.SpeechMode.off)
 	sleep(time)
 	speech.setSpeechMode(speech.SpeechMode.talk)
@@ -99,8 +99,8 @@ class AppModule(appModuleHandler.AppModule):
 	def event_NVDAObject_init(self, obj):
 		try:
 			if obj.UIAAutomationId != 'BubbleListItem' or not self.remove_phone_number and not self.remove_emojis: return
-			if self.remove_phone_number:
-				obj.name = sub(r'[^@]\+\d[()\d\s‬-]{12,}', '', obj.name)
+			if self.remove_phone_number and '+' in obj.name:
+				obj.name = sub(r'\+\d[\d\s\:\~\&-]{12,}', '', obj.name)
 			if self.remove_emojis:
 				print(emoji.emoji_count(obj.name))
 				obj.name = emoji.replace_emoji(obj.name, '')
@@ -128,18 +128,12 @@ class AppModule(appModuleHandler.AppModule):
 		except:
 			pass
 
-	@script(gestures=[f'kb:alt+{i}' for i in range(1, 10)])
-	def script_lastMessages(self, gesture):
-		x = int(gesture.displayName[-1])
-		if not self.message_list:
-			self.message_list = self.get('MessagesList', False, None)
-		count = self.message_list.UIAChildren.Length
+	@script(gesture='kb:alt+rightArrow')
+	def script_chatsList(self, gesture):
 		try:
-			messageElement = self.message_list.UIAChildren.GetElement(count-x)
-			self.message_object = NVDAObjects.UIA.UIA(UIAElement=messageElement)
-			message(self.message_object.name)
+			api.getForegroundObject().getChild(1).getChild(0).getChild(0).getChild(1).getChild(0).getChild(0).setFocus()
 		except:
-			pass
+			message('No encontrado')
 
 	@script(gesture="kb:alt+enter")
 	def script_messageFocus(self, gesture):
@@ -172,7 +166,6 @@ class AppModule(appModuleHandler.AppModule):
 				if self.addon_sounds: playWaveFile(os.path.join(sounds_path, 'recording.wav'))
 				record.doAction()
 				mute(1)
-				Thread(target=self.sendGesture, args=('shift+tab', 2), daemon=True).start()
 			else:
 				# Translators: Aviso de que el cuadro de edición de mensaje no está vacío
 				message(_('El cuadro de edición no está vacío'))

@@ -25,7 +25,7 @@ addon_info = {
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
 	"addon_description": _("""Complemento que renombra botones sin etiqueta, añade atajos de teclado para funciones principales de la aplicación, y funciones de enfoque para una mejor interacción con la interfaz. Solo disponible para la versión UWP."""),
 	# version
-	"addon_version": "2.2.1",
+	"addon_version": "2.2.2",
 	# Author(s)
 	"addon_author": "Gerardo Kessler <gera.ar@yahoo.com>",
 	# URL for the add-on documentation support
