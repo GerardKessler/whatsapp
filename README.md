@@ -1,6 +1,7 @@
 # whatsapp
 
 Autor: [Gerardo Kessler](http://gera.ar)  
+Colaborador: [Williams Cuevas](mailto:zarosoft@gmail.com)
 
 Importante: Este complemento solo funciona con la versión UWP de la aplicación.
 
