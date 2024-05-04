@@ -73,7 +73,8 @@ sounds_path = os.path.join(dirAddon, 'sounds')
 
 class AppModule(appModuleHandler.AppModule):
 
-	category = 'whatsapp'
+	# Translators: Nombre de la categoría en el diálogo de gestos de entrada
+	category= _('whatsapp')
 
 	def __init__(self, *args, **kwargs):
 		super(AppModule, self).__init__(*args, **kwargs)
