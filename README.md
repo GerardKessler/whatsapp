@@ -1,28 +1,26 @@
 # whatsapp
 
-Autor: [Gerardo Kessler](http://gera.ar)  
-Colaborador: [Williams Cuevas](mailto:zarosoft@gmail.com)
+Por [Gerardo Kessler](http://gera.ar)  
+Con la colaboración de [Williams Cuevas](mailto:zarosoft@gmail.com)
 
 Importante: Este complemento solo funciona con la versión UWP de la aplicación.
 
 ## Lista de comandos
 
 * Abrir la aplicación; sin asignar
+* Traer al frente la última notificación de la app, incluyendo una llamada entrante; sin asignar
 * Grabar y enviar mensajes de voz; control + r
 * Descartar el mensaje de voz en grabación; control + shift + r
 * Conocer el tiempo transcurrido en grabación; control + t
 * Enfocar la lista de mensajes; alt + flecha izquierda
+* Conmutar la activación del botón de navegación para la lista de mensajes, archivados, etcétera; alt + flecha derecha
 * Verbalizar el nombre del contacto o grupo; control + shift + t
 * Activar una ventana con el texto del mensaje; alt + r
 * Pulsar el botón adjuntar; control + shift + a
 * Pulsar el botón llamada de audio; control + shift + l
 * Pulsar el botón llamada de video; control + shift + v
-* Pulsar el botón info del chat; control + shift + i
-* Activar la ventana de filtros; control + shift + o
-* Alternar la eliminación de los números de teléfono en los mensajes de contactos no agendados; control + alt + n
-* Alternar la activación de los sonidos del complemento; control + alt + s
-* Alternar  la visualización de los emojis en los mensajes; control + alt + e
 * Enfocar los mensajes no leídos; alt + flecha abajo
+* Activar el diálogo de configuración del complemento; control + p
 
 ### Lista de mensajes
 
@@ -35,10 +33,6 @@ Al enfocarse un mensaje de audio, se activan los siguientes gestos:
 Al enfocarse un mensaje con un link:
 
 * control + intro; captura y abre el link en el navegador por defecto
-
-Al enfocarse un mensaje con archivo adjunto
-
-* alt + r; verbaliza los datos del archivo
 
 ## Traducción
 

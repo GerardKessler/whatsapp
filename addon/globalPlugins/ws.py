@@ -71,14 +71,29 @@ IS_WinON = False
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
+	# Translators: Nombre de la categoría en el diálogo de gestos de entrada
+	category= _('whatsapp')
+
 	@script(
-		category= 'whatsapp',
+		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
 		description= _('Abre WhatsApp, o la enfoca si ya se encuentra abierta')
 	)
 	def script_open(self, gesture):
 		_MainWindows = HiloComplemento()
 		_MainWindows.start()
+
+	@script(
+		category= category,
+		# Translators: Descripción del elemento en el diálogo de gestos de entrada
+		description=_('Trae al frente la notificación actual de WhatSapp, incluyendo una llamada entrante'),
+		gesture= None
+	)
+	def script_callFocus(self, gesture):
+		for i in api.getDesktopObject().children:
+			if i.firstChild and getattr(i.firstChild, 'UIAAutomationId', False) == 'ToastCenterScrollViewer':
+				i.firstChild.firstChild.setFocus()
+				break
 
 class ViewApps(wx.Dialog):
 	def __init__(self, parent, nombre, id, resultados):
@@ -162,3 +177,4 @@ class HiloComplemento(Thread):
 				ui.message(_('No se ha encontrado la aplicación de WhatsApp'))
 
 		wx.CallAfter(runApp)
+

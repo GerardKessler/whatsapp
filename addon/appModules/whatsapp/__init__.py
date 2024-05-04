@@ -6,8 +6,10 @@
 import webbrowser
 from threading import Thread
 from time import sleep
+import gui
 import speech
 from keyboardHandler import KeyboardInputGesture
+from .securityUtils import secureBrowseableMessage  # Created by Cyrille (@CyrilleB79)
 from globalVars import appArgs
 import appModuleHandler
 from scriptHandler import script
@@ -35,21 +37,21 @@ addonHandler.initTranslation()
 
 # Funciones de lectura y escritura de las configuraciones del complemento
 def initConfiguration():
-	confspec = {
-		'RemovePhoneNumberInMessages':'boolean(default=False)',
-		'AddonSounds':'boolean(default=True)',
-		'RemoveEmojis':'boolean(default=False)'
+	confspec= {
+		'RemovePhoneNumberInMessages': 'boolean(default=False)',
+		'AddonSounds': 'boolean(default=True)',
+		'RemoveEmojis': 'boolean(default=False)'
 	}
-	config.conf.spec['WhatsApp'] = confspec
+	config.conf.spec['WhatsApp']= confspec
 
 def getConfig(key):
-	return config.conf["WhatsApp"][key]
+	return config.conf['WhatsApp'][key]
 
 def setConfig(key, value):
 	try:
-		config.conf.profiles[0]["WhatsApp"][key] = value
+		config.conf.profiles[0]['WhatsApp'][key]= value
 	except:
-		config.conf["WhatsApp"][key] = value
+		config.conf['WhatsApp'][key]= value
 
 initConfiguration()
 
@@ -76,50 +78,36 @@ class AppModule(appModuleHandler.AppModule):
 	def __init__(self, *args, **kwargs):
 		super(AppModule, self).__init__(*args, **kwargs)
 		# Translators: Mensaje que anuncia que no se ha encontrado el elemento
-		self.not_found = _('Elemento no encontrado')
-		self.message_list = None
-		self.message_object = None
-		self.remove_phone_number = getConfig('RemovePhoneNumberInMessages')
-		self.addon_sounds = getConfig('AddonSounds')
-		self.remove_emojis = getConfig('RemoveEmojis')
+		self.not_found= _('Elemento no encontrado')
+		self.message_list= None
+		self.message_object= None
+		self.remove_phone_number= getConfig('RemovePhoneNumberInMessages')
+		self.addon_sounds= getConfig('AddonSounds')
+		self.remove_emojis= getConfig('RemoveEmojis')
 
 	# Función que recibe el UIAAutomationId por parámetro, y devuelve el objeto de coincidencia
 	def get(self, id, errorMessage, gesture):
 		for obj in api.getForegroundObject().children[1].children[0].children:
-			try:
-				if obj.UIAAutomationId == id:
-					return obj
-			except:
-				pass
+			if getattr(obj, 'UIAAutomationId', False) == id:
+				return obj
 		if errorMessage:
 			message(self.not_found)
 		if gesture:
 			gesture.send()
 
 	def event_NVDAObject_init(self, obj):
-		try:
-			if obj.UIAAutomationId != 'BubbleListItem' or not self.remove_phone_number and not self.remove_emojis: return
-			if self.remove_phone_number and '+' in obj.name:
-				obj.name = sub(r'\+\d[\d\s\:\~\&-]{12,}', '', obj.name)
-			if self.remove_emojis:
-				print(emoji.emoji_count(obj.name))
-				obj.name = emoji.replace_emoji(obj.name, '')
-		except:
-			pass
-		try:
+		if getattr(obj, 'UIAAutomationId', False) == 'BubbleListItem':
 			for element in obj.children:
-				try:
-					if element.UIAAutomationId == 'ProgressRing':
-						pattern= search(r'\d\d:\d\d\s[pa]\.\sm\.', obj.name)
-						obj.name = obj.name.replace(pattern[0], f'{element.next.name} ({pattern[0]})')
-					if element.UIAAutomationId == 'ForwardedHeader':
-						obj.name = f'Reenviado: {obj.name}'
-					if element.UIAAutomationId == 'ReactionBubble':
-						obj.name = f'{obj.name} ({element.name})'
-				except:
-					pass
-		except:
-			pass
+				if getattr(element, 'UIAAutomationId', False) == 'ForwardedHeader':
+					obj.name= _('Reenviado: {}').format(obj.name)
+				if getattr(element, 'UIAAutomationId', False) == 'ReactionBubble':
+					obj.name= f'{obj.name} ({element.name})'
+		if getattr(obj, 'UIAAutomationId', 'BubbleListItem') != 'BubbleListItem' or not self.remove_phone_number and not self.remove_emojis:
+			return
+		if self.remove_phone_number and '+' in obj.name:
+			obj.name= sub(r'\+\d[\d\s\:\~\&-]{12,}', '', obj.name)
+		if self.remove_emojis:
+			obj.name= emoji.replace_emoji(obj.name, '')
 
 	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
 		try:
@@ -128,19 +116,15 @@ class AppModule(appModuleHandler.AppModule):
 		except:
 			pass
 
-	@script(gesture='kb:alt+rightArrow')
-	def script_chatsList(self, gesture):
-		try:
-			api.getForegroundObject().getChild(1).getChild(0).getChild(0).getChild(1).getChild(0).getChild(0).setFocus()
-		except:
-			message('No encontrado')
-
-	@script(gesture="kb:alt+enter")
-	def script_messageFocus(self, gesture):
-		try:
-			self.message_object.setFocus()
-		except:
-			gesture.send()
+	@script(
+		category= category,
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Enfoca el menú de navegación'),
+		gesture='kb:alt+rightArrow')
+	def script_navegationMenu(self, gesture):
+		navigation_obj= self.get('TogglePaneButton', False, None)
+		if navigation_obj:
+			navigation_obj.doAction()
 
 	@script(
 	category= category,
@@ -170,11 +154,6 @@ class AppModule(appModuleHandler.AppModule):
 				# Translators: Aviso de que el cuadro de edición de mensaje no está vacío
 				message(_('El cuadro de edición no está vacío'))
 
-	def sendGesture(self, kb, amount):
-		sleep(0.5)
-		for x in range(amount):
-			KeyboardInputGesture.fromName(kb).send()
-
 	@script(
 		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
@@ -200,60 +179,6 @@ class AppModule(appModuleHandler.AppModule):
 		timer = self.get('PttTimer', False, gesture)
 		if timer:
 			message(timer.name)
-
-	@script(
-		category= category,
-		# Translators: Descripción del elemento en el diálogo gestos de entrada
-		description= _('Activa y desactiva los sonidos del complemento'),
-		gesture= 'kb:control+alt+s'
-	)
-	def script_soundsConfigToggle(self, gesture):
-		if self.addon_sounds:
-			setConfig('AddonSounds', False)
-			self.addon_sounds = False
-			# Translators: Mensaje que indica la desactivación de los sonidos del complemento
-			message(_('Sonidos del complemento, desactivados'))
-		else:
-			setConfig('AddonSounds', True)
-			self.addon_sounds = True
-			# Translators: Mensaje que anuncia la activación de los sonidos del complemento
-			message(_('Sonidos del complemento, activados'))
-
-	@script(
-		category= category,
-		# Translators: Descripción del elemento en el diálogo gestos de entrada
-		description= _('Activa y desactiva la eliminación de los números de teléfono de los contactos no agendados en los mensajes'),
-		gesture= 'kb:control+alt+n'
-	)
-	def script_viewNumbersToggle(self, gesture):
-		if self.remove_phone_number:
-			setConfig('RemovePhoneNumberInMessages', False)
-			self.remove_phone_number = False
-			# Translators: Mensaje de la opción de remover números telefónicos, desactivado
-			message(_('Eliminar números telefónicos, desactivado'))
-		else:
-			setConfig('RemovePhoneNumberInMessages', True)
-			self.remove_phone_number = True
-			# Translators: Mensaje de la opción de remover números telefónicos, activado
-			message(_('Eliminar números telefónicos, activado'))
-
-	@script(
-		category= category,
-		# Translators: Descripción del elemento en el diálogo gestos de entrada
-		description= _('Activa y desactiva la opción para ocultar los emojis en los mensajes'),
-		gesture= 'kb:control+alt+e'
-	)
-	def script_emojisToggle(self, gesture):
-		if self.remove_emojis:
-			setConfig('RemoveEmojis', False)
-			self.remove_emojis = False
-			# Translators: Mensaje de visualización de emojis, Desactivado
-			message(_('Ocultar emojis, desactivado'))
-		else:
-			setConfig('RemoveEmojis', True)
-			self.remove_emojis = True
-			# Translators: Mensaje de visualización de emojis, activado
-			message(_('Ocultar emojis, activado'))
 
 	@script(
 		category= category,
@@ -302,7 +227,7 @@ class AppModule(appModuleHandler.AppModule):
 	@script(
 		category= category,
 		# Translators: Descripción del elemento en el diálogo gestos de entrada
-		description= _('Verbaliza la respuesta en el mensaje con el foco'),
+		description= _('Visualiza en una ventana sencilla el contenido del mensaje cuando tiene texto'),
 		gesture= 'kb:alt+r'
 	)
 	def script_viewText(self, gesture):
@@ -310,7 +235,7 @@ class AppModule(appModuleHandler.AppModule):
 		for i in range(fc.childCount):
 			try:
 				if fc.children[i].UIAAutomationId == 'OpenButton':
-					message('{}; {}'.format(fc.children[i-2].name, fc.children[i-1].name))
+					message('{}; {}').format(fc.children[i-2].name, fc.children[i-1].name)
 					return
 			except:
 				pass
@@ -318,7 +243,7 @@ class AppModule(appModuleHandler.AppModule):
 			if not fc.UIAAutomationId == 'BubbleListItem': return
 			text = '\n'.join([item.name for item in fc.children if (item.UIAAutomationId == 'TextBlock' and item.next.next.UIAAutomationId == 'ReadMore')])
 			if text:
-				browseableMessage(text, _('Texto del mensaje'))
+				secureBrowseableMessage(text, _('Texto del mensaje'))
 			else:
 				# Translators: Mensaje de que no hay texto para mostrar
 				message(_('No hay texto para mostrar'))
@@ -393,6 +318,17 @@ class AppModule(appModuleHandler.AppModule):
 		# except:
 			# message(self.notFound)
 
+	@script(
+		category= category,
+		# Translators: Descripción del elemento en el diálogo gestos de entrada
+		description= _('Activa el diálogo de configuración del complemento'),
+		gesture= 'kb:control+p'
+	)
+	def script_settings(self, gesture):
+		settings_dialog= Settings(gui.mainFrame, self)
+		gui.mainFrame.prePopup()
+		settings_dialog.Show()
+
 class Messages():
 
 	def initOverlayClass(self):
@@ -440,3 +376,83 @@ class Messages():
 					break
 			except:
 				pass
+
+class Settings(wx.Dialog):
+	def __init__(self, parent, frame):
+		# Translators: Título del diálogo de configuraciones
+		super().__init__(parent, title=_('Configuraciones del complemento'))
+		self.frame= frame
+
+		# Panel principal
+		panel= wx.Panel(self)
+
+		# Translators: Texto de la casilla de verificación para la activación de los sonidos
+		self.sounds_checkbox= wx.CheckBox(panel, label=_('Activar los &sonidos del complemento'))
+		self.sounds_checkbox.SetValue(frame.addon_sounds)
+
+		# Translators: Texto de la casilla de verificación para la eliminación de los números telefónicos del contenido de los mensajes
+		self.number_checkbox= wx.CheckBox(panel, label=_('Eliminar los &números telefónicos de los mensajes'))
+		self.number_checkbox.SetValue(frame.remove_phone_number)
+
+		# Translators: Texto de la casilla de verificación para la eliminación de los emojis del contenido de los mensajes
+		self.emoji_checkbox= wx.CheckBox(panel, label=_('Eliminar los &emojis de los mensajes'))
+		self.emoji_checkbox.SetValue(frame.remove_emojis)
+
+		# Translators: Texto del botón para guardar los cambios
+		save_button = wx.Button(panel, label=_('&Guardar cambios'))
+		# Translators: Texto del botón cancelar
+		cancel_button = wx.Button(panel, label=_('&Cancelar'))
+		cancel_button.SetDefault()
+
+		# Eventos de botones
+		save_button.Bind(wx.EVT_BUTTON, self.onSave)
+		cancel_button.Bind(wx.EVT_BUTTON, self.onCancel)
+		# Maneja el cierre con la tecla Escape y otras teclas.
+		self.Bind(wx.EVT_CHAR_HOOK, self.onKeyPress)
+
+		# Organización con Sizers
+		v_sizer = wx.BoxSizer(wx.VERTICAL)
+		h_sizer = wx.BoxSizer(wx.HORIZONTAL)
+
+		# Añadir controles al sizer vertical
+		v_sizer.Add(self.sounds_checkbox, 0, wx.ALL, 10)
+		v_sizer.Add(self.number_checkbox, 0, wx.ALL, 10)
+		v_sizer.Add(self.emoji_checkbox, 0, wx.ALL, 10)
+
+		# Añadir botones al sizer horizontal
+		h_sizer.Add(save_button, 0, wx.ALL, 10)
+		h_sizer.Add(cancel_button, 0, wx.ALL, 10)
+
+		# Añadir el sizer horizontal al vertical
+		v_sizer.Add(h_sizer, 0, wx.ALIGN_CENTER | wx.ALL, 10)
+
+		panel.SetSizer(v_sizer)
+		v_sizer.Fit(self)
+		self.CenterOnScreen()
+
+	def onSave(self, event):
+		sounds= self.sounds_checkbox.GetValue()
+		number= self.number_checkbox.GetValue()
+		emoji= self.emoji_checkbox.GetValue()
+		if sounds != self.frame.addon_sounds:
+			self.frame.addon_sounds= sounds
+			setConfig('AddonSounds', sounds)
+		if number != self.frame.remove_phone_number:
+			self.frame.remove_phone_number= number
+			setConfig('RemovePhoneNumberInMessages', number)
+		if emoji != self.frame.remove_emojis:
+			self.frame.remove_emojis= emoji
+			setConfig('RemoveEmojis', emoji)
+		self.Destroy()
+		gui.mainFrame.postPopup()
+
+	def onCancel(self, event):
+		self.Destroy()
+		gui.mainFrame.postPopup()
+
+	def onKeyPress(self, event):
+		if event.GetKeyCode() == wx.WXK_ESCAPE:
+			self.onCancel(None)
+		else:
+			event.Skip()
+
