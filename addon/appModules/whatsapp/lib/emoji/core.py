@@ -178,7 +178,9 @@ def demojize(
     tree = _get_search_tree()
     result = []
     i = 0
-    length = len(string)
+    length = 0
+    if string:
+        length = len(string)
     while i < length:
         consumed = False
         char = string[i]

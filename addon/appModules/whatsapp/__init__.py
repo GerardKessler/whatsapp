@@ -105,7 +105,7 @@ class AppModule(appModuleHandler.AppModule):
 					obj.name= f'{obj.name} ({element.name})'
 		if getattr(obj, 'UIAAutomationId', 'BubbleListItem') != 'BubbleListItem' or not self.remove_phone_number and not self.remove_emojis:
 			return
-		if self.remove_phone_number and '+' in obj.name:
+		if obj.name and self.remove_phone_number and hasattr(obj, 'name') and '+' in obj.name:
 			obj.name= sub(r'\+\d[\d\s\:\~\&\(\)-]{12,}', '', obj.name)
 		if self.remove_emojis:
 			obj.name= emoji.replace_emoji(obj.name, '')
